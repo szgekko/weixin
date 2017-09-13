@@ -1,0 +1,1 @@
+a:8:{i:0;s:2:"id";i:1;s:8:"goods_id";i:2;s:10:"seckill_id";i:3;s:13:"seckill_price";i:4;s:13:"seckill_count";i:5;s:13:"seckill_title";s:3:"_pk";s:2:"id";s:5:"_type";a:6:{s:2:"id";s:16:"int(10) unsigned";s:8:"goods_id";s:7:"int(10)";s:10:"seckill_id";s:7:"int(10)";s:13:"seckill_price";s:5:"float";s:13:"seckill_count";s:7:"int(10)";s:13:"seckill_title";s:12:"varchar(255)";}}

@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document by jacy use in 秒杀 */
+html,body{ background:#ef282e}
+.main_bar{ background:url(time_bg.jpg) repeat-x; background-size:auto 100%; padding:10px 10px 30px;}
+.main_bar p{ text-align:center; color:#ef282e; font-size:16px; line-height:30px; padding-bottom:10px;}
+.main_bar p.end_tips{ padding-top:10px; font-size:13px; color:#999;}
+.end_tips img{ width:50px; vertical-align:-15px; margin-right:10px;}
+.timer{ display:-webkit-box;display: -moz-box;display: box;display: flex; margin:0 30px;}
+.timer .left{ display:block; margin:0 3px; -webkit-box-flex:1; -moz-box-flex: 1; box-flex: 1;flex:1; background:#ef282e; color:#fff; border-radius:5px; padding:5px; text-align:center; font-size:14px; font-weight:bold; box-shadow:0 2px #bc1619}
+.timer .left span{ display:block; text-align:center; font-size:18px;}
+.intro_btn{ text-align:center; padding:5px 15px 15px;}
+.intro_btn a{ color:#fff}
+.goods_list ul{ overflow:hidden;}
+.goods_list li{ width:50%; float:left;}
+.goods_list li a{ margin:5px;background:#f6ea00; display:block}
+.goods_list li .title{ font-size:12px; line-height:13px; padding:5px; color:#ef282e; height:28px; overflow:hidden;}
+.goods_list li .info{ padding:5px 5px 15px; background:url(time_bg.jpg) repeat-x;background-size:auto 100%;}
+.goods_list li .seckill_price{ color:#ef282e; font-style:italic; display:block}
+.goods_list li .seckill_price span{ font-size:18px;}
+.goods_list li .market_price{ color:#333; font-size:12px; display:block}
+.goods_list li .market_price span{ text-decoration:line-through}
+.goods_list li .buy{ padding:5px 0; text-align:center; color:#fff; background:#e5520a; border-bottom:3px solid #ad3d06; display:block;}
+.goods_list li .buy_gray{ background:#999; border-bottom:3px solid #666}
+.seckill_content{ position:fixed; top:0; right:0; bottom:0; left:0; z-index:10002;display: -webkit-box;display: -moz-box;display: box;display: flex;
+ -webkit-box-orient: horizontal;-moz-box-orient: horizontal;box-orient: horizontal;
+ -webkit-box-pack: center;-moz-box-pack: center;box-pack: center;
+ -webkit-box-align: center;-moz-box-align: center;box-align: center;background:RGBA(0,0,0,.5);}
+.seckill_content .content{ padding:10px; font-size:13px; min-height:70%; width:80%;background:#fff; border-radius:10px;}
+.seckill_content .close{ position:absolute; width:20px; height:20px; top:10px; right:10px; background:url(close.png) no-repeat; background-size:auto 100%;}

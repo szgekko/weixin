@@ -1,0 +1,156 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body  ng-controller="commonCtrl">
+    <div class="container">
+    <empty name="lists">
+    	<div class="cart_empty">
+        <img src="{:ADDON_PUBLIC_PATH}/mobile/cart.png"/>
+    	<p>购物车还是空的</p>
+    	<p><a href="{:U('lists',array('shop_id'=>$shop_id))}">去店里逛逛吧</a></p>
+    	</div>
+        
+    <else />
+    	<div class="cart_list_top">
+        	<a class="fr orange" href="javascript:void(0);" onClick="deleteCartItem()">删除商品</a>
+        </div>
+        <form action="{:addons_url('Shop://Wap/confirm_order')}" method="post" onSubmit="return checkCartSubmit()">
+        <div class="cart_list">
+        	<ul>
+                <volist name="lists" id="vo">
+                      <li class="cart_item">
+                          <input class="custom_check" id="item_{$vo.id}" rel="{$vo.id}" name="goods_ids[]" type="checkbox" value="{$vo.unqid}" checked="checked" />
+                          <label for="item_{$vo.id}"><em>&nbsp;</em></label>
+                          
+                          <div class="goods_item">
+                          <a href="{:U('detail',array('shop_id'=>$vo['shop_id'],'id'=>$vo['goods_id'],'spec_option_ids'=>$vo['spec_option_ids']))}">
+                            <img class="goods_img" src="{$vo.goods.cover|get_cover_url}"/></a>
+                              <div class="goods_desc">
+                                  <a class="name" href="{:U('detail',array('shop_id'=>$vo['shop_id'],'id'=>$vo['goods_id'],'spec_option_ids'=>$vo['spec_option_ids']))}">{$vo.goods_name}</a>
+                                  <p class="info"><span class="colorless">单价:</span>
+                                  <span class="orange">￥
+                                  <span class="singlePrice">
+                                	  <notempty name="vo.spec_option_ids">
+                                	  	<input name="spec_option_ids[{$vo.unqid}]" type="hidden" value="{$vo.spec_option_ids}">
+                                	 	   <php>
+                                	 	   		$optid=empty($vo['spec_option_ids'])?$vo['sku_data_defalut']:$vo['spec_option_ids'];
+                                	 	   		$pri=$vo['goods']['sku_data'][$optid];
+                                	 	   		if(floatval($pri['sale_price']) >0){
+                                	 	   			echo '<span id="price">'.$pri['sale_price'].'</span> (<del id="mPrice">￥'.$pri['market_price'].'</del>) ';
+                                	 	   		}else{
+                                	 	   			echo '<span id="price">'.$pri['market_price'].'</span>';
+                                	 	   		}
+                                	 	   </php>
+                                	  	<else/>
+                                	  		<if condition="floatval($vo[goods][sale_price]) gt 0">
+                                	  		<span id="price">{$vo.goods.sale_price}</span> (<del id="mPrice">￥{$vo.goods.market_price}</del>) 
+                                	  		<else/>
+                                	  		<span id="price">{$vo.goods.market_price}</span>
+                                	  		</if>
+                                	  </notempty>
+                                  </span>
+                                  </span>
+                                  </p>
+                                  <div class="buy_count">
+                                      <a class="reduce" href="javascript:;">-</a>
+                                      <input type="text" name="buyCount[{$vo.unqid}]" value="{$vo.num|intval}" rel="buyCount" data-cid="{$vo.id}" id="setnum_{$vo.id}" onblur="set_num(this)"/>
+                                      <a class="add" href="javascript:;" rel='{$vo.id}'>+</a>
+                                       </div><div style="display: inline-block;margin-left: 15px;color: darkgrey;vertical-align: -5px;">
+                                       (库存量：<span id='stockNum_{$vo.id}'>
+                                       	<php>
+                                       		$spc=$vo['spec_option_ids'];
+                                       		if($spc){
+                                       			echo $vo['goods']['sku_data'][$spc]['stock_num'];
+                                       		}else{
+                                       			echo $vo['goods']['stock_num'];
+                                       		}
+                                       	</php>
+                                       </span>)
+                                       </div>
+                                  </div>
+                              </div>
+                      </li>
+                </volist>
+            </ul>
+        </div>
+        <!-- cart_list end -->
+        <div class="cartBottom" style="bottom: 50px;">
+        	<div class="check_all">
+        	<input class="custom_check check_all" id="checkAll" name="checkAll" type="checkbox"  checked="checked"/>
+            <label for="checkAll"><em>&nbsp;</em>全选</label>
+            </div>
+            <div class="total">
+            	<p>总结：<span class="orange">￥<span id="totalPrice">00.00</span></span></p>
+                <p class="count">(共<span id="totalCount">12</span>件,不含运费)</p>
+            </div>
+             <input name="cart_ids" type="hidden" value="" />
+            <input type='hidden' name='shop_id' value="{$shop_id}" />
+            <input type='hidden' name='is_cart_goods' value='1' />
+            <button class="settlement" type="submit">去结算</button>
+        </div>
+        </form>
+   </empty>
+        
+        <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>	
+        <include file="DiyTemplate/allDisplay"/>
+		<script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        </script>
+        <empty name="lists">
+        </empty>
+  </div>  
+    	<!-- 底部导航 -->
+		<include file="_footer"/>
+    
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+   updatePriceAndCount();	
+});
+function set_num(_this){
+	var cartId= $(_this).attr('data-cid');
+	var num=parseInt($(_this).val());
+	var snum=parseInt($("#stockNum_"+cartId).text());
+	if(isNaN(num)){
+		num=0;
+	}
+	if(num > snum){
+		num = snum;
+	}
+	$(_this).val(num);
+// 	alert(isNaN(num));
+// 	alert(num+','+snum);
+}
+//删除沟通车的商品
+function deleteCartItem(){
+	if($('input[name="goods_ids[]"]:checked').size()==0){
+		$.Dialog.fail("请选择要删除的购物车物品");
+	}else if(confirm('确认删除？')){
+		var cartIds = "";
+		$('input[name="goods_ids[]"]:checked').each(function(index, element) {
+			cartIds += $(this).attr('rel')+",";
+		});
+		$.Dialog.loading();
+		$.ajax({
+			url:"{:U('delCart',array('shop_id'=>$shop_id))}",
+			data:{ids:cartIds},
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				window.location.reload();	
+			}
+		})
+	}
+}
+</script>

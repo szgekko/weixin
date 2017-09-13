@@ -1,0 +1,31 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<notempty name="data">
+		<volist name="data" id="vo">
+			<div class="comment_list_item">
+			<!-- 商品标题图片 -->
+			<div class="comment_list_goods">
+				<img src="{$vo.goods_img}">
+				<h4>{$vo.goods_title}</h4>
+			</div>
+			<!-- 评论星级用户名 -->
+			<div class="comment_list_name">
+				<div class="comment_star">
+					<span class="comment_star_{$vo.score}"></span>
+				</div>
+			</div>
+			<!-- 评论内容 -->
+			<div class="comment_list_content">{$vo.content}</div>
+			<!-- 评论时间 -->
+			<div class="comment_list_time">{$vo.cTime|time_format}</div>
+			</div>
+		</volist>
+		</notempty>
+		<!-- 底部导航 -->
+    	<include file="_footer"/>
+	</div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<style>
+.cancel_btn{
+	border: none;
+    background-color: #ACB1AC;
+    border-radius: 3px;
+    padding: 12px 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+	display: inline;
+    padding: 6px 15px;
+}
+.ssmall_btn{
+    display: inline;
+    padding: 6px;
+    font-size: 14px;
+}
+.mt36{margin-top: 32px;}
+</style>
+<body  ng-controller="commonCtrl">
+<body class="withFoot">
+    <div class="container">
+    	<div class="top_tab">
+        	<a href="{:U('myOrder')}" class="{$allClass}">全部订单</a>
+        	<a href="{:U('payOrder')}&paytype=0" class="{$payClass}">已付款</a>
+        	<a href="{:U('payOrder')}&paytype=1" class="{$payDepositClass}">已付订金</a>
+            <a href="{:U('unPayOrder')}" class="{$unPayClass}">待付款</a>
+            <a href="{:U('shippingOrder')}" class="{$shippingClass}">配送中</a>
+            <a href="{:U('waitCommentOrder')}" class="{$waitClass}">待评价</a>
+        </div>
+    	
+        <empty name="orderList">
+       		 <div class="empty_container"><p>暂时无订单数据</p></div>
+        <else />
+        <!-- 订单信息 -->
+        <div class="order_list">
+        	<ul>
+            	<volist name="orderList" id="vo">
+                <li>
+                <if condition='($vo.status_code egt 4) and ($vo.status_code neq 7)'>
+                    <a style="display:block" href="{:U('detail_comment',array('id'=>$vo[id]))}">
+                    <else/>
+                    <a style="display:block" href="{:U('orderDetail',array('id'=>$vo[id],'shop_id'=>$shop_id))}">
+                </if>
+                	
+                	<p class="top">
+                    <span class="t">订单编号：{$vo.order_number}</span><br/>
+                     <if condition='($vo.status_code egt 4) and ($vo.status_code neq 7)'>
+                      <span class="c">订单状态：<span class="blue">待评价</span> 
+                     <elseif condition='$vo.pay_status eq 2' />
+                      <span class="c">订单状态：<span class="blue">已支付订金</span> 
+                     <else/>
+                      <span class="c">订单状态：<span class="blue">{$vo.status_code_name}</span> 
+                     </if>
+                    </span>
+<!--                     <br/> <span class="t">支付方式：<eq name="vo.is_deposit" value='0'>全额支付<else/>订金支付</eq></span><br/> -->
+                    </p>
+                    
+                    <volist name="vo.goods" id="gg">
+                    <div class="goods_item">
+                        <img src="{$gg.cover|get_cover_url}"/>
+                        <div class="info">
+                            <P class="name">{$gg.title}</P>
+                            <p class="property">
+                                <span class="colorless">价格</span>
+                               
+                                <php>
+                                if($gg['spec_option_ids']){
+                                	$soi=$gg['spec_option_ids'];
+                                	$skuData=$gg['sku_data'][$soi];
+                                	if(floatval($skuData['sale_price'])>0){
+                                		echo ' <span class="orange">￥'.$skuData['sale_price'].'元</span>';
+                                	}else{
+                                		echo ' <span class="orange">￥'.$skuData['market_price'].'元</span>';
+                                	}
+                                }else{
+                                	if(floatval($gg['sale_price'])){
+                                		echo ' <span class="orange">￥'.$gg['sale_price'].'元</span>';
+                                	}else{
+                                		echo ' <span class="orange">￥'.$gg['market_price'].'元</span>';
+                                	}
+                                }
+                                </php>
+                            </p>
+<!--                             <eq name="vo.is_deposit" value='1'> -->
+<!--                             <p class ="colorless"> -->
+<!--                             	<span class="colorless">订金</span> -->
+<!--                             	<span class="orange">￥ {$gg.deposit_price} 元</span> -->
+<!--                             </p> -->
+<!--                             </eq> -->
+                            <p class="property">
+                                <span class="colorless">数量</span>
+                                <span>{$gg.num}</span>
+                            </p>
+                        </div>
+                        
+                    </div></volist>
+                    </a>
+                    <div class="order_list_bottom">
+                    	<if condition="$info[pay_type]==11">
+                            <if condition="$info[pay_status]==1">
+                                <span>订金支付成功</span>
+                            <else/>
+                                <span>等待到店支付</span>
+                            </if>
+               			<elseif condition="$vo[pay_status]==0 && $vo[pay_type]!=10"/>
+               				<empty name="vo.is_mail">
+               				<eq name="vo.is_deposit" value='1'>
+               				<span style="float:left;color:#999">订金支付：<span class="orange">￥{$vo.deposit_money|wp_money_format}</span> 元</span>
+               				<else/>
+               				<span style="float:left;color:#999">支付金额：<span class="orange">￥{$vo.total_price|wp_money_format}</span> 元</span>
+               				</eq>
+               				<else/>
+               				<span style="float:left;color:#999">邮费：<empty name='vo.mail_money'>包邮<else/><span class="orange">￥{$vo.mail_money|wp_money_format}</span>元</empty> </span>
+               				</empty>
+                            <div class="mt36">
+                            	<eq name="payment_config.isopenwx" value="1">
+                   				<a class="btn ssmall_btn" href="{:U('do_pay')}&order_id={$vo.id}&is_pay_now=1">立即付款</a>
+                   				</eq>
+                   				<if condition="$vo[is_deposit] eq 0 && $vo[is_mail] eq 0 && $vo['type'] eq 0">
+                   					<a class="btn ssmall_btn" href="javascript:;" onclick="pay_other('{$vo.id}')">线下付款</a>
+                   				</if>
+                            </div>
+                            <elseif condition="$vo[pay_status]==2 && $vo[pay_type]!=10"/>
+                            	<!-- 到店支付余额 -->
+                   				<span style="float:left;color:#999">支付余款：<span class="orange">￥<php>echo wp_money_format($vo['total_price']-$vo['deposit_money']);</php></span> 元</span>
+                                <div class="mt36">
+                                	<eq name="payment_config.isopenwx" value="1">
+                                    <a class="btn ssmall_btn" href="{:U('do_pay')}&order_id={$vo.id}&is_pay_now=1">立即付款</a>
+                                    </eq>
+                            	    <a class="btn ssmall_btn" href="javascript:;" onclick="pay_other('{$vo.id}')">线下付款</a>
+                                </div>
+                           <elseif condition="$vo[status_code]==1 && $vo[pay_type]!=10 && $vo['is_pay_score']==1"/>
+                               <a class="btn small_btn" href="javascript:;" onclick="pay_other('{$vo.id}')">商家确定</a>
+                           <elseif condition="$vo['pay_status'] eq 1 && $vo['type'] eq 1"  />
+                            	<a class="btn small_btn" href="{:U('orderDetail',array('id'=>$vo['id']))}" >查看下载链接</a>
+                           <elseif condition="$vo['pay_status'] eq 1 && $vo['type'] eq 2"  />
+                            	<a class="btn small_btn" href="{:U('orderDetail',array('id'=>$vo['id']))}" >查看序列码</a>
+                           <else />
+                                <eq name="vo[is_send]" value="0">
+                                    <span>等待卖家发货</span>
+                                <else/>
+                                	<if condition="$vo['status_code']==3">
+                                    <a class="btn small_btn" href="javascript:;" onClick="confirmGetHuo('{:U('confirm_get',array('id'=>$vo[id]))}');">确认收货</a>
+                                    <elseif condition="$vo['status_code']==1 and $vo['is_mail'] == 0"/>
+                                    <a class="btn small_btn" href="javascript:;" onclick="pay_other('{$vo.id}')">商家确定</a>
+                                    </if>
+                                </eq>
+                            
+                        </if>
+                    	
+                    </div>
+                </li>
+                </volist>
+                
+            </ul>
+         </div>
+        </empty>
+         
+        <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>	
+        <div id="sure_pwd"></div>
+<div class="pwd">
+<!-- 	<h3>这是一个标题</h3> -->
+	<span>X</span>
+	<p>商家确认密码</p>
+	<p><input type='password' name='sure_pwd'/></p>
+	<p ><a class='btn small_btn' id='make_sure' href='javascript:;' >确定</a>
+	<a class='cancel_btn' onclick='do_cancel()'>取消</a>
+	</p>
+</div>
+
+        <include file="DiyTemplate/allDisplay"/>
+		<script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        
+        $(function(){
+        	$('.pwd span,#mask_bg').click(function(){
+        		do_cancel();
+        	})
+        });
+        function pay_other(id){
+        	m_stop();
+        	$('#sure_pwd,.pwd,#mask_bg').show();
+    		$('html').addClass('mask_overf');
+    		$('#make_sure').attr('onclick','do_sure('+id+')').bind('click');
+        }
+        function do_cancel(){
+        	$('#mask_bg,.pwd').hide();
+        	m_move();
+    		$('html').removeClass('mask_overf');
+        }
+        function do_sure(id){
+        	var pwd= $("input[name='sure_pwd']").val();
+        	if(!pwd){
+        		$.Dialog.fail("请输入验证密码！");
+        		return false;	
+        	}
+        	$.get("{:U('ajax_check_pwd')}",{'id':id,'pwd':pwd},function(r){
+        		var res=parseInt(r);
+        		if(res == 0 || !res){
+        			$.Dialog.fail("订单不存在！");
+            		return false;	
+        		}else if(res == -1){
+        			$.Dialog.fail("输入密码不正确！");
+            		return false;	
+        		}else if(res == -2){
+        			$.Dialog.fail("该订单未支付订金");
+            		return false;
+        		}else {
+        			$.Dialog.success("验证成功！");
+        			window.location.href="{:U('detail_comment')}&id="+id;
+        		}
+        		
+        	});
+        }
+        
+        function confirmGetHuo(url){
+        	$.Dialog.confirmBox('温馨提示','确认已收货？',{rightCallback:function(){
+        		$.Dialog.loading();
+        		$.post(url,function(res){
+        			 setTimeout(function(){
+        				 if(res > 0){
+        					 window.location.href="{:U('detail_comment')}&id="+res;
+        				 }else{
+        					 location.reload(); 
+        				 }
+        			},1000);			
+        	    });
+        	}});
+        }
+        </script>
+        
+    </div>	
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+</body>
+</html>

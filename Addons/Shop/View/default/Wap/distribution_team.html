@@ -1,0 +1,85 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<h4 class="fx_team_top">团队成员 (<span>{$count}</span>)</h4>
+		<div class="fx_list">
+			<!--团队列表-->
+			<div class="fx_list_team">
+				<ul>
+					<notempty name="datas">
+						<volist name="datas" id="vo">
+						<li>
+							<img src="{$vo.userface}">
+							<div>
+								<h4 class="list_title">{$vo.username}</h4>
+								<p class="list_time">{$vo.ctime}</p>
+<!-- 								<span class="list_phone">手机号码</span> -->
+							</div>
+								<span class="list_coin">{$vo.mobile}</span>
+								<span class="team_member">分销级别：<span>{$vo.level}</span></span>
+<!-- 							<span class="list_coin">{$vo.profit}</span> -->
+<!-- 							<p class="team_member"><span>{$vo.team_count}</span>个成员</p> -->
+						</li>
+						</volist>
+					</notempty>
+					
+				</ul>
+				<!--无信息时显示-->
+			</div>
+		</div>
+		<empty name='datas'>
+		<div class="fx_empty">
+			<div class="empty"></div>
+			<p>您还没有分销团队，加油发展吧!</p>
+		</div>
+		</empty>
+	</div>
+	
+	<!-- 客户成员列表 -->
+	<div class="fx_warp">
+		<h4 class="fx_team_top">客户成员 (<span>{$coustomCount}</span>)</h4>
+		<div class="fx_list">
+			<!--客户列表-->
+			<div class="fx_list_team">
+				<ul>
+					<notempty name="coustomData">
+						<volist name="coustomData" id="vo">
+						<li>
+							<img src="{$vo.userface}">
+							<div>
+								<h4 class="list_title">{$vo.username}</h4>
+								<p class="list_time">{$vo.ctime}</p>
+<!-- 								<span class="list_phone">手机号码</span> -->
+							</div>
+<!-- 								<span class="list_coin">{$vo.mobile}</span> -->
+<!-- 								<span class="team_member">分销级别：<span>{$vo.level}</span></span> -->
+<!-- 							<span class="list_coin">{$vo.profit}</span> -->
+<!-- 							<p class="team_member"><span>{$vo.team_count}</span>个成员</p> -->
+						</li>
+						</volist>
+					</notempty>
+					
+				</ul>
+				<!--无信息时显示-->
+			</div>
+		</div>
+		<empty name='coustomData'>
+		<div class="fx_empty">
+			<div class="empty"></div>
+			<p>您还没有客户团队，加油发展吧!</p>
+		</div>
+		</empty>
+	</div>
+	<script type="text/javascript">
+	//分享
+	$.WeiPHP.initWxShare({
+		title:'{$shop.title}',
+		desc:'{$shop_share}',
+		link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+		imgUrl:'{$shop.logo}'
+	});
+	</script>
+</body>
+</html>

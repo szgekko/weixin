@@ -1,0 +1,24 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div id="container" class="container">
+    	<center><br/><br/><br/><img src="__IMG__/loading.gif"/><br/>跳转中...<br/><br/></center>
+    </div>
+    <include file="Public/mobile_foot"/>
+</body>
+</html>
+<script>
+$('#container').css({'min-height':$(window).height()});
+wx.ready(function(){
+	
+	var lat = '{$memberinfo.GammaAppId}'.split(',');
+	wx.openLocation({
+		latitude: parseFloat(lat[1]), // 纬度，浮点数，范围为90 ~ -90
+		longitude: parseFloat(lat[0]), // 经度，浮点数，范围为180 ~ -180。
+		name: '{$memberinfo.public_name}', // 位置名
+		address: '{$memberinfo.public_copy_right}', // 地址详情说明
+		scale: 16, // 地图缩放级别,整形值,范围从1~28。默认为最大
+		infoUrl: '{$listsUrl}' // 在查看位置界面底部显示的超链接,可点击跳转
+	});
+})
+</script>

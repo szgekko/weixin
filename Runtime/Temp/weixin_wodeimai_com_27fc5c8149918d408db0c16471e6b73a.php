@@ -1,0 +1,9 @@
+<?php
+//000000086400a:21:{s:2:"id";s:3:"143";s:4:"name";s:11:"shop_coupon";s:5:"title";s:9:"代金券";s:6:"extend";s:1:"0";s:8:"relation";s:0:"";s:7:"need_pk";s:1:"1";s:10:"field_sort";s:187:"["title","num","money","money_max","is_money_rand","order_money","limit_num","start_time","end_time","limit_goods","limit_goods_ids","is_market_price","content","member","type","is_show"]";s:11:"field_group";s:8:"1:基础";s:14:"attribute_list";N;s:13:"template_list";s:0:"";s:12:"template_add";s:0:"";s:13:"template_edit";s:0:"";s:9:"list_grid";s:345:"title:代金券名称
+money:面值
+limit_num:领取限制
+start_time:有效期
+collect_count:已领取
+use_count:已使用
+ids:操作:preview?id=[id]|预览,lists?_controller=Sn&target_id=[id]&p=1|领取记录,sncode_lists?id=[id]&p=1|核销记录,[EDIT]|编辑,[DELETE]|删除,index&_addons=ShopCoupon&_controller=Wap&id=[id]|复制链接";s:8:"list_row";s:2:"10";s:10:"search_key";s:36:"title:请输入代金券名称搜索";s:11:"search_list";s:0:"";s:11:"create_time";s:10:"1442390631";s:11:"update_time";s:10:"1477387047";s:6:"status";s:1:"1";s:11:"engine_type";s:6:"MyISAM";s:5:"addon";s:10:"ShopCoupon";}
+?>

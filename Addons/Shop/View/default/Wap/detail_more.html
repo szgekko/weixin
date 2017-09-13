@@ -1,0 +1,25 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+    <div class="container" style="padding-top:50px;">
+    	<div class="tab_nav" style="position:fixed; top:0; left:0; right:0;">
+        	<a class="cur" href="javascript:void(0)" onClick="show_data(this,'intro')">商品介绍</a>
+        	<a href="javascript:void(0)" onClick="show_data(this,'attr')">规格参数</a>
+        	<a href="javascript:void(0)" onClick="show_data(this,'baozhuan')">包装售后</a>
+        </div>
+        <!--商品介绍-->
+        <div class="intro goods-data">{$goods.content}</div>
+        <!--规格参数-->
+        <div class="attr goods-data" style="display:none"><volist name="goods.attr_list" id="vo"><p>{$vo.title}: {$vo.val}</p></volist></div>
+        <!--包装售后-->
+        <div class="baozhuan goods-data" style="display:none">{$goods.sevice}</div>        
+    </div>	
+</body>
+</html>
+<script type="text/javascript">
+function show_data(_this,type){
+	$('.goods-data').hide();
+	$('.'+type).show();
+	$(_this).addClass('cur').siblings().removeClass('cur');
+}
+</script>

@@ -1,0 +1,209 @@
+<html>
+<!-- 头部 -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+li {
+	list-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+input, textarea, select {
+	outline: none;
+}
+textarea {
+	resize: none;
+}
+img {
+	border: none;
+}
+body {
+	font-family: Arial, "微软雅黑";
+}
+a {
+	text-decoration: none;
+}
+.mainer_inner {
+	margin: 20px;
+}
+.title {
+	text-decoration: underline;
+	font-size: 16px;
+	line-height: 21px;
+	color: #4dbd01;
+	padding-bottom: 20px;
+}
+.nav {
+	float: left;
+}
+.search {
+	float: right;
+	border-color: #ebebeb;
+	background-color: #fff;
+	margin-right: 10px;
+	border: 1px solid #ebebeb;
+}
+.nav a {
+	display: inline-block;
+	margin-right: 5px;
+	padding: 6px 16px;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #edffd1;
+	background-color: #4bbd00;
+}
+.top {
+	height: 30px;
+}
+.nav a:hover {
+	color: #fff;
+	background-color: #5be204;
+}
+.search-input {
+	float: left;
+	padding: 2px 4px;
+	width: 180px;
+	height: 24px;
+	line-height: 26px;
+	border: 0 none;
+}
+.sch-btn {
+	display: inline-block;
+	margin-top: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(../../../../../Public/Home/images/60-vicons_03.png) no-repeat 0px 0px;
+	background-size: 16px 16px;
+}
+.data-table {
+	margin-top: 10px;
+}
+table {
+	border-spacing: 2px;
+	border-color: grey;
+}
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+.data-table thead th {
+	height: 92px;
+	color: #fff;
+	background-color: #353535;
+	text-align: left;
+}
+table tbody td {
+	height: 73px;
+	border-bottom-color: #f4f4f4;
+}
+.table-striped tbody tr {
+	background-color: #fefefe;
+	color: #686868;
+}
+.table {
+	height: 92px;
+	background: #000;
+	padding-left: 0px;
+	vertical-align: middle;
+}
+.table1 {
+	height: 73px;
+	padding-left: 0px;
+}
+.table1 li {
+	float: left;
+	color: #686868;
+}
+.table li {
+	float: left;
+	color: #fff;
+	font-weight: 400;
+height：92px;
+}
+.kuang .check-all {
+	width: 13px;
+	height: 13px;
+	margin-top: 40px;
+	margin-left: 10px;
+}
+.kuang1 .check-all {
+	width: 13px;
+	height: 13px;
+	margin-top: 30px;
+	margin-left: 10px;
+}
+.table .wenzi {
+	font-size: 14px;
+	padding-left: 15px;
+	padding-right: 40px;
+	line-height: 92px;
+}
+.table1 .wenzi {padding-top:26px;
+	
+	font-size: 14px;
+	line-height: 19px;
+	vertical-align:middle;
+	width:70px;word-wrap:break-word;
+}
+.table1 #wenzi1{padding-left: 8px;padding-right: 1px;} 
+.table1 #wenzi2{padding-left: 20px;padding-right: 7px;} 
+.table1 #wenzi3{padding-left: 15px;padding-right: 25px;} 
+.table1 #wenzi4{padding-left: 1px;padding-right: 12px;} 
+.table1 #wenzi5{padding-left: 20px;padding-right: 35px;} 
+.table1 #wenzi6{padding-left: 11px;padding-right: 10px;} 
+.table1 #wenzi7{padding-left: 21px;padding-right: 1px;} 
+.table1 #wenzi8{padding-left: 30px;padding-right: 25px;} 
+.table1 #wenzi9{padding-left: 15px;padding-right: 11px;} 
+.table1 #wenzi10{padding-left: 21px;padding-right: 20px;} 
+.table1 #wenzi11{padding-left: 46px;padding-right: 45px;}
+.table1 #wenzi12{padding-left: 12px;padding-right: 2px;}  
+</style>
+</head>
+
+<body>
+<div id="mainer">
+  <div class="mainer_inner">
+    <h1 class="title"><a class="title" href="{:U('User/admin_user')}">用户列表</a></h1>
+    <ul class="table">
+      <li class="wenzi" id="wenzi1">UID</li>
+      <li class="wenzi" id="wenzi1">昵称</li>
+      <li class="wenzi" id="wenzi2">联系人</li>
+      <li class="wenzi">手机号码</li>
+      <li class="wenzi">邮箱</li>
+      <li class="wenzi">公众号名称</li>
+      <li class="wenzi">原始ID</li>
+      <li class="wenzi">微信号</li>
+      <li class="wenzi">公众号绑定</li>
+      <li class="wenzi">应用ID</li>
+      <li class="wenzi">应用密钥</li>
+      <li class="wenzi">EncodingAESKey</li>
+    </ul>
+    <ul class="table1">
+      <li class="wenzi" id="wenzi1">{$public.uid}</li>
+      <li class="wenzi" id="wenzi12">{$ucanter.nickname}</li>
+      <li class="wenzi" id="wenzi2">{$ucanter.truename}</li>
+      <li class="wenzi" id="wenzi3">{$ucanter.mobile}</li>
+      <li class="wenzi" id="wenzi4">{$ucanter.email}</li>
+      <li class="wenzi" id="wenzi5">{$public.public_name}</li>
+      <li class="wenzi" id="wenzi6">{$public.public_id}</li>
+      <li class="wenzi" id="wenzi7">{$public.wechat}</li>
+      <li class="wenzi" id="wenzi8">
+      <if condition="$ucanter.has_public eq 0">无公众号
+			<else/>认证服务号
+				</if>
+	  </li>
+      <li class="wenzi" id="wenzi9">{$public.appid}</li>
+      <li class="wenzi" id="wenzi10">{$public.secret}</li>
+      <li class="wenzi" id="wenzi11">{$public.encodingaeskey}</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

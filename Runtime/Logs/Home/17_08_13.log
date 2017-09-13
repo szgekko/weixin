@@ -1,0 +1,1070 @@
+[ 2017-08-13T01:33:59+08:00 ] 109.63.231.254 /index.php?s=/addon/Shop/Shop/edit.html&mdm=266|365
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.095951s ]
+INFO: [ app_init ] --END-- [ RunTime:0.096790s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000979s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001033s ]
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::lists() should be compatible with Home\Controller\AddonsController::lists($model = NULL, $page = 0) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::edit() should be compatible with Home\Controller\AddonsController::edit($model = NULL, $id = 0) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::add() should be compatible with Home\Controller\AddonsController::add($model = NULL) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+SQL: SELECT `value` FROM `wp_config` WHERE ( name="FOLLOW_YOUKE_UID" ) LIMIT 1   [ RunTime:0.0242s ]
+SQL: UPDATE `wp_config` SET `value`='-91503' WHERE ( name="FOLLOW_YOUKE_UID" ) [ RunTime:0.0289s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0008s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91503' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0112s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 0 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0278s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = 0  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+NOTIC: [8] Undefined index: query /data/webroot/weixin.wodeimai.com/ThinkPHP/Common/functions.php 第 1006 行.
+NOTIC: [8] Undefined index: query /data/webroot/weixin.wodeimai.com/ThinkPHP/Common/functions.php 第 1006 行.
+SQL: SELECT * FROM `wp_shop` WHERE `token` = '-1' LIMIT 1   [ RunTime:0.0202s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+
+[ 2017-08-13T01:34:01+08:00 ] 109.63.231.254 /index.php?s=/addon/Shop/Shop/summary/mdm/266%7C365.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001362s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001761s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000484s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000535s ]
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::lists() should be compatible with Home\Controller\AddonsController::lists($model = NULL, $page = 0) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::edit() should be compatible with Home\Controller\AddonsController::edit($model = NULL, $id = 0) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+NOTIC: [2048] Declaration of Addons\Shop\Controller\ShopController::add() should be compatible with Home\Controller\AddonsController::add($model = NULL) /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 7 行.
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0009s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91503' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = -91503 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = -91503  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+NOTIC: [8] Undefined index: query /data/webroot/weixin.wodeimai.com/ThinkPHP/Common/functions.php 第 1006 行.
+NOTIC: [8] Undefined index: query /data/webroot/weixin.wodeimai.com/ThinkPHP/Common/functions.php 第 1006 行.
+SQL: SELECT * FROM `wp_shop` WHERE `token` = '-1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/Addons/Shop/Model/ShopModel.class.php 第 15 行.
+SQL: SELECT * FROM `wp_shop` WHERE `token` = '-1' AND `manager_id` = null LIMIT 1   [ RunTime:0.0155s ]
+NOTIC: [2] unlink(./Runtime/Temp/weixin_wodeimai_com_4d0960309fd371c8270c5c23c12a729e.php): No such file or directory /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Cache/Driver/File.class.php 第 157 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+SQL: SELECT count(1) as cc,FROM_UNIXTIME(cTime, '%H') as hh FROM `wp_visit_log` WHERE module_name='Shop' and publicid='' AND cTime>'1502472839' GROUP BY hh [ RunTime:0.8896s ]
+SQL: SELECT count(1) as cc,FROM_UNIXTIME(cTime, '%H') as hh FROM `wp_shop_order` WHERE shop_id='0' AND cTime>'1502472839' GROUP BY hh [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+NOTIC: [8] Undefined variable: log_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 122 行.
+NOTIC: [8] Undefined variable: order_data /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 123 行.
+SQL: SELECT `id` FROM `wp_shop_goods` WHERE `token` = '-1' AND `is_delete` = 0  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Addons/Shop/Controller/ShopController.class.php 第 145 行.
+SQL: SELECT sum(is_new) as new_count,count(1) as total_count FROM `wp_shop_order` WHERE `token` = '-1' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000270s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000330s ]
+NOTIC: [8] Use of undefined constant website_logo - assumed 'website_logo' /data/webroot/weixin.wodeimai.com/Runtime/Cache/Home/e54305db7dd82b9d21400dd523275162.php 第 58 行.
+
+[ 2017-08-13T01:34:02+08:00 ] 109.63.231.254 /index.php?s=/home/user/login/from/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001335s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001738s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000471s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000522s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0009s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91503' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = -91503 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = -91503  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`qr_code`,`addon`,`aim_id`,`cTime`,`token`,`action_name`,`extra_text`,`extra_int`,`request_count`,`scene_id`,`expire_seconds` FROM `wp_qr_code` WHERE `addon` = 'ScanLogin' AND `extra_text` = '598f3c09a13ce' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 28 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 29 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000181s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000243s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015680s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015743s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000564s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000625s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000889s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.001283s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002276s ]
+
+[ 2017-08-13T01:34:10+08:00 ] 109.63.231.254 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001338s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001719s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000461s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000508s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000502s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000985s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001577s ]
+
+[ 2017-08-13T01:34:13+08:00 ] 109.63.231.254 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001343s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001734s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000476s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000491s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000987s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001565s ]
+
+[ 2017-08-13T01:34:16+08:00 ] 109.63.231.254 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001370s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001758s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000469s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000516s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000487s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000990s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001566s ]
+
+[ 2017-08-13T01:34:19+08:00 ] 109.63.231.254 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001364s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001750s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000460s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000508s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000500s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000982s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001570s ]
+
+[ 2017-08-13T05:21:09+08:00 ] 109.63.234.228 /index.php?s=/Home/User/login/from/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001410s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001822s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000497s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000547s ]
+SQL: SELECT `value` FROM `wp_config` WHERE ( name="FOLLOW_YOUKE_UID" ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: UPDATE `wp_config` SET `value`='-91504' WHERE ( name="FOLLOW_YOUKE_UID" ) [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0008s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91504' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 0 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0008s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 185 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = 0  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`qr_code`,`addon`,`aim_id`,`cTime`,`token`,`action_name`,`extra_text`,`extra_int`,`request_count`,`scene_id`,`expire_seconds` FROM `wp_qr_code` WHERE `addon` = 'ScanLogin' AND `extra_text` = '598f71457a928' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 28 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 29 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000178s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000237s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014238s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014295s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000147s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000197s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000528s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.001025s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001643s ]
+
+[ 2017-08-13T05:21:53+08:00 ] 109.63.234.228 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001373s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001758s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000488s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000998s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001580s ]
+
+[ 2017-08-13T05:21:55+08:00 ] 109.63.234.228 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001370s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001768s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000472s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000520s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000498s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.001012s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001599s ]
+
+[ 2017-08-13T05:21:57+08:00 ] 109.63.234.228 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001353s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001746s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000489s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000986s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001566s ]
+
+[ 2017-08-13T07:47:38+08:00 ] 123.125.71.117 /index.php?s=/Home/User/login/from/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001374s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001765s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000530s ]
+SQL: SELECT `value` FROM `wp_config` WHERE ( name="FOLLOW_YOUKE_UID" ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: UPDATE `wp_config` SET `value`='-91505' WHERE ( name="FOLLOW_YOUKE_UID" ) [ RunTime:0.0003s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0012s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91505' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 0 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined index: HTTP_REFERER /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 139 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 185 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = 0  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`qr_code`,`addon`,`aim_id`,`cTime`,`token`,`action_name`,`extra_text`,`extra_int`,`request_count`,`scene_id`,`expire_seconds` FROM `wp_qr_code` WHERE `addon` = 'ScanLogin' AND `extra_text` = '598f939a07084' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 28 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 29 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000176s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000236s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014378s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014436s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000131s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000181s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000508s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000583s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001182s ]
+
+[ 2017-08-13T12:13:51+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login/from/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.127400s ]
+INFO: [ app_init ] --END-- [ RunTime:0.128188s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000975s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001027s ]
+SQL: SELECT `value` FROM `wp_config` WHERE ( name="FOLLOW_YOUKE_UID" ) LIMIT 1   [ RunTime:0.0261s ]
+SQL: UPDATE `wp_config` SET `value`='-91506' WHERE ( name="FOLLOW_YOUKE_UID" ) [ RunTime:0.0217s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+SQL: SHOW COLUMNS FROM `wp_auth_group_access` [ RunTime:0.0008s ]
+SQL: SELECT a.uid,a.group_id,g.title,g.rules FROM wp_auth_group_access a INNER JOIN wp_auth_group g on a.group_id=g.id  WHERE ( a.uid='-91506' and g.status='1' )  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0100s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: addon_status /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id /data/webroot/weixin.wodeimai.com/Application/Common/Model/AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 0 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0232s ]
+SQL: SELECT * FROM `wp_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined variable: addons /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 501 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 106 行.
+NOTIC: [8] Undefined offset: 265 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined index: side /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 179 行.
+NOTIC: [8] Undefined offset: 263 /data/webroot/weixin.wodeimai.com/Application/Common/Model/ManagerMenuModel.class.php 第 185 行.
+SQL: SELECT * FROM `wp_public_link` WHERE `uid` = 0  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`qr_code`,`addon`,`aim_id`,`cTime`,`token`,`action_name`,`extra_text`,`extra_int`,`request_count`,`scene_id`,`expire_seconds` FROM `wp_qr_code` WHERE `addon` = 'ScanLogin' AND `extra_text` = '598fd1fed7e79' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 28 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Home/Model/QrCodeModel.class.php 第 29 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+SQL: SELECT `id`,`token` FROM `wp_public`  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: -1 /data/webroot/weixin.wodeimai.com/Application/Common/Model/PublicModel.class.php 第 38 行.
+NOTIC: [8] Undefined index: is_bind /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1566 行.
+NOTIC: [8] Undefined index: appid /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+NOTIC: [8] Undefined index: secret /data/webroot/weixin.wodeimai.com/Application/Common/Common/function.php 第 1569 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000177s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000237s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.092105s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.092168s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000681s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000734s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000975s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.001114s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002182s ]
+
+[ 2017-08-13T12:13:57+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001343s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001737s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000477s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000526s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000478s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000686s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001253s ]
+
+[ 2017-08-13T12:14:00+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001353s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001755s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000466s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000513s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000503s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000693s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001284s ]
+
+[ 2017-08-13T12:14:03+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001406s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001796s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000476s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000525s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000481s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000701s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001271s ]
+
+[ 2017-08-13T12:14:08+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001343s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001732s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000463s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000510s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000483s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.093209s ]
+INFO: [ app_end ] --END-- [ RunTime:0.093796s ]
+
+[ 2017-08-13T12:14:10+08:00 ] 195.91.224.113 /index.php?s=/Home/User/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001387s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001798s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000489s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000536s ]
+NOTIC: [8] Undefined index: uid /data/webroot/weixin.wodeimai.com/ThinkPHP/Library/Think/Controller.class.php 第 526 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000501s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.000429s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001020s ]
+

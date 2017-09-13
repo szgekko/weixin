@@ -1,0 +1,76 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<div class="fx_goods_top">
+			<p>共找到<span>{$total_count}</span>笔订单，分销总收入<span>{$total_profit|wp_money_format}</span></p>
+			<p>
+			<volist name='level_name' id='le'>
+			{$le}&nbsp;<span>{$order_count[$key]|intval}</span>&nbsp;笔&nbsp;&nbsp;&nbsp;&nbsp;
+			</volist>
+			</p>
+		</div>
+		<div class="fx_list">
+			<!--订单-->
+			<div class="fx_list_goods">
+				<ul>
+					<notempty name="datas">
+					<volist name="datas" id="vo">
+					<li class="goods">
+						<div class="list_warp">
+							<p class="list_time">{$vo.ctime|time_format}</p>
+							<h4 class="list_title">{$vo.duser_order}订单：{$vo.order_number}</h4>
+						</div>
+						<span class="list_coin">+{$vo.profit|wp_money_format}<em></em></span>
+						<div class="goods_detail">
+								<p>{$vo.duser_order}：<span>{$vo.duser_name}</span></p>
+								<span class="goods_detail_top">￥{$vo.total_price}</span>
+							<div class="goods_list">
+								<ul>
+									<notempty name="vo.goods_list" >
+									<volist name="vo.goods_list" id='gg'>
+									<li>
+										<img src="{$gg.goods_img}">
+										<div class="goods_part">
+											<h4>{$gg.goods_title}</h4>
+											<!-- 商品价格 -->
+											<span>￥{$gg.goods_price}</span>
+											<!-- 商品佣金 -->
+											<span class="goods_com">+{$gg.goods_profit|wp_money_format}</span> 
+										</div>
+									</li>
+									</volist>
+									</notempty>
+								</ul>
+								<span>客户名：{$vo.follow_name}</span>
+							</div>
+						</div>
+					</li>
+					</volist>
+					</notempty>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	//分享
+	$.WeiPHP.initWxShare({
+		title:'{$shop.title}',
+		desc:'{$shop_share}',
+		link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+		imgUrl:'{$shop.logo}'
+	});
+	
+	$('.goods').each(function(){
+		$(this).click(function(event){
+			$(this).find('.goods_detail').toggle();
+			$(this).find('.list_coin em').toggleClass('arrow');
+		});
+	});
+	$('.goods_detail').click(function(){
+		event.stopPropagation();
+	});
+	</script>
+</body>
+</html>

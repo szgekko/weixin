@@ -1,0 +1,69 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div id="container" class="container">
+    	<div class="fixed_bg"></div>
+    	<div class="wrap">
+         <div class="tabs">
+         	<a class="current" href="javascript:;" onClick="tab(this,0)">今天({$today})</a>
+            <a href="javascript:;" onClick="tab(this,1)">明天({$tomorrow})</a>
+         </div>
+         <div class="list_container">
+         
+         	<ul id="today">
+            	<notempty name="todayData">
+            	<volist name="todayData" id="vo">
+            		<li <eq name="vo[is_use]" value="1">class="used"</eq>>
+                    	<p><strong>{$vo.reservation_date|day_format} <eq name="vo[type]" value="0">上午<else/>下午</eq></strong>&nbsp;{$vo.reservation_time|hour_format}</p>
+                    	<p>预约号:{$vo.reservation_num}</p>
+                        <eq name="vo[is_use]" value="0"><a class="do_btn" href="{:addons_url('Reservation://Wap/doReservation',array('id'=>$vo['id']))}">立即预约</a><else/><span class="done_btn">已预约</span></eq>
+                    </li>
+                </volist>
+                <else/>
+                <p><center><br/>该天没有发放预约号<br/></center></p>
+                </notempty>
+            </ul>
+            <ul id="tomorrow" style="display:none">
+            	<notempty name="tomorrowData">
+            	<volist name="tomorrowData" id="vo">
+            		<li <eq name="vo[is_use]" value="1">class="used"</eq>>
+                    	<p><strong>{$vo.reservation_date|day_format} <eq name="vo[type]" value="0">上午<else/>下午</eq></strong>&nbsp;{$vo.reservation_time|hour_format}</p>
+                    	<p>预约号:{$vo.reservation_num}</p>
+                        <eq name="vo[is_use]" value="0"><a class="do_btn" href="{:addons_url('Reservation://Wap/doReservation',array('id'=>$vo['id']))}">立即预约</a><else/><span class="done_btn">已预约</span></eq>
+                    </li>
+                </volist>
+                <else/>
+                <p><center><br/>该天没有发放预约号<br/></center></p>
+                </notempty>
+            </ul>
+         </div>
+       </div>
+    </div>
+    <include file="Public/mobile_foot"/>
+</body>
+</html>
+<script>
+$('#container').css({'min-height':$(window).height()});
+function tab(_this,type){
+	if($(_this).hasClass('current')){
+		return;
+	}else{
+		$(_this).addClass('current').siblings().removeClass('current');
+		if(type==0){
+			$('#today').show();
+			$('#tomorrow').hide();
+		}else{
+			$('#tomorrow').show();
+			$('#today').hide();
+		}
+	}
+}
+/*
+$.WeiPHP.initSimpleShareData({
+	title:'{$shareData.title}',
+	desc:'{$shareData.desc}',
+	link:'{$shareData.link}',
+	imgUrl:'{$shareData.imgUrl}'
+});
+*/
+</script>

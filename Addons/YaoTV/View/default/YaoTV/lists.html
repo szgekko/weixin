@@ -1,0 +1,257 @@
+<extend name="Base/common" />
+<block name="body">
+<div class="span9 page_message">
+	<section id="contents">
+		<include file="Addons/_nav" />
+
+		<div class="table-bar">
+			<div class="fl">
+				<div class="tools">
+					<a class="btn" href="javascript:;" onclick="editProgram();">添加节目</a>&nbsp;&nbsp;
+					<input type="file" id="uploadProgram" title="上传节目单"> <input
+						type="hidden" name="uploadProgram" value="" />
+					<script type="text/javascript">
+                	$("#uploadProgram").uploadify({
+						"height"          : 33,
+						"swf"             : "__STATIC__/uploadify/uploadify.swf",
+						"fileObjName"     : "download",
+						"buttonText"      : "上传节目单",
+						"uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+						"width"           : 120,
+						'removeTimeout'	  : 1,
+						"onUploadSuccess" : function(file, data){
+							var data = $.parseJSON(data);
+							console.log(data);
+							if(data.id){
+								window.location.href = "{:U('import_yaotv')}&id="+data.id;
+							}else{
+								updateAlert('上传节目单失败');
+							}
+							
+						}
+					});
+                </script>
+
+					&nbsp;&nbsp;<a
+						href="http://yaotv.qq.com/shake_tv/res/demo/demo.zip">查看示例</a>
+				</div>
+			</div>
+			<!-- 日期过滤 -->
+			<!-- 			<div class="search-form table_date_filter fr" -->
+			<!-- 				style="margin-bottom: 0"> -->
+			<!-- 				<input type="datetime" name="start_time" -->
+			<!-- 					class="search-input date input-small" value="{$now_day}" placeholder="请选择日期"> -->
+			<!-- 				<span class="fl se_span">&nbsp;至&nbsp;</span> <input type="datetime" -->
+			<!-- 					name="end_time" class="search-input date input-small" value="{$end_day}" placeholder="请选择日期"> <span class="fl se_span">&nbsp;</span> -->
+			<!-- 				<select class="time_select time"> -->
+			<!-- 					<option value="23:00">23:00</option> -->
+			<!-- 				</select> <span class="fl se_span">&nbsp;至&nbsp;</span> <select -->
+			<!-- 					class="time_select time"> -->
+			<!-- 					<option value="23:00">23:00</option> -->
+			<!-- 				</select> -->
+			<!-- 			</div> -->
+		</div>
+
+		<div class="data-table">
+			<div class="table-striped">
+				<table cellspacing="1" id="programTable">
+					<!-- 表头 -->
+					<thead>
+						<tr>
+							<th>节目时间</th>
+							<th>节目名称/页面名称</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<!-- 列表 -->
+					<tbody>
+						<volist name="list_data" id="program">
+						<tr class='program_{$program.id}'>
+							<td><span class="p_date">{$program.date_format}</span> <span
+								class="p_begin_stamp">{$program.begin_stamp|hour_format}</span>-<span
+								class="p_end_stamp">{$program.end_stamp|hour_format}</span></td>
+							<td><span class="p_name">{$program.name}</span><a
+								href="javascript:;" onclick="editProgram(this,{$program.id});"><img
+									src="__IMG__/write.png"
+									style="width: 17px; vertical-align: -2px;" /></a></td>
+							<td><a
+								href="{:U('activities', array('yaotv_id'=>$program[id]))}">编辑活动</a>
+								<a href="javascript:;"
+								onClick="deleteProgram(this,{$program.id})">删除</a></td>
+						</tr>
+						<volist name="program.activities" id="act">
+						<tr class='activity_{$program.id}'>
+							<td style="padding-left: 105px;">{$act.begin_offset|time_offset}-{$act.end_offset|time_offset}</td>
+							<td>{$act.res_name}</td>
+							<td>&nbsp;</td>
+						</tr>
+						</volist> </volist>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<div class="page">{$_page|default=''}</div>
+	</section>
+</div>
+</block>
+
+<block name="script">
+<link
+	href="__STATIC__/datetimepicker/css/datetimepicker.css?v={:SITE_VERSION}"
+	rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '
+<link
+	href="__STATIC__/datetimepicker/css/datetimepicker_blue.css?v={:SITE_VERSION}"
+	rel="stylesheet" type="text/css">
+';</php>
+<link
+	href="__STATIC__/datetimepicker/css/dropdown.css?v={:SITE_VERSION}"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript"
+	src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+	src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v={:SITE_VERSION}"
+	charset="UTF-8"></script> <script type="text/javascript">
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        autoclose:true,
+		minView:2
+    });
+});
+</script> <script type="text/javascript" charset="utf-8">
+//导航高亮
+$('.side-sub-menu').find('a[href="{:U('Addons/index')}"]').closest('li').addClass('current');
+if($('ul.tab-nav').length){
+	$('.btn-return').hide();
+}
+$(function(){
+	showTab();
+	for(var i=0;i<24;i++){
+		var tempTime = "00:00";
+		if(i<10){
+			tempTime = "0"+i+":00"
+		}else{
+			tempTime = i+":00"
+		}
+		$('.time_select').append('<option value="'+tempTime+'">'+tempTime+'</option>');
+	}
+})
+//编辑节目
+function editProgram(_this,id){
+	var isAdd = arguments.length==0?true:false;
+	var $addHtml = $('<tr class="add_program_tr">'+
+					'<td><input type="text" class="input-inline date" id="date" placeholder="请选择日期" value="{$now_day}"/>&nbsp;'+
+					'<select class="time_select select-inline" id="begin_stamp"></select>&nbsp;'+
+					'<select class="time_select select-inline" id="end_stamp"></select>'+
+					'</td>'+
+					'<td><input type="text" class="input-inline" id="name"/></td>'+
+					'<td><a class="save_btn" href="javascript:;">保存</a>&nbsp;&nbsp;<a class="cancel_btn" href="javascript:;">取消</a></td>'+
+					'</tr>');	
+	
+	$('.date',$addHtml).datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        autoclose:true,
+		minView:2
+    });
+	for(var i=0;i<48;i++){
+		var tempTime = "00:00";
+		if(i<20){
+			if(i%2==0){
+				tempTime = ("0"+(i-i/2)+":00")
+			}else{
+				tempTime = ("0"+(i-(Math.floor(i/2)+1))+":30")
+			}
+			
+		}else{
+			if(i%2==0){
+				tempTime = ((i-i/2)+":00")
+			}else{
+				tempTime = ((i-(Math.floor(i/2)+1))+":30")
+			}
+		}
+		$('.time_select',$addHtml).append('<option value="'+tempTime+'">'+tempTime+'</option>');
+	}
+	if(isAdd){
+		//添加
+		$addHtml.prependTo($('#programTable tbody'));
+	}else{
+		//编辑
+		var $copyTr = $(_this).parents('tr');
+		$(_this).parents('tr').replaceWith($addHtml);
+		var date = $(_this).parents('tr').find('.p_date').text();
+		var begin_stamp = $(_this).parents('tr').find('.p_begin_stamp').text();
+		var end_stamp = $(_this).parents('tr').find('.p_end_stamp').text();
+		var name = $(_this).parents('tr').find('.p_name').text();
+		//填充默认数据
+		$('#date',$addHtml).val(date);
+		$('#name',$addHtml).val(name);
+		$('#begin_stamp option').each(function(index, element) {
+            if($(this).val()==begin_stamp){
+				$(this).prop('selected',true);
+			}
+        });
+		$('#end_stamp option').each(function(index, element) {
+            if($(this).val()==end_stamp){
+				$(this).prop('selected',true);
+			}
+        });
+	}
+	$('.save_btn',$addHtml).click(function(){
+		var data = isAdd ? {
+			'date':$("#date",$addHtml).val(),
+			'begin_stamp':$("#begin_stamp",$addHtml).val(),
+			'end_stamp':$("#end_stamp",$addHtml).val(),
+			'name':$("#name",$addHtml).val()
+		}:{
+			'id':id,
+			'date':$("#date",$addHtml).val(),
+			'begin_stamp':$("#begin_stamp",$addHtml).val(),
+			'end_stamp':$("#end_stamp",$addHtml).val(),
+			'name':$("#name",$addHtml).val()
+		};
+		//console.log(data);return false;
+		
+		var postUrl = isAdd?"{:U('add_program')}":"{:U('edit_program')}";
+		$.post(postUrl,data,function(res){
+			var json = res;
+			if(json.status==1){
+				//保存成功
+				var addSuccessHtml = $('<tr>'+
+					'<td><span class="p_date">'+$("#date",$addHtml).val()+'</span>&nbsp;&nbsp;<span class="p_begin_stamp">'+
+					$("#begin_stamp",$addHtml).val()+'</span>-<span class="p_end_stamp">'+
+					$("#end_stamp",$addHtml).val()+
+					'</span></td>'+
+					'<td><span class="p_name">'+$('#name',$addHtml).val()+'<span><a href="javascript:;" onclick="editProgram(this,'+json.id+');"><img src="__IMG__/write.png" style="width:17px; vertical-align:-2px;"/></a></td>'+
+					'<td><a class="save_btn" href="'+json.edit_act_url+'">编辑活动</a>&nbsp;&nbsp;<a class="cancel_btn" href="javascript:;" onClick="deleteProgram(this,'+json.id+')">删除</a></td>'+
+					'</tr>');
+				$addHtml.replaceWith(addSuccessHtml);
+			}else{
+				updateAlert(json.msg);
+			}
+		});
+	});
+	$('.cancel_btn',$addHtml).click(function(){
+		if(isAdd){
+			$addHtml.remove();
+		}else{
+			$addHtml.replaceWith($copyTr);
+		}
+	});
+}
+//删除节目
+function deleteProgram(_this,id){
+	if(confirm('确认要删除这个节目节目吗')){
+		$.get('{:U('del_yaotv', array('id'=>$program[id]))}',function(data){
+			//to do
+		});
+		$(_this).parents('tr').remove();
+		$('.activity_'+id).remove();
+	}
+}
+</script> </block>

@@ -1,0 +1,127 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/index.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<!-- 
+     选择时 body带上此
+-->
+<php>$isUse = I('use');</php>
+<body <if condition='$_GET[from]=="select"'>id="chooseCouponPage" </if> >
+	<div id="container" class="container">
+    	<div class="common_header">
+        	<a class="back" href="javascript:;" onClick="history.back()"></a>
+            <span>代金券</span>
+        </div>
+        <div class="single_item tb tab_nav m_15">
+        	<eq name="isUse" value="0">
+                <a class="p_10 flex_1 btl bbl" href="{:U('personal')}&use=1&from={$_GET['from']}&is_cuxiao={$_GET['is_cuxiao']}&str_coupon_id={$_GET['str_coupon_id']}">未使用</a>
+                <a class="p_10 flex_1 btr bbr cur" href="#">已使用</a>
+            <else/>
+            	<a class="p_10 flex_1 btl bbl cur" href="#">未使用</a>
+                <a class="p_10 flex_1 btr bbr" href="{:U('personal')}&use=0&from={$_GET['from']}&is_cuxiao={$_GET['is_cuxiao']}&str_coupon_id={$_GET['str_coupon_id']}">已使用</a>
+
+            </eq>
+        </div>
+        <if condition="!empty($list)" >
+    	<div class="conpons_list">
+        	<volist name='list' id="vo">
+                 <div class="coupon_box">
+                 <if condition='$vo[is_use]==0'>
+                 <div class="left_check">
+                  		<input class="custom_check" id="item_{$vo.sn_id}" rel="{$vo.sn_id}" name="sn_id" type="radio" value="{$vo.sn_id}" />
+                        <label for="item_{$vo.sn_id}">
+                        	 <if condition="$vo[is_old] neq 1"><em>&nbsp;</em></if>
+                        </label>
+                 </div>
+                 </if>
+                 <if condition='$vo[is_use] eq 0 && $vo[can_use] eq 1'>
+                      <if condition='$_GET[from]=="select"'>
+                      <a class="conpon selelct_part" rel="{$vo.sn_id}" href="javascript:;">
+                      <else />
+                      <a class="conpon" class="conpon_item" href="{:addons_url('ShopCoupon://Wap/show',array('id'=>$vo['id'],'sn_id'=>$vo['sn_id']))}">
+                      </if>	
+                  <else />
+                  	<a class="conpon conpon_disable" href="javascript:;">
+                  </if>	
+                  <div class="coupon_top"
+                  	<if condition='$vo[can_use]'>
+                    	
+                    <else />
+                    	style="background:#aaa"
+                    </if>	
+                    >
+                  		<p class="title">{$vo.title}</p>
+                        <p class="use">￥&nbsp;{$vo.prize_title}<em class="l"></em><em class="r"></em></p>
+                  </div>
+                  <div class="info" <if condition='$vo[can_use]'>
+                    	
+                    <else />
+                    	style="background:#ccc"
+                    </if>	>
+                  		<p><notempty name="vo.order_money">消费满 {$vo.order_money}元可使用</notempty></p>
+                        <p class="time">
+                        	<if condition='$vo[is_use]'>
+                                已使用
+                            <else />
+                                <notempty name="vo.end_time">有效期：{$vo.start_time|day_format} 至 {$vo.end_time|day_format}</notempty>
+                            </if>
+                        	
+                        </p>
+                  </div>
+                  <if condition="$vo[is_old] eq 1">
+                  	<div class="used_div">已过期</div>
+                  	<else/>
+                  	<div class="used_div">已使用</div>
+                  </if>
+                </a>
+                </div>
+            </volist> 
+        </div>
+     
+       </if>
+        <if condition="empty($list)" >
+        	<div class="empty_default">
+            	<br/>
+                <br/>
+                <br/>
+            	<img src="__IMG__/empty_content.png" width="100"/>
+                <br/>
+                还没有代金券~</p>
+            </div>
+        </if>
+        <p class="copyright">{$system_copy_right}</p>
+                
+    </div>
+    <if condition="!empty($list)" >
+        <div class="bottom_bar">
+            <button type="button" onClick="select_coupon()" class="btn">确定</button>
+        </div>
+    <else/>
+    	<div class="bottom_bar">
+            <a onClick="history.back()" class="btn">返回</a>
+        </div>
+    </if>
+    <if condition='$_GET[from]=="select"'>
+    <else />
+    <include file="Public/card_footer"/>
+    <include file="Public/mobile_foot"/>
+    </if>
+</body>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideToolbar');
+});
+function select_coupon(){
+	var val = $('input[type="radio"]:checked').val();
+	if(val==undefined) {
+		$.Dialog.fail('请选择代金券');
+	}else{
+		window.location.href="{:addons_url('shop://Wap/confirm_order')}&sn_id="+val;
+	}
+}
+$(function(){
+	$('.selelct_part').bind('click',function(){
+		var id = $(this).attr('rel');		
+		$('#item_'+id).click();
+	});
+})
+</script>
+</html>

@@ -1,0 +1,79 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body id="weisite">
+<div class="container">
+	<div class="detail top_line">
+    	<h6 class="title">{$info.title}</h6>
+        <p class="info"><span class="colorless">{$info.cTime|time_format}</span>&nbsp;&nbsp;<span><a href="{:U('setCount',array('id'=>$info[id],'type'=>'author'))}">{$info.uid|get_nickname}</a></span></p>
+        <section class="content">
+                <!--顶部广告-->
+                <php> if($info['ad_top_type']==1) { </php>
+                <!--我的名片-->
+                <div class="ad_card"><a href="{:U('setCount',array('id'=>$info[id],'type'=>'top'))}"><img src="{$info.uid|get_userface}"/>{$info.uid|get_nickname}<em></em></a></div>
+                <php> }elseif($info['ad_top_type']==2){ </php>
+                 <!--自定义广告-->
+                <div class="ad_photo"><a href="{:U('setCount',array('id'=>$info[id],'type'=>'top'))}"><img src="{$info.ad_top_img|get_cover_url}"/></a></div>
+                <php> } </php>                
+                
+                <notempty name="info.cover_id"><p><img src="{$info.cover_id|get_cover_url}"/></p></notempty>
+                {$info.content|htmlspecialchars_decode}
+                
+                <!--底部广告-->
+                <php> if($info['ad_bottom_type']==1) { </php>
+                <!--我的名片-->
+                <div class="ad_card"><a href="{:U('setCount',array('id'=>$info[id],'type'=>'bottom'))}"><img src="{$info.uid|get_userface}"/>{$info.uid|get_nickname}</a></div>
+                <php> }elseif($info['ad_bottom_type']==2){ </php>
+                 <!--自定义广告-->
+                <div class="ad_photo"><a href="{:U('setCount',array('id'=>$info[id],'type'=>'bottom'))}"><img src="{$info.ad_bottom_img|get_cover_url}"/></a></div>
+                <php> } </php>
+        </section>
+        <div class="detail_count">
+        	<span class="count view_count">{$info.view_count}</span>
+            <a class="count digg_count <empty name='info.has_digg'>done_digg</empty>" href="{:U('digg',array('id'=>$info['id']))}">{$info.digg_count}</a>
+            <a class="count comment_count" href="{:U('comment', array('media_id'=>$info['id']))}">{$info.comment_count}</a>
+        </div>
+     </div>
+     <div class="detail_more">   
+        <!--相关阅读-->
+        <notempty name="other_list">
+        <h1>相关阅读</h1>
+            <ul class="small_pic_list">
+    <volist name="other_list" id="vo">
+    	<li><php>$get_param['id'] = $vo['id'];</php>
+        	<a href="{:U('detail', $get_param)}">
+            	<notempty name="vo.cover_id"><img src="{$vo.cover_id|get_cover_url}"/></notempty>
+                <h6>{$vo.title}</h6>
+                <p>{$vo.intro}</p>
+                <span class="colorless">{$vo.cTime|time_format}</span>
+            </a>
+        </li>
+        </volist>
+    </ul>
+        </notempty>
+        
+        <p class="look_more"><a href="{:U('lists', array('uid'=>$info['uid']))}">查看更多内容</a></p>
+    </div>
+</div>
+<!-- 底部导航 -->
+{$footer_html}
+<!-- 统计代码 -->
+<notempty name="config.code">
+<p class="hide bdtongji">
+{$config.code}
+</p>
+<else />
+<p class="hide bdtongji">
+{$tongji_code}
+</p>
+</notempty>
+</body>
+<script type="text/javascript">
+$('.digg_count').click(function(){
+	var href = $(this).attr('href');
+	$.get(href,function(){
+		$('.digg_count').addClass('done_digg');
+	});
+	return false;
+})
+</script>
+</html>

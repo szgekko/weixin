@@ -1,0 +1,325 @@
+<extend name="Base/common" />
+<block name="body">
+<div class="span9 page_message">
+	<section id="contents">
+      <include file="Addons/_nav" />
+      <p class="normal_tips"><b class="fa fa-info-circle"></b> {$normalTips}</p>
+      <div class="tab-content">
+      		<h3>{$info.name}</h3>
+            <!-- 45000为秒 -->
+            <p id="totalTime" data-time="{$info.total_time}">{$info.begin_stamp|time_format} - {$info.end_stamp|time_format} 共{$info.total_time_show}</p>
+            <form id="pageForm" action="{:U('activities')}" method="post">
+            <input type="hidden" name="yaotv_id" value="{$info.id}" />
+            <table class="timeline_table" id="timelineTable">
+            	<thead>
+                	<th width="30%">摇一摇时间</th>
+                    <th width="70%">摇一摇页面名称</th>
+                </thead>
+                <tbody>
+                <volist name="list_data" id="vo">
+                	<tr>
+                    	<td>
+                        	<input type="button" class="timeline" onclick="openSelectTime(this);" value="{$vo.timeline}"/>
+                            <input type="hidden" name="startTime[]" value="{$vo.begin_offset}"/>
+                            <input type="hidden" name="endTime[]" value="{$vo.end_offset}" />
+                            <input type="hidden" name="sucai_id[]" value="{$vo.res_id}" />
+                        </td>
+                        <td>
+                        	<div class="yaopage">
+                        	<span class="fl name">{$vo.res_name}</span> 
+                        	<a onclick="openSelectPage(this)" href="javascript:;" class="fr add">编辑</a> 
+                        	<a onclick="openPreviewPage(this)" href="javascript:;" class="fr preview" 
+                        	data-link="{$vo.res_url}" style="display: inline;">预览</a>
+                            </div>
+                            
+                        	<a class="delete_icon" href="javascript:;" onclick="deletePage(this,{$vo.id})" title="删除"></a>
+                        </td>
+                    </tr>
+                    </volist>
+                    <empty name="list_data">
+                    <tr>
+                    	<td>
+                        	<input type="button" class="timeline" onclick="openSelectTime(this);" value="0'0'' 至 0'0''"/>
+                            <input type="hidden" name="startTime[]" value=""/>
+                            <input type="hidden" name="endTime[]" value="" />
+                            <input type="hidden" name="sucai_id[]" value="" />
+                        </td>
+                        <td>
+                        	<div class="yaopage">
+                            	<span class="fl name">添加一个摇一摇页面</span>
+                                <a class="fr add" href="javascript:;" onclick="openSelectPage(this)">添加</a>
+                            	<a class="fr preview" href="javascript:;" onclick="openPreviewPage(this)">预览</a>
+                            </div>
+                            
+                        	<a class="delete_icon" href="javascript:;" onclick="deletePage(this,{$info.id})" title="删除"></a>
+                        </td>
+                    </tr>
+                    </empty>
+                </tbody>
+            </table>
+            </form>
+            <p class="p_10">
+            	<a class="border-btn" href="javascript:void(0);" onclick="addYaoPage()">+添加摇一摇页面</a>
+            </p>
+            <div style="padding:15px 0; margin:15px 6px; border-top:1px solid #ddd; width:80%">
+            	<a class="btn" onclick="submitForm();" href="javascript:;">保存</a>&nbsp;&nbsp;
+                <a class="border-btn" href="javascript:window.history.back()">取消</a>
+            </div>
+            
+            
+      </div>
+    </section>
+ </div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/slider/css/jslider.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="__STATIC__/slider/css/jslider.blue.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/slider/js/jshashtable-2.1_src.js"></script>
+<script type="text/javascript" src="__STATIC__/slider/js/jquery.numberformatter-1.2.3.js"></script>
+<script type="text/javascript" src="__STATIC__/slider/js/tmpl.js"></script>
+<script type="text/javascript" src="__STATIC__/slider/js/jquery.dependClass-0.1.js"></script>
+<script type="text/javascript" src="__STATIC__/slider/js/draggable-0.1.js"></script>
+<script type="text/javascript" src="__STATIC__/slider/js/jquery.slider.js"></script>
+<script type="text/javascript" src="__STATIC__/qrcode/jquery.qrcode.js"></script>
+<script type="text/javascript" src="__STATIC__/qrcode/qrcode.js"></script>
+<script type="text/javascript">
+var totalTime = $('#totalTime').data('time');
+//添加页面
+function addYaoPage(){
+	var $addHtml = '<tr>'+
+				'<td>'+
+					'<input type="button" class="timeline" onclick="openSelectTime(this);" value="0\'0\'\' 至 0\'0\'\'"/>'+
+					'<input type="hidden" name="startTime[]" value=""/>'+
+					'<input type="hidden" name="endTime[]" value=""/>'+
+					'<input type="hidden" name="sucai_id[]" value="" />'+
+				'</td>'+
+				'<td>'+
+					'<div class="yaopage">'+
+						'<span class="fl name">添加一个摇一摇页面</span>'+
+						'<a class="fr add" href="javascript:;" onclick="openSelectPage(this)">添加</a>'+
+						'<a class="fr preview" href="javascript:;" onclick="openPreviewPage(this)">预览</a>'+
+					'</div>'+
+					'<input type="hidden" name="yaopageId" />'+
+					'<a class="delete_icon" href="javascript:;" onclick="$(this).parents(\'tr\').remove();" title="删除"></a>'+
+				'</td>'+
+			'</tr>'
+	$('#timelineTable tbody').append($addHtml);
+}
+//提交表单
+function submitForm(){
+	var submitFlag1 = true;
+	var submitFlag2 = true;
+	$('#timelineTable tbody tr').each(function(index, element) {
+        var startTime = $(this).find('input[name="startTime[]"]').val(); 
+		var endTime = $(this).find('input[name="endTime[]"]').val(); 
+		var sucai_id = $(this).find('input[name="sucai_id[]"]').val(); 
+		if(startTime=="" || endTime==""){
+			submitFlag1 = false;
+		}else if(sucai_id==""){
+			submitFlag2 = false;
+		}
+    });
+	if(submitFlag1==false){
+		updateAlert("请选择摇一摇页面的时间范围!");
+	}else if(submitFlag2==false){
+		updateAlert("请添加摇一摇页面的素材页面!");
+	}else{
+		$('#pageForm').submit();	
+	}
+}
+
+//打开选择时间段
+function openSelectTime(_this){
+	var otherTrs = $(_this).parents('tr').siblings();
+	var pageCount = $('#timelineTable tbody tr').size();
+	var startTime = $(_this).parent().find('input[name="startTime[]"]').val();
+	var endTime = $(_this).parent().find('input[name="endTime[]"]').val();
+	//console.log(startTime + "==" +endTime)
+	var pageTimeline = [];
+	otherTrs.each(function(index, element) {
+		var p = [];
+		var t1 = $(this).find('input[name="startTime[]"]').val();
+		var t2 = $(this).find('input[name="endTime[]"]').val();
+		t1 = t1==""?0: t1;
+		t2 =t2 ==""?0: t2;
+		p.push(t1);
+		p.push(t2);
+		pageTimeline.push(p);
+	});
+	if(startTime=="" && endTime==""){
+		//帅选出起始最大时间
+		//console.log(pageTimeline);
+		startTime = 0;
+		for(var i=0;i<pageTimeline.length;i++){
+			var tempTimeline = pageTimeline[i];
+			//console.log(startTime+"=========="+tempTimeline[1]);
+			if(parseInt(tempTimeline[1]) >= parseInt(startTime)){
+				startTime = tempTimeline[1];
+				//console.log(startTime+"****************"+tempTimeline[1]);
+			}
+		}
+		endTime = totalTime;
+		//console.log("endTime="+endTime)
+		//如果开始时间用尽了
+		if(startTime==totalTime){
+			updateAlert("没有可配置的时间段了:(");
+			return false;
+		}
+	}
+	
+	var minRange = 0;
+	var maxRange = totalTime;
+	//console.log(pageTimeline);
+	//console.log("startTime:"+startTime)
+	for(var i=0;i<pageTimeline.length;i++){
+		var tempTimeline = pageTimeline[i];
+		if(tempTimeline[1] <= startTime && tempTimeline[1] >= minRange){
+			minRange = tempTimeline[1];
+		}
+		if(tempTimeline[0] >= endTime && tempTimeline[0] <= maxRange){
+			maxRange = tempTimeline[0];
+		}
+	}
+	//console.log(minRange + "=" + maxRange);
+	
+	var tempHtml = $('<div><div class="yao_slider_time">'+
+					'<p class="dialog_slider_tips">提示：12:25代表12分22秒</p>'+
+					'<div class="dialog_slider_wrap"><input id="timeSlider" type="slider" name="area" value="'+
+					startTime+
+					";"+
+					endTime+
+					'" /></div>'+
+					'</div>'+
+					'<div class="dialog_foot">'+
+					'<a href="javascript:;" class="btn leftBtn" id="confirmBtn">确定</a>'+
+					'<a href="javascript:;" class="border-btn rightBtn" onclick="$.Dialog.close()">取消</a>'+
+					'</div>'+
+					'</div>');
+	$.Dialog.open("摇一摇时间设置",{width:700,height:300},tempHtml);
+	var scaleArr = [];
+	scaleArr[0] = 0;
+	for(var i=1;i<=7;i++){
+		scaleArr[i] = Math.round((totalTime/7*i)/60*100)/100;
+	}
+	$("#timeSlider",tempHtml).slider({ 
+		from: 0, 
+		to: totalTime,
+		range:[minRange,maxRange], 
+		heterogeneity: [], 
+		scale: scaleArr, 
+		limits: true, 
+		step: 0.01, 
+		calculate: function( value ){
+			return parseSecondToMinAndSecond(value);
+		},
+		dimension: '', 
+		skin: "blue", 
+		callback: function( value ){ 
+			//console.dir( value ); 
+		} 
+	});
+	$('#confirmBtn',tempHtml).click(function(){
+		var value = $('#timeSlider').val();
+		var _startTime = value.split(";")[0];
+		var _endTime = value.split(";")[1];
+		var _startTimeStr = parseSecondToMinAndSecond(_startTime);
+		var _endTimeStr = parseSecondToMinAndSecond(_endTime);
+		$(_this).val(_startTimeStr+" 至 "+_endTimeStr);
+		$(_this).parent().find('input[name="startTime[]"]').val(_startTime);
+		$(_this).parent().find('input[name="endTime[]"]').val(_endTime);
+		$.Dialog.close();
+	});
+}
+
+//打开选择素材
+function openSelectPage(_this){
+	var tempHtml = $('<div><div class="yao_page_dialog">'+
+					'<p class="m15"><a class="btn" href="{:addons_url(\'Sucai://Sucai/lists\')}">+新建素材</a></p>'+
+					'<div id="loading" style="height:344px;"><br/><br/><br/><center><img src="__IMG__/loading.gif"/><br/>加载数据中...</center><br/><br/><br/></div>'+
+					'<div class="yao_page_html">'+
+					
+					'</div>'+
+					'<div class="dialog_foot">'+
+					'<a href="javascript:;" class="btn leftBtn" id="confirmBtn">确定</a>'+
+					'<a href="javascript:;" class="border-btn rightBtn" onclick="$.Dialog.close()">取消</a>'+
+					'</div>'+
+					'</div>');
+	var url = "<php>echo addons_url ( 'YaoTV://YaoTV/ajax_page_list' )</php>";
+	$.get(url,{},function(data){
+		$('.yao_page_html').html(data);
+		$('#loading').hide();
+	})
+	$.Dialog.open("选择活动素材",{width:800,height:500},tempHtml);
+	$(document).on("click", ".yao_page_list li", function(){
+		$(this).addClass('checked');
+		$(this).siblings().removeClass('checked');
+	})
+	$(document).on("click", ".page a", function(){
+		$('#loading').show();
+		$('.yao_page_html').hide();
+		var href = $(this).attr('href');
+		$.get(href,{},function(data){
+			$('.yao_page_html').html(data);
+			$('.yao_page_html').show();
+			$('#loading').hide();
+		})
+		return false;
+	})	
+	var checkFlag = false;
+	$('#confirmBtn',tempHtml).click(function(){
+		$('.yao_page_list li').each(function(index, element) {
+            if($(this).hasClass('checked')){
+				var title =$(this).find('.title').text();
+				var link = $(this).find('.link').text();
+				var id = $(this).data('id');
+				$(_this).parents('tr').find('input[name="sucai_id[]"]').val(id);
+				$(_this).parents('.yaopage').find('.name').text(title);
+				$(_this).parents('.yaopage').find('.add').text("编辑");
+				$(_this).parents('.yaopage').find('.preview').attr("data-link",link).show();
+				$.Dialog.close();
+				checkFlag = true;
+			}
+        });
+		if(!checkFlag){
+			alert("请选择活动页面");
+		}
+		
+	});
+
+}
+
+//预览
+function openPreviewPage(_this){
+	var link =$(_this).data('link');
+	var tempHtml = $('<div><div class="yao_page_preview">'+
+					'<div class="left">'+
+						'<div class="wx_head"></div>'+
+						'<iframe src="'+link+'" width="320" height="430" id="wxPage"></iframe>'+
+					'</div>'+
+					'<div class="right">'+
+						'扫描二维码预览:<br/>'+
+						'<div id="qrcodeCanvas"></div>'+
+					'</div>'+
+					'</div>'+
+					'<div class="dialog_foot">'+
+					'<a href="javascript:;" class="btn leftBtn" onclick="$.Dialog.close()">确定</a>'+
+					'<a href="javascript:;" class="border-btn rightBtn" onclick="$.Dialog.close()">取消</a>'+
+					'</div>'+
+					'</div>');
+	$.Dialog.open("预览",{width:800,height:600},tempHtml);
+	$('#qrcodeCanvas',tempHtml).qrcode({
+		text:link
+	});			
+}
+//删除
+function deletePage(_this,id){
+	if(confirm("确认删除这个摇一摇页面吗？")){
+		$(_this).parents('tr').remove();
+		$.post("{:U('del_activity')}",{id:id},function(data){
+			//to do...
+		})
+	}	
+}
+</script>
+</block>

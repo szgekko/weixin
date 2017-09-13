@@ -1,0 +1,115 @@
+<extend name="Base/common" />
+<block name="body">
+<div class="span9 page_message">
+	<section id="contents">
+      <include file="Addons/_nav" />
+      <p class="normal_tips"><b class="fa fa-info-circle"></b>  {$normalTips}</p>
+      <div class="table-bar">
+        <div class="fl">
+           <div class="tools">
+                <a class="btn" href="#">素材库</a>&nbsp;&nbsp;
+                <input type="file" id="uploadProgram" title="本地素材">
+                <input type="hidden" name="uploadProgram" value=""/>
+                <script type="text/javascript">
+                	$("#uploadProgram").uploadify({
+						"height"          : 33,
+						"swf"             : "__STATIC__/uploadify/uploadify.swf",
+						"fileObjName"     : "download",
+						"buttonText"      : "上传本地素材",
+						"uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+						"width"           : 120,
+						'removeTimeout'	  : 1,
+						"onUploadSuccess" : function(file, data){
+							window.location.reload();
+						}
+					});
+                </script>
+                
+                &nbsp;&nbsp;<span class="gray">(zip格式，不超过200k)</span> 
+           </div>
+        </div>
+        <div class="search-form table_date_filter fr" style="margin-bottom:0">
+            <select class="select-inline">
+            	<option value="0">全部状态</option>
+                <option value="1">未入库</option>
+            </select>
+            <span class="fl se_span">&nbsp;&nbsp;</span>
+            <select class="select-inline">
+            	<option value="0">全部</option>
+            </select>
+            <input type="text" name="key" class="input-inline" placeholder="输入关键词" />
+            <input style="padding:3px 10px" type="button" class="btn" value="搜索" />
+        </div>
+        
+      </div>  
+        
+      <div class="data-table">
+        <div class="table-striped">
+          <table cellspacing="1" id="programTable">
+            <!-- 表头 -->
+            <thead>
+              <tr>
+                <th width="60%">页面名称</th>
+                <th width="30%">状态</th>
+                <th width="10%">操作</th>
+              </tr>
+            </thead>
+            
+            <!-- 列表 -->
+            <tbody>
+              <tr>
+                  <td>广告用转howork<br/>
+http://yaotv.qq.com/shake_tv/auto/8t32d1i5ffs7cm/reel/index.html</td>
+                  <td>已入库<br/>2015-01-02 提交</td>
+                  <td>
+                  	<a href="javascript:;" data-link="http://baidu.com" onclick="openPreviewPage(this)">详情</a>
+                  </td>
+               </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>  
+      
+      
+    </section>
+ </div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/qrcode/jquery.qrcode.js"></script>
+<script type="text/javascript" src="__STATIC__/qrcode/qrcode.js"></script>
+<script type="text/javascript" charset="utf-8">
+//导航高亮
+$('.side-sub-menu').find('a[href="{:U('Addons/index')}"]').closest('li').addClass('current');
+if($('ul.tab-nav').length){
+	$('.btn-return').hide();
+}
+$(function(){
+	showTab();
+	
+})
+//预览
+function openPreviewPage(_this){
+	var link =$(_this).data('link');
+	var tempHtml = $('<div><div class="yao_page_preview">'+
+					'<div class="left">'+
+						'<div class="wx_head"></div>'+
+						'<iframe src="'+link+'" width="320" height="430" id="wxPage"></iframe>'+
+					'</div>'+
+					'<div class="right">'+
+						'扫描二维码预览:<br/>'+
+						'<div id="qrcodeCanvas"></div>'+
+					'</div>'+
+					'</div>'+
+					'<div class="dialog_foot">'+
+					'<a href="javascript:;" class="btn leftBtn" onclick="$.Dialog.close()">确定</a>'+
+					'<a href="javascript:;" class="border-btn rightBtn" onclick="$.Dialog.close()">取消</a>'+
+					'</div>'+
+					'</div>');
+	$.Dialog.open("预览",{width:800,height:600},tempHtml);
+	$('#qrcodeCanvas',tempHtml).qrcode({
+		text:link
+	});			
+}
+</script>
+</block>

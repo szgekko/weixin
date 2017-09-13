@@ -1,0 +1,388 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__CSS__/base.css?v={:SITE_VERSION}" rel="stylesheet">
+<link href="__CSS__/module.css?v={:SITE_VERSION}" rel="stylesheet">
+<link href="__CSS__/weiphp.css?v={:SITE_VERSION}" rel='stylesheet'>
+<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="__JS__/admin_common.js?v={:SITE_VERSION}" charset="UTF-8"></script>
+<title>admin 管理员</title>
+<style type="text/css">
+
+li {
+	list-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+input, textarea, select {
+	outline: none;
+}
+textarea {
+	resize: none;
+}
+img {
+	border: none;
+}
+body {
+	font-family: Arial, "微软雅黑";
+}
+a {
+	text-decoration: none;
+}
+.mainer_inner {
+	margin: 20px;
+}
+.title {
+	font-size:16px;
+	line-height: 21px;
+	color: #404040;
+	padding-bottom: 20px;
+}
+.nav {
+	float: left;
+	color: #9C9B9B;
+}
+.search {
+	float: right;
+	border-color: #ebebeb;
+	background-color: #fff;
+	margin-right: 10px;
+	border: 1px solid #ebebeb;
+}
+.nav a {
+	display: inline-block;
+	margin-right: 5px;
+	padding: 6px 16px;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #edffd1;
+	/*background-color: #c3c3c3;*/
+}
+.top {
+	height: 30px;
+	margin-bottom: 10px;
+}
+.nav a:hover {
+	color: #fff;
+	background-color: #5be204;
+}
+.search-input {
+	float: left;
+	padding: 2px 4px;
+	width: 180px;
+	height: 24px;
+	line-height: 26px;
+	border: 0 none;
+}
+.sch-btn {
+	display: inline-block;
+	margin-top: 5px;
+	width: 16px;
+	height: 16px;
+	background: url(__IMG__/60-vicons_03.png) no-repeat 0px 0px;
+	background-size: 16px 16px;
+}
+.data-table {
+	margin-top: 10px;
+}
+table {
+	
+	border-color: grey;
+}
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+.data-table thead th {
+	height: 92px;
+	color: #fff;
+	background-color: #353535;
+	text-align: left;
+}
+ table tbody td { 
+ 	height: 73px; 
+ 	border-bottom-color: #f4f4f4; 
+ } 
+.table-striped tbody tr {
+	background-color: #fefefe;
+	color: #686868;
+}
+.table {
+	height: 92px;
+	background: #000;
+	padding-left: 0px;
+	vertical-align: middle;
+}
+.table1 {
+	height: 73px;
+	padding-left: 0px;
+}
+.table1 li {
+	float: left;
+	color: #686868;
+}
+.table li {
+	float: left;
+	color: #fff;
+	font-weight: 400;
+    height：92px;
+}
+.kuang .check-all {
+	width: 13px;
+	height: 13px;
+	margin-top: 40px;
+	margin-left: 10px;
+}
+.kuang1 .check-all {
+	width: 13px;
+	height: 13px;
+	margin-top: 30px;
+	margin-left: 10px;
+}
+.table .wenzi {
+	font-size: 14px;
+	padding-left: 20px;
+	padding-right: 40px;
+	line-height: 92px;
+}
+.table1 .wenzi {
+	font-size: 12px;
+	line-height: 73px;
+	padding-left: 8px;
+	padding-right: 2px;
+	padding-left: 20px;
+	padding-right: 30px;
+}
+.table1 #wenzi1 {
+	padding-right: 75px;
+}
+.table1 #wenzi2 {
+	padding-right: 10px;
+}
+.table1 #wenzi3 {
+	padding-right: 25px;
+	padding-left: 10px
+}
+.table1 #wenzi4 {
+	padding-right: 52px;
+	text-align:center;
+}
+.table1 #wenzi5 {
+	padding-right: 52px;
+	padding-left: 10px;
+}
+.table1 .wenzi a {
+	color: #2c7200;
+}
+
+.table_data{
+	margin:0 auto;
+}
+.table_data table{
+	
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+#th_title{
+    background: #666966;
+    color: #BFBFBF;
+}
+#th_title th{
+	padding:8px;
+}
+.table_data table td a{
+	color: #2c7200;
+}
+</style>
+</head>
+
+<body>
+<!--  -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+ 	<php>
+ 		if ($mid ) {
+			$link = M ( 'public_link' )->where ( 'uid=' . $mid )->order ( 'is_use desc' )->select ();
+			foreach ( $link as $l ) {
+				$mp_ids [] = $l ['mp_id'];
+				$is_use [$l ['mp_id']] = $l ['is_use'];
+			}
+			$mp_ids = getSubByKey ( $link, 'mp_id' );
+			if (! empty ( $mp_ids )) {
+				$mp_ids_list = count ( $mp_ids );
+				$mp_ids = implode ( ',', $mp_ids );
+				$map ['id'] = array (
+						'in',
+						$mp_ids 
+				);
+				
+				$public_list = M ( 'public' )->where ( $map )->order ( 'FIND_IN_SET(id,"' . $mp_ids . '")' )->select ();
+				$public = $public_list [0];
+				
+				$token = get_token ();
+				if ($public ['public_id'] && ($is_use [$public ['id']] == 0 || $token == '' || $token == - 1)) {
+					get_token ( $public ['public_id'] );
+				}
+				
+				unset ( $public_list [0] );
+			} else {
+				$mp_ids_list=0;
+			}
+			
+			$publicInfo=M('public')->where(array('uid'=>$mid))->find();
+            $userInfo=getUserInfo($mid);
+            //dump($mid);
+		}    
+			
+       </php>
+    <div class="wrap">
+        <span style="color: #C3BEBE;font-size: 15px;">{$nickname}管理员，您好！ </span>
+       
+            <div class="top_nav">
+                <if condition="is_login()">
+                    <ul class="nav" style="margin-right:0">
+                    	
+                    	
+                    	
+                        
+                        <li class="dropdown admin_nav">
+                            <a href="#" class="dropdown-toggle login-nav" data-toggle="dropdown" style="">
+                                <notempty name="userInfo[headface_url]">
+                                    <img class="admin_head" src="{$userInfo.headface_url|get_cover_url}"/>
+                                <else/>
+                                    <img class="admin_head" src="__IMG__/default.png"/>
+                                </notempty>
+                                {$mid|get_username|getShort=4}<b class="pl_5 fa fa-sort-down"></b>
+                            </a>
+                            <ul class="dropdown-menu" style="display:none">
+                               <!--  <if condition="$mid==C('USER_ADMINISTRATOR')"><li><a href="{:U ('Admin/Index/Index')}" target="_blank">后台管理</a></li></if>-->
+<!--                                <li><a href="{:U('Home/Public/lists')}">返回前台</a></li> -->
+<!--                             	<li><a href="{:U ('Home/Public/add',array('id'=>$publicInfo[id]))}">账号配置</a></li> -->
+<!--                                 <li><a href="{:U ('Home/Public/step_0',array('id'=>$publicInfo[id]))}">公众号配置</a></li> -->
+<!--                                 <li><a href="{:U('User/profile')}">修改密码</a></li> -->
+                                <li><a href="{:U('User/logout')}">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                <else/>
+                    <ul class="nav" style="margin-right:0">
+                    	<li style="padding-right:20px">你好!欢迎来到{:C('WEB_SITE_TITLE')}</li>
+                        <li>
+                            <a href="{:U('User/login')}">登录</a>
+                        </li>
+                        <li>
+                            <a href="{:U('User/register')}">注册</a>
+                        </li>
+                        <li>
+                            <a href="{:U('admin/index/index')}" style="padding-right:0">后台入口</a>
+                        </li>
+                    </ul>
+                </if>
+            </div>
+        </div>
+</div>
+<div id="mainer">
+  
+  <div class="mainer_inner">
+   
+    <h2 style="text-align: center;">后台用户信息管理</h2>
+    <div class="top">
+      <div class="nav">
+      	<span>审核筛选</span>
+      	<input type='radio' value='0' id='audit_0' name='is_audit' <eq name='is_audit' value='0'>checked=checked</eq>/><label for='audit_0'>所有</label>
+      	<input type='radio' value='1' id='audit_1' name='is_audit' <eq name='is_audit' value='1'>checked=checked</eq>/><label for='audit_1'>通过</label >
+      	<input type='radio' value='2' id='audit_0' name='is_audit' <eq name='is_audit' value='2'>checked=checked</eq>/><label for='audit_2'>未通过</label>
+      </div>
+      <div class="search">
+       
+        <input type="text" name="nickname" value="{:I('nickname')}" placeholder="请输入用户昵称或者ID">
+<!--         <a class="sch-btn" href="#" id="search"></a> </div> -->
+        <a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"></a></div>
+    </div>
+     <div  class='table_data'>
+	<table cellpadding='0' cellspacing='0'>
+        <tr id='th_title'>
+		<th style="border-radius:15px 0px 0px 0px">UID</th>
+		<th class="">昵称</th>
+		<th class="">金币值</th>
+        <th class="">经验值</th>
+		<th class="">登录次数</th>
+		<th class="">最后登录时间</th>
+		<th class="">最后登录IP</th>
+		<th class="">注册时间</th>
+		<th class="">审核时间</th>
+		<th class="">状态</th>
+        <th class="">审核</th>
+		<th style="border-radius:0px 15px 0px 0px">操作</th>
+		</tr>
+    <tbody>
+		<notempty name="list_data">
+		<volist name="list_data" id="vo">
+		<tr>
+			<td>{$vo.uid} </td>
+			<td>{$vo.nickname}</td>
+			<td>{$vo.score}</td>
+            <td>{$vo.experience}</td>
+			<td>{$vo.login_count|intval}</td>
+			<td><span>{$vo.last_login_time|time_format}</span></td>
+			<td><span>{:long2ip($vo['last_login_ip'])}</span></td>
+			<td><span>{$vo.reg_time|time_format}</span></td>
+			<td><span>{$vo.audit_time|time_format}</span></td>
+			<td>
+			<eq name="vo.status" value="1">
+			<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" >正常</a>
+		<else/>
+			<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" >禁用</a>
+		</eq></td>
+            <td> 	<eq name="vo.is_audit" value="1">
+			<a href="{:U('User/changeStatus?method=audit_0&id='.$vo['uid'])}">通过</a>
+		<else/>
+			<a href="{:U('User/changeStatus?method=audit_1&id='.$vo['uid'])}" >待审</a>
+		</eq></td>
+			<td>
+			<a href="{:U('User/showPublic',array('uid'=>$vo['uid']))}" target='_blank'>查看公众号信息</a>
+            	<neq name="vo.uid" value='1'>
+         		<a href="{:U('User/del_user?uid='.$vo['uid'])}" class="confirm" >删除</a>
+         		</neq>
+            
+            </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="13" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table> 
+     <div class="page"> {$_page|default=''} </div>
+  </div>
+</div>
+ <script type="text/javascript">
+//搜索功能
+$("#search").click(function(){
+	var nickname=$("input[name='nickname']").val();
+	if(nickname != ''){
+		var url="{:U('User/admin_user')}&nickname="+nickname;
+	}else{
+		var url="{:U('User/admin_user')}";
+	}
+	window.location.href =url ;
+	
+});
+$(document).ready(function() {
+	 $("input").filter(":radio").change(function(){
+	var data=$("input[name='is_audit']:checked").val();
+	
+	var url="{:U('User/admin_user')}&is_audit="+data;
+	
+	
+	window.location.href=url;
+})
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<div class="fx_main">
+			<div class="fx_total">
+			<a href="{:U('distribution_total',array('shop_id'=>$shop_id))}">
+				<p>可提佣金 (元)</p>
+			</a>
+			</div>
+			<div class="fx_take">
+				<p>{$duser.profit_money|wp_money_format}</p>
+			</div>
+		</div>
+		<form class="take_form">
+			<h4>提现金额</h4>
+			<label>￥</label><input type="number" name="cashout_money" value='' class="cmoney">
+			<h4>支付宝名称</h4>
+			<input type="text" name="zfb_name" value='{$duser.zfb_name}'  placeholder="请填写支付宝名称">
+			<h4>支付宝账号</h4>
+			<input type="text" name="zfb_account" value='{$duser.zfb_account}'  placeholder="请填写支付宝账号">
+			<h4>备注</h4>
+			<textarea name="remark"></textarea>
+			<a class="btn" href="javascript:;" onclick="do_cashout();">提现</a>
+		</form>
+	</div>	
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+	imgUrl:'{$shop.logo}'
+});
+	function do_cashout(){
+		var url="{:U('distribution_take')}";
+		var money=$("input[name='cashout_money']").val();
+		var zfb_name=$("input[name='zfb_name']").val();
+		var zfb_account=$("input[name='zfb_account']").val();
+		var all = parseFloat("{$duser.profit_money}");
+		var remark=$("textarea[name='remark']").val();
+		if(all <= 0){
+			$.Dialog.fail('没有可提现的金额！');
+			return false;
+		}
+		if(money <= 0 || money==""){
+			$.Dialog.fail('金额不能低于0元！');
+			return false;
+		}
+		if(money > all){
+			$.Dialog.fail('金额不能大于'+all+'元！');
+			return false;
+		}
+		if(!zfb_name){
+			$.Dialog.fail('请填写支付宝名称！');
+			return false;
+		}
+		if(!zfb_account){
+			$.Dialog.fail('请填写支付宝账号！');
+			return false;
+		}
+		$.post(url,{'money':money,'zfb_name':zfb_name,'zfb_account':zfb_account,'remark':remark},function(res){
+			if(res==0){
+				$.Dialog.fail('提交失败');
+			}else{
+				$.Dialog.success('提交成功');
+				window.location.href=url;
+			}
+		})
+	}
+</script>
+</body>
+</html>

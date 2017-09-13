@@ -1,0 +1,50 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body id="weisite">
+<div class="container">
+<php>$param = $get_param;$param['cate_id'] = 0;</php>
+	<div class="category_div">
+                  <div class="cate_inner">
+              <a href="{:U('lists',$param)}" <eq name="$cate_id" value="0">class="selected"</eq> >全部分类</a>
+                  <volist name="category_list" id="vo">
+                  <php>$param['cate_id'] = $vo['id'];</php>
+                      <a href="{:U('lists',$param)}" <eq name="vo['id']" value="$cate_id">class="selected"</eq> >{$vo.title}</a>
+                  </volist>
+              </div>
+    </div>
+    <ul class="small_pic_list" id="pullContainer">
+    <volist name="list_data" id="vo">
+    	<li><php>$get_param['id'] = $vo['id'];</php>
+        	<a href="{:U('detail', $get_param)}">
+            	<notempty name="vo.cover_id"><img src="{$vo.cover_id|get_cover_url}"/></notempty>
+                <h6>{$vo.title}</h6>
+                <p>{$vo.intro}</p>
+                <span class="colorless">{$vo.cTime|time_format}</span>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <!-- 分页 -->
+    <div class="page" data-pullload="true"> {$_page|default=''} </div>
+</div>
+<!-- 底部导航 -->
+{$footer_html}
+<!-- 统计代码 -->
+<notempty name="config.code">
+<p class="hide bdtongji">
+{$config.code}
+</p>
+<else />
+<p class="hide bdtongji">
+{$tongji_code}
+</p>
+</notempty>
+</body>
+<script type="text/javascript">
+$(function(){
+	//$.WeiPHP.initBanner(true,5000);
+	
+	$.WeiPHP.initLoadMorePage();
+})
+</script>
+</html>

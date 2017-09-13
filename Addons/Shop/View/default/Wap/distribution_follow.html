@@ -1,0 +1,28 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+        <div class="fx_share_top">
+            <img src="{$shop.logo|get_cover_url=100,100}" style="border-radius: 100%;">
+            <div class="follow">
+	            <p>{$shop.title}</p>
+	           <notempty name='shop.wechat'> <span>微信号: {$shop.wechat}</span></notempty>
+	        </div>
+        </div>	
+        <div class="fx_share_cont">
+        	<img src="{$qrCode}">
+        	<p>长按二维码图片， 识别图中二维码 购买</p>
+        	<span>关注我们 获取更多服务</span>
+        </div>
+        <script type="text/javascript">
+      //分享
+    	$.WeiPHP.initWxShare({
+    		title:'{$shop.title}',
+    		desc:'{$shop_share}',
+    		link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+    		imgUrl:'{$shop.logo}'
+    	});
+        </script>	
+</body>
+</html>

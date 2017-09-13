@@ -1,0 +1,272 @@
+html,body{width: 100%;height: 100%;}
+*{-webkit-tap-highlight-color:rgba(255,0,0,0);-cwebkit-user-select: none;}
+.jingcaibg{
+	background: #3a3f55;
+}
+.pd20{
+	padding: 20px;
+}
+.pdb80{
+	padding-bottom: 80px;
+}
+.pdb120{
+	padding-bottom: 120px;
+}
+.tc{
+	text-align: center;
+}
+
+.jingcaibox .frmsub,.frmsub_big{
+	display: block;
+	width: 440px;
+	height: 80px;
+	margin: 40px auto;
+	background: url(../images/toupiaobtn.png) center center no-repeat;
+	background-size:100%;
+	border: none;
+	color: #2f9ee3;
+	text-align: center;
+	font-size: 30px;
+	line-height: 80px;
+	cursor: pointer;
+}
+.jc_frm{
+	clear: both;
+	margin: 30px 0px;
+}
+.jc_frm .jc_frm_btn{
+	line-height: 56px;
+	height: 56px;
+	text-align: center;
+	display: block;
+	width: 80%;
+	background: -webkit-gradient(linear,10% 100%,60% 100%,from(#18cbb8), to(#2f9ee3));
+	border-radius:24px;
+	font-size: 30px;
+	color: #fff;
+}
+.jc_frm .jc_frm_btn_sub{
+	margin: 20px auto;
+}
+/*投票A*/
+.toupiaobox{text-align: -webkit-center;}
+.toupiaobox .tp_linksgourp{width: 79.68%;margin-bottom:9.53%;} 
+.tp_linksgourp:nth-of-type(2){margin-top:14.53%;}
+.toupiaobox .tp_link_item{width:100%;height: 87px;border:none;font-size:1.2em;color: #3399cc;background: url(../images/toupiaoa_btnbg.png) no-repeat;background-size: cover;}
+
+/*提交成功*/
+.tijiaobox{padding-top:9.2%;}
+.tijiaook{text-align: center;}
+.tijiaotitletxt{padding:3.9% 3.9% 7.8%;text-align: left; font-size: 1.2em;color: #fff;}
+.tijiaobox .jc_frm{margin:5.57% 0;} 
+.tijiaobox .jc_frm .jc_frm_btn{height: 87px;}
+.tijiaobox .frmsub_big{width: 80%;height:95px;margin: 60px auto 0px; color: #fff; background-size: contain;}
+
+/*已选清单*/
+.tijiaobox{}
+ .yixuanconunt{padding-top:5.7%;padding-bottom: 3.4%;border-bottom: 1px solid #2c8ac2; text-align: center;font-size: 1.3em;color: #2c8ac2;}
+ .yixuanbox table tr:first-child td{padding:7% 0; font-size:1.3em;color:#fff;}
+.yixuanbox table td{padding:2% 0; text-align: center;border-bottom: 1px solid #4e546c; font-size: 1.2em; color: #c7c7c7;}
+ .yxuserpic{border:1px solid #616577; border-radius: 70px;}
+.yixuanbox table td a{display: inline-block;}
+.yixuanbox table td .gotoveiw{margin-right:10px;}
+.yixuanbox .jc_frm{margin-bottom:15.3%;margin-top:50.4%;}
+.yixuanbox .jc_frm .jc_frm_btn{ height: 87px;}
+/*投票2*/
+.toupiao2box{}
+.tpban2{width:100%;background: url(../images/tplistbanner.jpg) no-repeat;background-size:cover;}
+.tp2title{width: 100%;padding-top:5%;overflow: hidden;}
+
+ .titleth{float: left;width:44.68%;padding:1.5% 0;text-align: center; font-size:1.2em;color: #1a1e30; background: #68b830;border-radius: 0 5px 5px 0;}
+ .titletd{float: right;width:47%;padding-right: 1%; margin-right:-1px; font-size: 0.9em;}
+ .titletd p{font-size:1em;color: #fff;}
+ .titletd p span{display: inline-block;padding:2% 15px;margin-right:5px;font-size: 1em;}
+.titletd p .startime{background:#ff861a;border-radius: 5px 5px 0 0;}
+.titletd p .endtime{background:#292d41;border-radius: 0px 0px 5px 5px;}
+ .tp2titletxt{width:97.5%;padding:6.25% 1.2% 0; margin:0 auto; font-size: 1.2em;line-height: 1.6em; color: #fff;}
+.tpcount{padding:2% 5.5% 5% 2%;text-align: right;font-size:0.8em;color: #1a1e30;}
+ .selectgrouup{width: 100%;overflow: hidden;color:#fff;background: #32374d;font-size: 16px;}
+.selectbutton{float: left;width: 33%;text-align: center;}
+.selectbutton .arriveSlt{height: 68px;line-height: 68px;vertical-align: middle;font-size: 30px;color: #fff;
+ -webkit-appearance: button;
+text-align: center;
+border:none;
+vertical-align: middle;
+background: rgba(255,255,255,0);
+box-sizing: border-box;
+border-radius: 0px;
+}
+.selectbutton .searchbut{display:inline-block; height: 68px;line-height: 68px; width: 100%;font-size:30px;color: #2ea0e1;}
+.serarchebox{position: relative; width:93.8%;margin:2.6% auto 0; background: #292d41;border-radius: 25px;display: none;}
+.serarchebox input.searcheinputbox{width: 80%; height: 62px; vertical-align: middle; border:none;font-size: 1.2em;color: #fff; background: none;text-indent: 10px;}
+.searchebt{display: inline-block; width:97px;height: 62px;border:none;background: url(../images/searchbtbg.png) center center no-repeat; vertical-align: middle; }
+.arror_t{position: absolute;top:-12px;right:11.5%;}
+.listcontentitem{padding:0 3.1% 15%;text-align: right;}
+
+.listselectcount{width:100%;margin-top:4.8%; text-align:right; }
+.listselectcount a{display: inline-block;width:40%;padding:1.2% 0 2.5%;  font-size: 1.2em;color: #fff;background: url(../images/tpgotocount.png) no-repeat;background-size:contain;text-align: center; }
+.listselectcount a span{color:#fff;font-size:1.1em;}
+.itemlines{width: 100%;padding-bottom:100px; overflow: hidden;}
+.listiems{float: left;width: 49.5%;margin-top:4.35%; text-align: center;box-sizing: border-box;}
+.userpi{border:1px solid #686e7f;border-radius: 50%;}
+.itesnames{margin-top:5.3%; }
+ .nochecked{display: inline-block;width: 38px;height: 31px;background: url(../images/selectnochecked.png) no-repeat;}
+.itesnames .itemnametxt{display: inline-block;font-size: 1.2em;color: #fff;font-style: italic;vertical-align: text-bottom;}
+.itesnames .checked{display: inline-block;width: 38px;height: 31px;background: url(../images/selectchecked.png) no-repeat;}
+
+  .checkboxs{opacity: 0;width:38px;height: 31px;background:#f00;-webkit-appearance:button;}
+.nextbutton{position: fixed;left:0;bottom:15px; width:100%;height: 87px;}
+.nextbutton a{
+  display: block;margin: 0 auto;  
+  line-height: 87px;
+  height: 87px;
+  text-align: center;
+  display: block;
+  width: 80%;
+  background: -webkit-gradient(linear,10% 100%,60% 100%,from(#18cbb8), to(#2f9ee3));
+  border-radius: 24px;
+  font-size: 30px;
+  color: #fff;}
+
+/*弹出层*/
+.alertbox{position: fixed;top:10%;left:5.3%;width: 89.3%;height:75%; padding-bottom:10%;background: #fff; display: none;}
+ .al_close{position: absolute;top:0;right:0;}
+ .personimg{padding-top:12%;padding-bottom:5%;text-align: center;}
+ .headimg{border-radius: 50%;}
+ .personname{font-style: italic;font-size:1.3em;color: #292d41;}
+ .personshwo{font-size:1.0em;color: #292d41;}
+ .tp_btns{text-align: center;}
+ .tp_sub{width: 80%;height: 87px;border: 0;color: #fff;font-size:1.2em;  background: -webkit-gradient(linear,10% 100%,60% 100%,from(#18cbb8), to(#2f9ee3));border-radius: 30px;}
+ .tp_sub2{width: 80%;height: 87px;border: 0;color: #ccc;font-size:1.2em;  background: -webkit-gradient(linear,10% 100%,60% 100%,from(#7c7c7c), to(#949494));border-radius: 30px;display: none;}
+.personshwo{padding:0 5%;font-size: 1.2em;height: 51%; margin-bottom: 5%;overflow-y:scroll; }
+
+/*摇广播  摇一摇页面*/
+.ygb_yyy_banner{padding:15px 0;text-align: center;}
+.ygb_cursor{padding-top:14.06%;text-align: center;}
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+.animated {
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+.wobble {
+  -webkit-animation-name: wobble;
+          animation-name: wobble;
+}
+@-webkit-keyframes wobble {
+  0% {
+    -webkit-transform: none;
+            transform: none;
+  }
+
+  15% {
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+
+  30% {
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+
+  45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+
+  60% {
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+
+  100% {
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.dialogbox{position: absolute;width: 83.12%;left:8.4%;top:36%;  background:#454957;border-radius: 10px;}
+ .ygb_closedialog{position: absolute;top:-20px;right:-10px;}
+  .dialogtitle{padding-top:10.9%;padding-bottom:4.7%;text-align: center;font-size:13px;color: #fff;}
+ .ygb_dialogimg{text-align: center;}
+ .ygb_inputinfo{width: 100%;padding-bottom:8%; margin-top:5%; text-align:-webkit-center;}
+ .ygb_inputinfo a{display:block; width: 58.6%;padding:2.63% 0;text-align: center;color: #fbc448;font-size: 1.3em;background: #363c4f;}
+
+/*摇广播活动页面*/
+.jingcaibg2{background:url(../images/ygb_active_bg.jpg);}
+.paddingvalue{padding-top:13%;}
+.ygb_active{position: relative;min-height: 100%;}
+.ygb_active_banner{position: relative;width: 100%;text-align: center;}
+ .active_logo{position: absolute;top:16%;right:16%;}
+ .ygb_active_text{padding:11.7% 9.2% 30%;color: #595959;font-size:1.2em;}
+.gotoactive{position: absolute;display: block; width: 100%;left:0;bottom: 0;}
+.gotoactive img{display: block;}
+.loading {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+  background: url(images/spinner.png) no-repeat;
+  background-size: 100px 100px;
+  opacity: 0;
+  -webkit-animation: loading infinite linear .5s;
+}
+.loading-show{opacity: 1;}
+.wait_msg{ text-align:center; color:#fff;}
+
+#timediv{ width:100px; height:100px; margin:50px auto; text-align:center; line-height:100px; background:#fff; color:#333; font-size:60px; font-weight:bold; border-radius:50px;}
+#timediv{-webkit-animation:popTime 1s infinite;animation:popTime 1s infinite;}
+#countDown .tips{ text-align:center; font-size:40px;  color:#ea105a; text-shadow:0 1px 10px #fff;}
+
+.get_bag{ width:240px; margin:0 auto; height:70px; padding-top:85px; text-align:center; color:#fff; font-size:30px; background:url(bag_1.png) no-repeat; background-size:100% 100%;}
+
+@-webkit-keyframes loading{
+    0%{
+        -webkit-transform: rotate(0);
+        transform: rotate(0); 
+    }
+    100%{
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg); 
+    }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) { 
+	/*已选清单*/
+	.yixuanbox .jc_frm{margin-top:40.4%;}
+	/*摇广播活动页面*/
+	.paddingvalue{padding-top:6%;}
+	 .ygb_active_text{padding:5% 9% 30%;}
+
+ }
+
+@-webkit-keyframes pop
+{
+from { -webkit-transform:scale(0,0);opacity:0}
+to { -webkit-transform:scale(1,1);opacity:1}
+}
+
+@keyframes popTime
+{
+0% { transform:scale(1.8,1.8); opacity:.5}
+50% { transform:scale(1,1);opacity:1}
+100% { transform:scale(1,1)}
+}
+
+@-webkit-keyframes popTime
+{
+0% { -webkit-transform:scale(1.8,1.8);opacity:.5}
+50% { -webkit-transform:scale(1,1);opacity:1}
+100% { -webkit-transform:scale(1,1)}
+}

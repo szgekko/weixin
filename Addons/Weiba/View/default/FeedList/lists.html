@@ -1,0 +1,240 @@
+    
+      <div class="weiba_forumlist">
+      	 <php>if(empty($list_data)) { </php>
+         	<div class="empty_list">暂时没有动态!</div>
+         <php> } else { </php>
+         <volist name="list_data" id="feed">
+           <div class="section">
+                  <div class="friend_list">
+                      <div class="friend_left">
+                      <!--头像-->
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><img class="w-h-img" width="100%"  src="{$feed.headimgurl}"></a>
+                      </div>
+                      <div class="friend_right">
+                          <em class="icon_default"></em>
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><h3>{$feed.nickname}</h3></a>
+                          <eq name="feed.feed_type" value="3">
+                             <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><h3>{$feed.title}</h3></a>
+                          </eq>
+                          <in name="feed.feed_type" value="0,1,2">
+                            <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">{$feed.content}</p></a>
+                                <else/>
+                            <eq name="feed.feed_type" value="3">
+                            <em class="icon_long"></em>
+                                <div class="long_txt"> 
+                                    <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">{$feed.content}</p></a>
+                                </div>
+                            </eq>
+                          </in>
+                          <notempty name="feed.img_ids">
+                          <ul class="img_list content_imgs">
+                              <volist name="feed.img_ids" id="img">
+                              <li><img onclick="showBigImgBox(this);" src="{$img}"></li>
+                              </volist>
+                          </ul>
+                          </notempty>
+                          <eq name="feed.feed_type" value="1">
+                          <em class="icon_goods"></em>
+                          <div class="friend_list_goods">
+                              <span class="price">￥<strong>{$feed.price}</strong></span>
+                              <eq name="feed.is_store" value="1"><span class="goods_tip">自提</span></eq>
+                              <eq name="feed.is_home" value="1"><span class="goods_tip">邮寄</span></eq>
+                              <a href="javascript:;" class="goods_btn" rel="{$feed.id},{$feed.price},{$feed.is_store},{$feed.is_home},{$myinfo.truename},{$myinfo.mobile},{$myinfo.address}" post_url="{:U('feedOrder')}">立即购买</a>
+                          </div>
+                          </eq>
+                          <eq name="feed.feed_type" value="2">
+                          <em class="icon_act"></em>
+                          <div class="friend_list_act">
+                              <p class="act_time">时间：<span>{$feed.event_time|time_format}</span>
+                              <if condition="$feed[has_join] gt 0"><a  href="javascript:;" class="cancle_btn" rel="{$feed.id}">已报名</a>
+                              <else /><a href="javascript:;" class="act_btn" rel="{$feed.id}">立即报名</a></if>
+                              </p>
+                              <notempty name="feed.event_list">
+                              <div class="act_list">
+                                  <p>已报名：{$feed.event_count|intval}人</p>
+                                  <volist name="feed.event_list" id="vo">
+                                  <img class="w-h-img" width="100%"  src="{$vo.uid|get_userface}">
+                                  </volist>
+                                  <php> if($feed['event_count']>10) echo '...';</php>
+                              </div>
+                              </notempty>
+                          </div>
+                          </eq>
+
+                          <p class="info">
+                            <span class="pinfo">
+                              <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}" class="comment"><i>{$feed.reply_count}</i></a>
+                              <span id="digg{$feed.id}" rel="{$feed.digg_count}">
+                               <eq name="feed.has_digg" value="1"><a href="javascript:;" class="iszan" onclick="delDigg({$feed.id},'{:U('addDigg')}','{:U('delDigg')}')"><i class="zan">{$feed.digg_count}</i></a>
+                                <else /><a href="javascript:;" onclick="addDigg({$feed.id},'{:U('addDigg')}','{:U('delDigg')}')"><i class="zan">{$feed.digg_count}</i></a></eq>
+                              </span>
+                            </span>
+                            <span>{$feed.cTime}</span><a class="feed_del"></a>
+                          </p>
+                      </div>
+                  </div>
+            </div>
+            </volist>
+<php> }  </php>            
+          <div class="page">
+            {$_page}
+          </div>
+          <div style="height:75px;"></div>
+      </div>
+      <script>
+        $(function(){
+          //动态图片
+           $('.img_list').each(function(){
+            var imgNum = $(this).find('li').size();
+            //console.log(imgNum)
+            var imgW = $('.img_list').width();
+            var imgW2 =imgW*0.48;
+            var imgW3 =imgW*0.31;
+            if(imgNum>2){
+                $(this).find('li').css({'height':imgW3,'width':imgW3});
+                $(this).find('img').css('height',imgW3)
+            }else if(imgNum==1){
+                $(this).find('li').css({'height':imgW,'width':'100%'});
+                $(this).find('img').css('height',imgW)
+            }else if(imgNum==2){
+                $(this).find('li').css({'height':imgW2,'width':'48%'});
+                $(this).find('img').css('height','100%')
+            }
+           })
+           //活动报名
+           $('.act_btn').click(function(){
+        	   var feed_id = $(this).attr('rel');
+              var joinHtml = $('<div class="join_event_dialog">'+
+              '<form class="join_form">'+
+                '<a class="close" href="javascript:;"></a>'+
+                '<p class="title">我要参加</p>'+
+                '<div class="form_row"><p>真实姓名<em>*</em></p><div class="row"><input type="text" name="name"/></div></div>'+
+                '<div class="form_row"><p>手机<em>*</em></p><div class="row"><input type="text" name="phone"/></div></div>'+
+                '<input type="hidden" name="event_id" value=""/>'+
+                '<a class="btn-big" id="submitJoinBtn" href="javascript:;">提交</a>'+
+              '</form>'+
+              '</div>');
+              $('body').append(joinHtml);
+              $('.join_event_dialog').height($('#layout').height()+50); 
+              var dialogTop = $(window).scrollTop()+($('body').height()-$('.join_event_dialog .join_form').height()-32)/2;
+              if($('.join_event_dialog .join_form').height()>=$(window).height()){
+                dialogTop = 0;
+                $('body').css('min-height',$('.join_event_dialog .join_form').height())
+              }
+              $('.join_event_dialog .join_form').css('top',dialogTop);
+              $('.close',joinHtml).click(function(){
+                joinHtml.remove();
+              })
+              $('#submitJoinBtn',joinHtml).click(function(){
+                var name = $('input[name="name"]',joinHtml).val();
+                var phone = $('input[name="phone"]',joinHtml).val();
+                if(name==''){
+                   $.ui.showMask("请填写真实姓名！", true);
+                   return;
+                }
+                if(phone==''){
+                   $.ui.showMask("请填写手机！", true);
+                   return;
+                }
+                $.post("{:U('joinEvent')}",{feed_id:feed_id,username:name,mobile:phone},function(res){
+                	joinHtml.remove();
+                	if(res==1){
+                		$.ui.showMask("报名成功！", true);
+                		window.location.reload();
+                	}else{
+                		$.ui.showMask("报名失败，请稍后再试！", true);
+                	}
+                });
+             })
+            })
+        })
+
+      </script>
+
+
+<!--大图相册的效果-->
+<style type="text/css">
+#topcontrol{ display:none;}
+#content .postDetail{ padding-bottom:3em;}
+/*大图相册的效果*/
+.device {
+  display:none;position: absolute;top: 0px; bottom:44px;left: 0px;width: 100%;height: 100%;background-color: #333;z-index: 10009;overflow: hidden;
+}
+.device .showImg{position: relative; }
+.device .showImg_t{height: 38px;line-height: 38px;text-align: center;background-color: #000;color: #fff;font-size: 14px;padding: 0 20px;}
+.device .showImg_close{position: absolute;right: 20px;top: 10px; color: #fff;z-index: 999;}
+.device .swiper-container {
+  width: 100%;
+}
+.device .content-slide {
+  padding: 20px;  color: #fff;
+}
+.device .title {
+  font-size: 25px;  margin-bottom: 10px;
+}
+.device .pagination {
+  position: absolute; left: 0;  text-align: center; bottom: 10px;  width: 100%;  z-index: 99999;
+}
+.swiper-slide{display: box; display: -webkit-box; -webkit-box-pack:center; -webkit-box-align:center;overflow-y:scroll;}
+.device .swiper-pagination-switch {
+  display: inline-block;  width: 6px;  height: 6px; border-radius:6px; background: #ccc; margin: 0 3px;  cursor: pointer;}
+.device .swiper-active-switch {
+  background: #09b092;
+}
+</style>
+
+<div class="device">
+  <div class="showImg">
+    <a class="showImg_close" href="javascript:void(0)" onClick="closeBox()">关闭</a>
+    <div class="swiper-container">
+      <div class="swiper-wrapper" id="content_img_list"> 
+      <!--  <div class="swiper-slide">
+          <img src="{$vo.img_url}" alt="{$vo.ad_name}" width="100%" height="198" />
+        </div> -->
+      </div>
+    </div>
+    <div class="pagination"></div>
+  </div>
+</div>
+<script type="text/javascript">         
+var mySwiper
+function showBigImgBox(obj){
+  $('.pagination').html('');
+  $('.swiper-slide-duplicate').remove('');
+  $('#content_img_list').html("");
+  var old_src = $(obj).attr('src');
+  var imgArr = new Array();
+  var index = 0;
+  $(obj).closest('.content_imgs').find('img').each(function(i, e) {
+    var src = $(this).attr('src');
+    if(src!=""){
+      if(src==old_src){
+        index = i;
+      }
+      src = src.replace(/_250_250./,".");
+      src = src.replace(/_200_200./,"."); 
+      imgArr.push(src);
+      var html = "<div class=\"swiper-slide\"><img src=\""+src+"\" width=\"100%\" /></div>";
+      $('#content_img_list').append(html);
+    }        
+    });
+  $('.device').show();
+  mySwiper = new Swiper('.swiper-container',{
+    pagination: '.pagination',
+    loop:true,
+    grabCursor: true,
+    paginationClickable: true,
+    visiblilityFullfit: true,
+    watchActiveIndex: true,
+    initialSlide:index
+    })  
+  var scrollT =  $("body").scrollTop();
+  $('.device').offset({top:scrollT});
+  $('body,html').css('overflow','hidden')
+}
+function closeBox(){
+  mySwiper.destroy();
+  $('.device').hide();
+  $('body,html').css('overflow','auto')
+}
+</script>

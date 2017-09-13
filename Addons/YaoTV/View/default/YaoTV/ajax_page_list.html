@@ -1,0 +1,10 @@
+<ul class="yao_page_list">
+<volist name="list_data" id="data">
+<li data-id="{$data.id}" class="">
+	<span class="check"><img src="__IMG__/jump_success.png" width="30"/>&nbsp;</span>
+    <span class="title">{$data.name}</span>
+    <span class="link">{$data.url}</span>
+</li>
+</volist>
+</ul>
+<div class="page" style="margin:10px 15px;">{$_page|default=''}</div>

@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/mobile_head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/redbag.css"/>
+<script src="{:ADDON_PUBLIC_PATH}/jquery.shake.js"></script>
+<script>
+var img="{$img}";
+if(img==""){
+	img="{:ADDON_PUBLIC_PATH}/logo-w.png";
+}
+var shareData = {
+		desc:'摇一摇微现场',
+		title:'摇一摇微现场',
+		link:"{:addons_url('Shake://Wap/index',array('token'=>$token))}",
+		imgUrl:"{$img}"
+	}
+$.WeiPHP.initWxShare(shareData);
+</script>
+<style>
+body{
+	background:#eee url("{$bg_img}") no-repeat !important; background-size:100% 100% !important;
+}
+.tips{
+	color: bisque;
+    font-family: 楷体;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 10px;
+}
+.count_down{
+	color: bisque;
+    font-family: 楷体;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 30px;
+}
+</style>
+</head>
+<body class="jingcaibg">
+<div class="loadingbox"></div>
+<div class="container">
+    <div class="main">
+        <div class="ygb_yyy">
+        	
+            <div class="ygb_yyy_banner">
+                <if condition="$img eq ''">
+                <img src="{:ADDON_PUBLIC_PATH}/logo-w.png" width="86.56%">
+                <else/>
+                <img src="{$img}" width="66.56%"  height='128px'>
+                </if>
+            </div>
+            <div style="text-align:center">
+        	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$music_path}" ></audio>
+        	<img src="{:ADDON_PUBLIC_PATH}/images/music_start.png" width='80px' id='bf_music'>
+        </div>
+            <div class="tips" id="tips">距离游戏开始时间还有</div>
+            <div class="count_down">
+            	<span id="time">{$daoji}</span>
+            </div>
+            
+            <div class="ygb_cursor">
+                <img src="{:ADDON_PUBLIC_PATH}/images/ygb_cursor.png" width="28.43%" class="animated wobble infinite">
+            </div>
+			
+            
+            <div id="loading" class="loading"></div>
+        </div>
+    </div>
+<!--     <p class="copyright" style="position:absolute; bottom:0;right:0;left:0;text-align:center">{$system_copy_right}</p> -->
+</div>
+</body>
+<script type="text/javascript">
+    var lastTime = 0;
+    var x = y = z = lastX = lastY = lastZ = 0;
+    var shakeSpeed = 800;
+    window.status = 2;//首次不能摇  根据倒计时来设置0或1
+    var daojitime;
+    var live_id="{$live_id}";
+    var shake_id="{$info.id}"
+    var daoji="{$daoji}";
+    var gameState="{$game_state}";
+    var canShake="{$can_shake}";
+    var countTime=0;
+    $(function(){
+    	 setStart(daoji,gameState,canShake);
+    	 //监控摇控器 游戏状态
+    	 var murl="{:addons_url('MiniLive://Show/getStatusByAjax')}&id="+live_id;
+    	 if(canShake == 1){
+    		 var getMonitor=setInterval(function(){
+ 				$.post(murl,function(d){
+ 					setStart(d.daoji,d.game_state,canShake);
+ 				});
+ 		  	 },3000)
+    	 }
+    });
+	if(window.DeviceMotionEvent){
+	   var countTime = 0;
+	   $(document).shake({
+			shake_speed:15,  
+			time_difference:50,
+			shakeAfter : function(){
+				 if(window.status == 1){
+					 //定时发送摇次数
+					 countTime++;
+					 if(countTime%2==0){
+						 //to do
+						 $.post("{:U('ajaxAddCount')}",{'live_id':live_id,'the_count':countTime},function(d){
+							 //达到了指定次数在这里要做相应的处理
+							 if(d==1){
+								 setStart(0,0,canShake);
+							 }else if(d == 2){
+								 setStart(0,0,0);
+							 }
+							 
+						 });
+					 }
+				}
+			}
+		});
+	}else{
+		alert('本设备不支持摇一摇功能');
+	}
+    function setStart(daoji,gameState,canShake){
+    	if(gameState == 2){
+    		window.status = 2;//不可摇
+        	if(daoji != 0){
+        		$('#tips').text('距离游戏开始时间还有');
+        		//$('#time').text(daoji+'秒');
+        		if(!daojitime){
+        			var tempdaoji = daoji-2;
+        			daojitime=setInterval(function(){
+        				tempdaoji--;
+            			$('#time').text(tempdaoji+'秒');
+        				if(tempdaoji <=0 ){
+        					clearInterval(daojitime);
+        					if(canShake==0){
+        			    		window.status = 2;//不可摇
+        			    		$('#tips').text('游戏已结束  谢谢你的参与');
+        			       	 	$('#time').text('本轮设置不能重复中奖');
+        			    	}else{
+	           					 window.status = 1;//可摇
+	           					 $('#tips').text('游戏开始  摇动你的手机');
+	           			       	 $('#time').text('开始了，使劲摇吧！');
+        			    	}
+        				}
+        			},1000);
+        			
+        		}
+        			
+        	}else{
+        		 window.status = 1;//可摇
+        		$('#tips').text('游戏开始  摇动你的手机');
+           	 	$('#time').text('开始了，使劲摇吧！');
+        	}
+        }else if(gameState == 1){
+        	 $('#tips').text('距离游戏开始时间还有');
+        	 $('#time').text('游戏还没开始！');
+        }else{
+        	window.status = 2;//不可摇
+        	$.post("{:U('is_user_win')}",{'live_id':live_id,'shake_id':shake_id},function(dd){
+        		if(dd == 0){
+        			$('#tips').text('游戏已结束  谢谢你的参与');
+               	 	$('#time').text('请发送UP参与活动！');
+        		}else{
+        			$('#tips').text('游戏已结束  谢谢你的参与');
+               	 	$('#time').text('恭喜中奖了，请返回微信发表获奖感言吧！');
+        		}
+        	})
+        }
+    	if(canShake==0){
+    		window.status = 2;//不可摇
+    		$('#tips').text('游戏已结束  谢谢你的参与');
+       	 	$('#time').text('本轮设置不能重复中奖');
+    	}
+    }
+    var mstatus=1;
+    $('#bf_music').click(function(){
+    	var myVid=document.getElementById("musicAudio");
+    	if(myVid.paused){                 
+    		myVid.play();
+    		var imgurl="{:ADDON_PUBLIC_PATH}/images/music_start.png";
+            $('#bf_music').attr('src',imgurl);
+        }else{
+        	myVid.pause();// 暂停
+        	var imgurl="{:ADDON_PUBLIC_PATH}/images/music_stop.png";
+            $('#bf_music').attr('src',imgurl);
+        } 
+    });
+    
+    function fnShowResult(){
+        //$("#myaudio")[0].play();
+        document.getElementById("loading").className = 'loading loading-show';
+        setTimeout(function(){
+            document.getElementById("loading").className = 'loading';
+            document.getElementById("zj_dailogbox").style.display="block";
+        }, 1000);
+
+    }
+    // 关闭弹窗
+    function hidedialogthis(obj)
+    {
+        window.status = 1;
+        $("#"+obj).hide();
+    }
+
+    // get prize res
+    function hh_get_res()
+    {
+        $.get("{:addons_url('MiniLive://Wap/ajax_api')}&id={$info.id}&live_id={$live_id}",function(res){
+            $("#myaudio")[0].play();
+            var m = eval("("+res+")");
+            $("#hhhiii").hide();
+            
+            if(m.status == 1)
+            {
+				$('#tips').text('aaaaaaaa');
+				/*
+                $("#mastername").text("恭喜您获得"+m.name);
+                $("#masterlogo").attr("src",m.img);
+                $("#hhhref").prop("href",'javascript:;');
+              if(m.is==1){
+                	window.status = 2;
+                    $("#hhdel").hide();
+                    $("#hhnowin").hide();
+                    $("#hhhiii").hide();
+                    $("#lqhb").attr('href',m.url);
+                    $("#lqhb").show();
+                    fnShowResult();
+               }else if(m.is==2){
+            	   window.status = 2;
+            	   $("#hhdel").hide();
+            	   $("#hhhiii").show();
+            	   $("#lqhb").hide();
+            	   fnShowResult();
+               }else if(m.is==0){
+            	   window.status = 2;
+            	   $("#hhdel").hide();
+            	   $("#hhhiii").show();
+            	   $("#hhhiii").text('所得积分可到个人中心查看');
+            	   $("#lqhb").hide();
+            	   fnShowResult();
+               }else if(m.is==3){
+            	   window.status = 2;
+            	   $("#hhdel").hide();
+            	   $("#hhhiii").show();
+            	   $("#hhhiii").text('代金券可到个人中心查看');
+            	   $("#lqhb").hide();
+            	   fnShowResult();
+               }
+               */
+            }
+            else if(m.status == 2)
+            {
+                //alert(m.url);
+                //$("#mastername").text(m.name+'提醒您未中奖');
+                $("#mastername").text(m.name);
+                $("#masterlogo").attr("src",m.img);
+                $("#hhhref").prop("href",m.url);
+                $("#hhdel").hide();
+                $("#hhnowin").show();
+                window.status = 2;
+                fnShowResult();
+                
+            }
+            
+        });
+    }
+</script>
+</html>

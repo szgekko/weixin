@@ -1,0 +1,77 @@
+<include file="header" />
+<style type="text/css">
+  body{background-color: #f1f1f1;}
+</style>
+<div id="content">
+    <div id="weiba" data-title="我的好友" class="panel" data-selected="true"  data-menu="msgmenu">
+        <header>
+            <div id="header-buttons">
+              <a href="javascript:history.go(-1);">
+                    <div id="back" class="header-menu-link" data-back="false">
+                    </div>
+                </a>
+            </div>
+            <h1 class="hasback">我的好友</h1>
+        </header>
+      <div class="mainWeiba">
+          <div class="my_forumlist" style="margin-top:0">
+              <div id="list_tab" class="list_tab">
+                  <a class="cur" href="javascript:;">关注</a>
+                  <a href="javascript:;">粉丝</a>
+              </div>
+              <div class="list_detail_warp">
+                <div class="com_detail am_tab">
+                  <div class="section">
+                      <div class="friend_list">
+                          <div class="friend_left">
+                          <!--头像-->
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><img class="w-h-img" width="100%"  src="{$feed.headimgurl}"></a>
+                          </div>
+                          <div class="friend_right">
+                              <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><h3>关注的好友</h3></a>
+                              <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">好友的最新一条动态</p></a>
+                              <p class="info">
+                                <span>08-02 20:11</span>
+                              </p>
+                          </div>
+                      </div>
+                  </div> 
+                  <div class="section">
+                      <div class="friend_list">
+                          <div class="friend_left">
+                          <!--头像-->
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><img class="w-h-img" width="100%"  src="{$feed.headimgurl}"></a>
+                          </div>
+                          <div class="friend_right">
+                              <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><h3>关注的好友</h3></a>
+                              <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">好友的最新一条动态</p></a>
+                              <p class="info">
+                                <span>08-02 20:11</span>
+                              </p>
+                          </div>
+                      </div>
+                  </div>  
+                </div>
+                <div class="com_detail">
+                  <div class="section">
+                      <div class="friend_list">
+                          <div class="friend_left">
+                          <!--头像-->
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><img class="w-h-img" width="100%"  src="{$feed.headimgurl}"></a>
+                          </div>
+                          <div class="friend_right">
+                              <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><h3>粉丝</h3></a>
+                              <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">粉丝的最新一条动态</p></a>
+                              <p class="info">
+                                <span>08-02 20:11</span>
+                              </p>
+                          </div>
+                      </div>
+                  </div> 
+                </div>
+              </div>  
+          </div>
+      </div>
+    </div>
+</div>
+<include file="footer" />

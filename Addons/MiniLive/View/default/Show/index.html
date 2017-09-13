@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+
+</head>
+<body>
+	<div id="commentPage">
+    	<div class="top_hd">
+        	<empty name="logo"><img class="logo" src="{:ADDON_PUBLIC_PATH}/logo.png"/><else/><img class="logo" src="{$logo|get_cover_url}"/></empty>
+        </div>
+       <div class="gallery">
+       		<ul>
+       			<notempty name='album_cover'>
+       				<li style="display:block"><img src="{$album_cover|get_cover_url}"/></li>
+       			</notempty>
+       			<notempty name='picArr'>
+<!--             		<li style="display:block"><img src="__IMG__/tEST.JPG"/></LI> -->
+<!--                 	<LI><IMG SRC="__IMG__/DEFAULT.PNG"/></LI> -->
+					<volist name="picArr" id='vo'>
+						<li ><img src="{$vo|get_cover_url}"/></li>
+					</volist>
+                </notempty>
+            </ul>
+       </div>
+       
+    </div>
+   <audio src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+   <notempty name="music_path">
+   <audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$music_path}"></audio>
+   <else/>
+   <audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+   </notempty>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/banjiang.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+	
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+var bg_path="{$bg_path}";
+$(function(){
+	if(bg_path !=""){
+		$('body').css('background-image',bg_path);
+	}
+	$('body').css('height',wHeight);
+	$('.gallery').css({'height':wHeight-140,'width':wHeight-140});
+	var index =1;
+	var galleryCount = $('.gallery li').size();
+	setInterval(function(){
+		if(index==galleryCount){
+			index=0
+		}
+		$('.gallery li').eq(index).fadeIn();
+		index==0?$('.gallery li').eq(galleryCount-1).fadeOut():$('.gallery li').eq(index-1).fadeOut();
+		index++;
+	},3000)
+	
+})
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>

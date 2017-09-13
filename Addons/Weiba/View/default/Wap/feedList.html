@@ -1,0 +1,23 @@
+<include file="header" />
+<div id="content">
+  <div id="weiba" data-title="论坛" class="panel" data-selected="true"  data-menu="msgmenu" style="padding:0;">
+    <header>
+        <div id="header-buttons">
+            <div class="head_left">
+                    <a class="head_logo" href="/"><img src="{:ADDON_PUBLIC_PATH}/sys/logo.png?v={:SITE_VERSION}"/></a>
+                    
+                </div>
+             <div id="otherLink" style="right:0">
+                <a id="friendLink" class="header-menu-link" href="{:U('feedPost')}">分享动态</a>
+                <a id="myLink" class="header-menu-link msg_tips_container" href="{:addons_url('Weiba://Wap/my')}">我<em class="msg"></em></a>
+            </div>
+        </div>
+        
+    </header>
+    <div class="mainWeiba">
+      {:W('FeedList/lists', array(array('weiba_id'=>$weiba_id)))}
+      
+    </div>
+</div>
+
+<include file="footer" />

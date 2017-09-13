@@ -1,0 +1,49 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<!-- 下单成功-->
+    <div class="container">
+    	<notempty name="roleInfo">
+            <if condition="$orderinfo['pay_status'] eq 1">
+                <div class="order_success_tips">
+                        <center><br/><br/><img width="60" src="__IMG__/yes.png"/><br/><span>支付成功！</span><br/><br/></center>
+                        <div class="m_20">
+                            <a class="btn" href="javascript:;" onClick="history.back()">返回</a>
+                        </div>
+                </div>
+            <elseif condition="$orderinfo['pay_status'] eq 0"/>
+            <br/>
+            <br/>
+            <br/>
+                <p style="text-align:center; font-size:20px; color:#0C0; padding:30px 0; line-height:40px;">支付金额<br/><span style="text-align:center; font-size:40px; color:#0C0;">{$orderinfo.total_price}</span></p>
+                <div style="margin:20px 30px">
+                    <a class="btn" href="javascript:;" onClick="confirmPay();">确认支付</a>
+                </div>
+            <else/>
+            	<!-- 订单已支付或已过期 -->
+                 <div class="order_success_tips">
+                        <center><br/><br/><img width="60" src="__IMG__/jump_err.png"/><br/><span>扫码失败！订单已支付或已过期!</span><br/><br/></center>
+                        <div class="m_20">
+                            <a class="btn" href="javascript:;" onClick="history.back()">返回</a>
+                        </div>
+                </div>
+            </if>
+        <else/>
+        	<!-- 授权失败 -->
+             <div class="order_success_tips">
+                    <center><br/><br/><img width="60" src="__IMG__/jump_err.png"/><br/><span>扫码失败！你可能还没被授权该操作，请联系管理员!</span><br/><br/></center>
+                    <div class="m_20">
+                    	<a class="btn" href="javascript:;" onClick="history.back()">返回</a>
+                    </div>
+			</div>
+        </notempty>
+    </div>	
+    
+</body>
+</html>
+<script type="text/javascript">
+function confirmPay(){
+	window.location.replace("{:U('manager_confirm_pay',array('id'=>$orderinfo[id],'dopay'=>1))}");
+}
+</script>
+

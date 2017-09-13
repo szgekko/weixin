@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{ background:#fff;width: 100%; min-height:100%;}
+body{margin:0;padding:0;width: 100%; min-height:100%;min-height: 100%;font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;font-size: 15px;line-height: 1.5em;-webkit-touch-callout: none;
+display: -webkit-box;-webkit-box-orient: vertical;-webkit-box-align: stretch;position: relative;}
+.body{}
+*{margin: 0;outline: 0;padding: 0;font-size: 100%;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+li,ul{ list-style:none}
+img{ border:none; max-width:100%;}
+a{ text-decoration:none; color:#fff;}
+.copyright{ text-align:center; line-height:60px; color:#999}
+.container{ max-width:640px; min-width:320px; min-height:100%; position:relative; margin:auto; outline:none; font-size:100%; overflow:hidden;}
+.conpons_list{ margin:0;}
+.conpon{ display:block; background:#db4b04; border-radius:5px; margin:15px; position:relative;}
+.conpon .title{ text-align:center; padding:10px 10px 5px; color:#fff; font-size:16px;}
+.conpon .use{ text-align:center; padding: 0 10px 10px; font-size:20px; color:#fff;border-bottom:2px dashed #b73e03;position:relative;}
+.conpon .use em{ position:absolute; height:20px; width:20px; border-radius:10px; background:#fff;}
+.conpon .use em.l{ bottom:-10px; left:-10px;}
+.conpon .use em.r{ bottom:-10px; right:-10px;}
+.conpon .info{ padding:10px 10px; color:#fff; font-size:12px; background:#f28005; border-bottom-left-radius:5px;border-bottom-right-radius:5px;}
+.conpon .desc{ border-top:1px dashed #d89e03; padding:10px 0; margin:10px 0 0}
+.conpon .coupon_top{border-top-left-radius:5px;border-top-right-radius:5px;}
+.start_btn,.start_btn:hover,.start_btn:link,.start_btn:active,.start_btn:visited{ border-radius:5px; background:#0dbd02; display:block; margin:20px 15px 20px; padding:13px 0; text-align:center; color:#fff; font-size:16px;}
+.use_status{ text-align:center}
+.use_status img{ vertical-align:middle; margin-right:10px; font-size:16px;}
+.used_div{ position:absolute; top:50px; left:50%; margin-left:-50px; width:100px; height:50px; text-align:center; border:2px solid #fff; border-radius:15px; background:RGBA(0,0,0,.3); color:#fff; font-size:20px; line-height:50px; transform:rotate(-15deg); display:none}
+.conpon_disable .used_div{ display:block;}
+.conpon_disable .use{ border-color:#999}
+.left_check{ position:absolute; left:20px; top:50%; margin-top:-15px; display:none;}
+#chooseCouponPage{ padding-bottom:50px;}
+#chooseCouponPage .conpons_list .coupon_box{ padding-left:50px; position:relative;}
+.bottom_bar{ position:fixed; bottom:0; right:0; left:0; padding:10px; background:#fff; border-top:1px solid #ddd; display:none}
+#chooseCouponPage .left_check{ display:block}
+#chooseCouponPage .bottom_bar{ display:block}
+
+.v_nav{ border-top:1px solid #ddd; background:#fff}
+.v_nav .item{ height:46px; line-height:46px; border-bottom:1px solid #ddd; display:block; color:#333; padding:0 50px 0 20px; position:relative}
+.v_nav .item em{ position:absolute; right:10px; top:14px; height:24px; width:24px; background:url(arw.png) no-repeat; background-size:18px 18px;}
+.v_nav a{ color:#888}
+.v_nav .single_address{ line-height:24px; padding:10px 70px 10px 20px; color:#888}
+.v_nav .single_address .title{ font-size:16px; color:#444;}
+.v_nav .single_address em{ width:60px; height:40px; background:url(phone.png) center center no-repeat; background-size:40px 40px; border-left:1px solid #ccc;}
+.v_nav .single_address a{   white-space: nowrap;overflow: hidden;display: block;text-overflow: ellipsis;font-size:13px;}
+
+.intro{ font-size:14px}
+.intro .title { margin:10px}
+.intro .content{ background-color:#FFF; padding:5px}

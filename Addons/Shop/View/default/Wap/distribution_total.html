@@ -1,0 +1,37 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<div class="fx_main">
+			<div class="fx_total">
+				<p>可提佣金 (元)</p>
+			</div>
+			<div class="fx_take" style="border-bottom: 1px solid #d47471;">
+				<p>{$datas.can_deposit|wp_money_format}<a href="{:U('distribution_detail',array('shop_id'=>$shop_id))}"><em class="icon_right" style="margin-top: 14px;"></em><span class="fx_check">查看明细</span></a></p>
+			</div>
+			<div class="fx_success">
+				<p style="padding: 0 0 14px 0;">成功提现: <span>{$datas.success|wp_money_format}</span></p>
+			</div>
+		</div>
+		<div class="fx_nav_cash">
+			<ul>
+				<li>累计佣金<p>{$datas.totals|wp_money_format}</p></li>
+				<li class="nbr">未结算佣金<p>{$datas.wait|wp_money_format}</p></li>
+			</ul>
+			<p class="fx_spec">买家确认收货后，立即获得分销佣金。结算期（<span>7</span>天）后，佣金可提现。结算期内，买家退货，佣金将自动扣除。
+			</p>
+		</div>
+		<a class="btn" href="{:U('distribution_take')}" style="width: 92%;margin: 16px auto 0;">我要提现</a>
+	</div>
+	<script type="text/javascript">
+	//分享
+	$.WeiPHP.initWxShare({
+		title:'{$shop.title}',
+		desc:'{$shop_share}',
+		link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+		imgUrl:'{$shop.logo}'
+	});
+	</script>
+</body>
+</html>

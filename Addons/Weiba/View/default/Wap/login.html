@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta charset="utf-8">
+    <title><php>echo empty($page_title) ? C('WEB_SITE_TITLE') : $page_title;</php></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script type="text/javascript">
+    //静态变量
+    var IMG_PATH = "__IMG__";
+    var STATIC_PATH = "__STATIC__";
+    var SITE_URL = "{:SITE_URL}";
+    var WX_APPID = "{$jsapiParams.appId}";
+    var WXJS_TIMESTAMP='{$jsapiParams.timestamp}'; 
+    var NONCESTR= '{$jsapiParams.nonceStr}'; 
+    var SIGNATURE= '{$jsapiParams.signature}';
+  </script>
+    <link href="{:ADDON_PUBLIC_PATH}/css.min.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css" />
+    <link href="{:ADDON_PUBLIC_PATH}/style.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css" />
+    <!--TS-U function-->
+    <script type="text/javascript">
+        var SITE_URL  = '<php> echo SITE_URL;</php>';
+        //载入函数
+        var U = function(url, params) {
+            var website = SITE_URL+'/index.php';
+            url = url.split('/');
+            if(url[0]=='' || url[0]=='@')
+                url[0] = APPNAME;
+            if (!url[1])
+                url[1] = 'Index';
+            if (!url[2])
+                url[2] = 'index';
+            website = website+'?app='+url[0]+'&mod='+url[1]+'&act='+url[2];
+            if(params) {
+                params = params.join('&');
+                website = website + '&' + params;
+            }
+            return website;
+        };
+        var _static = '__APP__';
+    </script>
+    <script src="{:ADDON_PUBLIC_PATH}/jquery-2.1.1.min.js?v={:SITE_VERSION}"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="{:ADDON_PUBLIC_PATH}/appframework.js?v={:SITE_VERSION}"></script>
+    <script src="{:ADDON_PUBLIC_PATH}/jquery.tap.min.js?v={:SITE_VERSION}"></script>
+    <script src="{:ADDON_PUBLIC_PATH}/iscroll.js?v={:SITE_VERSION}"></script>
+    <!-- <script src="{:ADDON_PUBLIC_PATH}/zepto.js?v={:SITE_VERSION}"></script> -->
+    <script src="{:ADDON_PUBLIC_PATH}/ui4jq.js?v={:SITE_VERSION}"></script><script src="{:ADDON_PUBLIC_PATH}/basic.js?v={:SITE_VERSION}"></script>
+    <script src="{:ADDON_PUBLIC_PATH}/app.js?v={:SITE_VERSION}"></script>
+    <script src="{:ADDON_PUBLIC_PATH}/form.js?v={:SITE_VERSION}"></script>
+    <script src="{:ADDON_PUBLIC_PATH}/core.js?v={:SITE_VERSION}"></script>
+<script>
+/**
+ * 全局变量
+ */
+var SITE_URL  = '<php> echo SITE_URL;</php>';
+var UPLOAD_URL= '<php> echo UPLOAD_URL;</php>';
+var THEME_URL = '__THEME__';
+var APPNAME   = '<php> echo APP_NAME;</php>';
+var MID       = '<php> echo $mid;</php>';
+var UID       = '<php> echo $uid;</php>';
+var initNums  =  '<php> echo $initNums;</php>';
+var SYS_VERSION = '<php> echo $site["sys_version"];</php>';
+var _CITY = '{:session("init_city")}';
+var ISWAP = 1;
+var USER_UN_SETTING = '{$unsetting}';
+// Js语言变量
+var LANG = new Array();
+</script>
+<php>if(!empty($langJsList)) {</php>
+<volist name="langJsList" id="vo">
+<script src="{$vo}?v={:SITE_VERSION}"></script>
+</volist>
+<php>}</php>
+</head>
+<body style="background: #0fb2da;height: auto;">
+<div id="content" style="background: #0fb2da;margin-top: 0;">
+
+  <div id="weiba" data-title="登录" class="panel" data-selected="true"  data-menu="msgmenu" style="padding:0;background: #0fb2da;">
+    <img src="{:ADDON_PUBLIC_PATH}/sys/logo.png" class="logo_login">
+    <div class="login">
+      <form class="login_form">
+        <div class="login_input">
+            <div class="login_user">
+              <em class="icon_user"></em>
+              <input type="text" name="login_user" placeholder="用户名/手机号">
+            </div>
+            <div class="login_pwd">
+              <em class="icon_pwd"></em>
+              <input type="password" name="login_pwd" placeholder="密码">
+            </div>
+        </div>
+        <a href="javascript:;" class="btn_login">登录</a>
+        <a href="{:addons_url('Weiba://Wap/register')}" class="btn_reg">创建新的用户</a>
+        <a href="{:addons_url('Weiba://Wap/forgetPwd')}" class="btn_reg">忘记密码</a>
+      </form>
+    </div>
+  </div>
+</div>
+<include file="footer" />

@@ -1,0 +1,23 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body ng-controller="commonCtrl">
+    <div class="container" ng-style="{'background-color':headItem.params.bgColor}">
+    	 <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules track by $index" on-finish-render-filters>
+            <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+        </div>
+    </div>	
+    <include file="DiyTemplate/allDisplay"/>
+    <script type="text/javascript">
+	var dataConfig = '{$data[config]}';
+	if(dataConfig!=""){
+		initDiy(dataConfig);
+	}
+    </script>
+   <if condition="($data.is_show eq 1)"> 
+    <include file="_footer"/>
+</if>
+</body>
+</html>

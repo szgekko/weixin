@@ -1,0 +1,280 @@
+<extend name="Base/common" />
+<block name="body">
+<style type="text/css">
+.money {
+	width: 100px;
+}
+</style>
+<!-- 标签页导航 -->
+
+<div class="span9 page_message">
+  <section id="contents"> <include file="Addons/_nav" />
+    <div class="tab-content"> 
+      <!-- 表单 -->
+      <php> $post_url || $post_url = U('edit?model='.$model['id'], $get_param);</php>
+      <form class="form-horizontal form-center" method="post" action="{$post_url}" id="form">
+        <div class="form-item cf toggle-title">
+          <label class="item-label"> <span class="need_flag">*</span> 代金券名称 </label>
+          <div class="controls">
+            <input type="text" value="{$data.title}" name="title" class="text" placeholder="最多可支持10个字">
+          </div>
+        </div>     
+        <div class="form-item cf toggle-num">
+          <label class="item-label"> <span class="need_flag">*</span> 共发放 </label>
+          <div class="controls">
+            <input type="text" value="{$data.num}" name="num" class="text money">
+            张 </div>
+        </div>
+        <div class="form-item cf toggle-money">
+          <label class="item-label"> <span class="need_flag">*</span> 面值 </label>
+          <div class="controls">
+            <input type="text" value="{$data.money}" name="money" class="text money">
+            <span id="money_max">至
+            <input type="text" value="{$data.money_max}" name="money_max" class="text money">
+            </span>元
+            <input type="checkbox" value="1" name="is_money_rand" id="is_money_rand" <eq name="data.is_money_rand" value="1">checked="checked"</eq> >
+            随机 </div>
+        </div>
+        <div class="form-item cf toggle-order_money">
+          <label class="item-label"> 订单金额 <span class="check-tips"> （满多少可以使用，0表示不限制） </span></label>
+          <div class="controls">
+            <input type="number" value="{$data.order_money|intval}" name="order_money" class="text money">
+          </div>
+        </div>
+<!--         <div class="form-item cf"> -->
+<!--           <label class="item-label"> 选择人群 </label> -->
+<!--           <div class="controls"> -->
+<!--             <select name="member"> -->
+<!--               <option class="toggle-data" value="0"  <eq name="data[member]" value="0">selected="selected"</eq> >所有用户 </option> -->
+<!--               <option class="toggle-data" value="-1"  <eq name="data[member]" value="-1">selected="selected"</eq> >所有会员卡成员 </option> -->
+<!--               <volist name="card_level" id="cl"> -->
+<!--               <option class="toggle-data" value="{$cl.id}"  <eq name="data[member]" value="$cl[id]">selected="selected"</eq> >{$cl.level} </option> -->
+<!--               </volist> -->
+<!--             </select> -->
+<!--           </div> -->
+<!--         </div>            -->
+
+ <div class="controls">
+<label class="item-label"><span class="need_flag"></span>
+                       适用人群<span class="check-tips"></span>
+                </label>
+                <div class="check-item"> <input type="checkbox" class="regular-checkbox toggle-data" value="0" id="member_0" name="member[]" toggle-data=""
+                              
+                 <php>if(in_array(0,$data['member']) || empty($data['member'])){echo ' checked="checked"';}</php>                   >
+                        <label for="member_0"></label>所有用户 </div>
+                <div class="check-item"> <input type="checkbox" class="regular-checkbox toggle-data" value="-1" id="member_-1" name="member[]" toggle-data=""
+                              
+                           <php>if(in_array(-1,$data['member'])){echo ' checked="checked"';}</php>                        >
+                        <label for="member_-1"></label>所有会员 </div>
+                <notempty name='card_level'>
+                	<volist name='card_level' id='vo'>
+                	<div class="check-item"> <input type="checkbox" class="regular-checkbox toggle-data" value="{$vo.id}" id="member_{$vo.id}" name="member[]" toggle-data=""
+                      <php>if(in_array($vo['id'],$data['member'])){echo ' checked="checked"';}</php>                                    >
+                        <label for="member_{$vo.id}"></label>
+                       {$vo.level} </div> 
+                	</volist>
+                </notempty>
+                             </div>
+                             
+           <div class="controls">
+                <label class="item-label">
+                       在手机端是否显示<span class="check-tips">（在手机端会员卡领取代金券页面中是否显示）</span>
+                </label>
+                <input type="radio" name="is_show" <empty name="data.is_show">checked=checked</empty> class="regular-radio toggle-data" id="is_show_0"  value="0"/> <label for="is_show_0"> </label>不显示
+                <input type="radio" name="is_show"  <notempty name="data.is_show">checked=checked</notempty> class="regular-radio toggle-data" id="is_show_1"  value="1"/> <label for="is_show_1"> </label>显示
+            </div>                    
+                             
+        <div class="form-item cf toggle-limit_num">
+          <label class="item-label"> 每人限领 </label>
+          <div class="controls">
+            <select name="limit_num">
+              <option class="toggle-data" value="0"  <eq name="data[limit_num]" value="0">selected="selected"</eq> >不限张 </option>
+              <option class="toggle-data" value="1"  <eq name="data[limit_num]" value="1">selected="selected"</eq> >1张 </option>
+              <option class="toggle-data" value="2"  <eq name="data[limit_num]" value="2">selected="selected"</eq> >2张 </option>
+              <option class="toggle-data" value="3"  <eq name="data[limit_num]" value="3">selected="selected"</eq> >3张 </option>
+              <option class="toggle-data" value="4"  <eq name="data[limit_num]" value="4">selected="selected"</eq> >4张 </option>
+              <option class="toggle-data" value="5"  <eq name="data[limit_num]" value="5">selected="selected"</eq> >5张 </option>
+              <option class="toggle-data" value="10" <eq name="data[limit_num]" value="10">selected="selected"</eq> >10张 </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-item cf toggle-start_time">
+          <label class="item-label"> <span class="need_flag">*</span> 有效期 </label>
+          <div class="controls">
+            <input type="datetime" placeholder="请选择生效时间" value="{$data.start_time|time_format}" class="text time" name="start_time">
+            -
+            <input type="datetime" placeholder="请选择过期时间" value="{$data.end_time|time_format}" class="text time" name="end_time">
+          </div>
+        </div>
+        <div class="form-item cf toggle-limit_goods">
+          <label class="item-label"> 可适用商品 </label>
+          <div class="controls"> <input type="radio" class="regular-radio is_all_goods" value="0" id="limit_goods_0" name="limit_goods" 
+            <eq name="data[limit_goods]" value="0">checked="checked"</eq>
+            />
+            <label for="limit_goods_0"></label>
+            全店适用 <input type="radio" class="regular-radio is_all_goods" value="1" id="limit_goods_1" name="limit_goods" 
+            <eq name="data[limit_goods]" value="1">checked="checked"</eq>
+            />
+            <label for="limit_goods_1"></label>
+            指定商品适用 </div>
+         </div>
+          
+<div class="form-item cf" id="goods_item">
+        <div style="margin:15px 0;" class="data-table">
+            <table cellspacing="1" cellpadding="0">
+              <thead>
+                <tr>
+                  <th colspan="2" align="center">商品信息</th>
+                  <th align="center" width="200">库存</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="goods_list">
+              <volist name="goods_list" id="gl">
+                <tr rel="{$gl.id}" class="goods_data">
+								  <td width="100" align="center"><img class="list_img" src="{$gl.cover|get_cover_url}" /></td>
+								  <td align="center">{$gl.title}</td>
+								  <td align="center">{$gl.stock_num|intval}</td>
+								  <td align="center">
+								  <input type="hidden" name="goods_ids[]" value="{$gl.id}" />
+								  <a href="javascript:void(0);" onclick="remove_tr(this)">删除</a></td>                 
+								  </tr>
+                 </volist>
+                <tr class="add_goods_tr">
+                  <td colspan="4"><a href="javascript:choose_goods()">+增加商品</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>          
+          
+        <div class="form-item cf toggle-is_market_price">
+          <label class="item-label">
+            <input type="checkbox" value="{$data.is_market_price|intval}" name="is_market_price" id="is_market_price" <eq name="data.is_market_price" value="1">checked="checked"</eq> >
+            仅原价购买商品时可用 </label>
+        </div>
+        <div class="form-item cf toggle-content">
+          <label class="item-label"> 使用说明 </label>
+          <div class="controls">
+            <label class="textarea input-large">
+              <textarea name="content" placeholder="填写活动的详细说明，支持换行">{$data.content}</textarea>
+            </label>
+          </div>
+        </div>
+        <div class="form-item form_bh" style="text-align:center">
+          <notempty name="data.id">
+            <input type="hidden" name="id" value="{$data.id}">
+          </notempty>
+          <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">{$submit_name|default='确 定'}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+</block>
+<block name="script">
+  <link href="__STATIC__/datetimepicker/css/datetimepicker.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+  <php> if(C('COLOR_STYLE')=='blue_color') echo '
+    <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+    '; </php>
+  <link href="__STATIC__/datetimepicker/css/dropdown.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script> 
+  <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v={:SITE_VERSION}" charset="UTF-8"></script> 
+  <script type="text/javascript">
+function money_max(){
+	var val = $('#is_money_rand').is(':checked');
+	if(val==true){
+		$('#money_max').show();
+	}else{
+		$('#money_max').hide();
+	}
+}
+  $(function(){
+	 initUploadImg();
+	initUploadFile();
+	 })
+$(function(){    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:0,
+        autoclose:true
+    });
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });	
+    showTab();
+	
+	$('.toggle-data').each(function(){
+		var data = $(this).attr('toggle-data');
+		if(data=='') return true;		
+		
+	     if($(this).is(":selected") || $(this).is(":checked")){
+			 change_event(this)
+		 }
+	});
+	
+	$('.toggle-data').bind("click",function(){ change_event(this) });
+	$('#is_money_rand').bind('click',function(){ money_max();	});
+	money_max();
+	
+	$('.is_all_goods').bind('click',function(){ is_all_goods();	});
+	is_all_goods();
+});
+function remove_tr(_this){	
+	$(_this).parent().parent().remove();
+	
+	var count = 0;
+	$('.td_key').each(function() {
+		count = count + 1;
+        if(count>1) $(this).html(count);
+    });	
+}
+function is_all_goods(){
+	var val = $('input[name="limit_goods"]:checked').val();
+	if(val==0){
+		$('#goods_item').hide();
+		$('.goods_data').each(function(index, element) {
+            $(this).remove();
+        });
+	}else{
+		$('#goods_item').show();
+	}
+}
+function choose_goods(){
+	var dataUrl = "{:addons_url('Shop://Goods/lists', array('isAjax'=>1))}";
+
+	$.WeiPHP.openSelectGoods(dataUrl,function(goodsList){
+				if(goodsList.length>0){
+					//获取已经存在的商品
+					var arr = [];
+					var goods_count = 0;
+					$('.goods_data').each(function(){
+						var gid = $(this).attr('rel');
+						arr.push(gid);
+						goods_count = goods_count + 1;
+					});
+					
+					for(var i=0;i<goodsList.length;i++){
+						var val = goodsList[i];
+						
+						if($.inArray(val.id, arr)!=-1) continue;
+												
+						var html =  '<tr rel="'+val.id+'" class="goods_data">'
+								  + '<td width="100" align="center"><img class="list_img" src="'+val.img+'" /></td>'
+								  + '<td align="center">'+val.title+'</td>'
+								  + '<td align="center">'+val.stock_num+'</td>'
+								  + '<td align="center">'
+								  + '<input type="hidden" name="goods_ids[]" value="'+val.id+'" />'
+								  + '<a href="javascript:void(0);" onclick="remove_tr(this)">删除</a></td> '                 
+								  + '</tr>';
+								  
+				        $('.add_goods_tr').before(html);
+					}
+				}
+			});
+}
+</script> 
+</block>

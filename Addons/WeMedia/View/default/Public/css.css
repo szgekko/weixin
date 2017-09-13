@@ -1,0 +1,56 @@
+.category_div{width:100%; background:#fff; border-bottom:1px solid #ccc; height:44px; overflow:auto;}
+.cate_inner{ white-space:nowrap; padding-right:15px;}
+.cate_inner a{ margin:7px 5px; padding:0 5px; display:inline-block; height:30px; line-height:30px;}
+.cate_inner a.selected{ background:#09F; color:#fff}
+
+.banner{ width:100%; overflow:hidden; position:relative;}
+.banner ul{ position:absolute; left:0; top:0; z-index:10; -webkit-animation:}
+.banner ul li{ float:left; display:table-cell; position:relative}
+.banner li a{ width:100%; height:100%; display:block;}
+.banner li .title{background-color:RGBA(0,0,0,.5); height:30px; color:#fff; line-height:30px; padding-left:10px; position:absolute; left:0; bottom:0; width:100%; z-index:1000;}
+.identify{text-align:right; position:absolute; bottom:0; right:0; z-index:100; height:30px;}
+.identify em{ display:inline-block; margin:10px 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;
+border-radius: 6px;margin-left: 5px;width: 12px;height: 12px;background: #fff;}
+.identify em.cur{ background-color:#090}
+.small_pic_list li{}
+.small_pic_list li a{ margin:10px; background:#fff; border:1px solid #ccc; border-radius:5px;display:block; padding:10px 10px 10px 120px; position:relative; min-height:60px; color:#333}
+.detail_more .small_pic_list li a{ border:1px solid #eee;}
+.small_pic_list li a:active{ background-color:#CCC}
+.small_pic_list li a img{ position:absolute; left:10px; top:10px; width:100px; height:60px;}
+.small_pic_list li a h6{ font-size:18px; font-weight:bold; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.small_pic_list li a p{ color:#999; font-size:13px; line-height:22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+/* 详情页 */
+.detail { padding:10px;}
+.detail h6{ font-size:18px; padding:7px 0; font-weight:bold;}
+.detail .info{ line-height:30px; margin-bottom:5px;}
+.detail img{ max-width:100%;}
+.detail .content{padding:5px 0; font-size:16px;}
+.detail .content a{ text-decoration:underline}
+.detail .ad_card{ border:1px solid #ccc; height:50px; padding:10px 10px 10px 70px; background:#fff; position:relative; line-height:50px; margin-bottom:10px;}
+.detail .ad_card a{ color:#333; text-decoration:none; display:block}
+.detail .ad_card img{ width:50px; height:50px; position:absolute; left:10px; top:10px;}
+.detail .ad_card em{ position:absolute; right:0px; top:50%; margin-top:-15px; width:30px; height:30px; background:url(item_arrow.png) no-repeat; background-size:100% 100%;}
+.detail .ad_photo{border:1px solid #ccc; padding:10px; background:#fff;}
+.detail .ad_photo img{ display:block}
+.detail_more{ background:#fff; padding:10px 0; border-top:1px solid #ccc;}
+.detail_more h1{ padding:0 10px;}
+.detail_more .look_more{ border:1px solid #eee; border-radius:5px; background:#eee; padding:5px 10px; text-align:center; margin:10px;}
+.detail_count .count{ padding:5px 15px 5px 20px; color:#888;}
+.view_count{ background:url(view.png) no-repeat 0 center; background-size:15px 15px;}
+.digg_count{ background:url(praise.png) no-repeat  0 center; background-size:15px 15px;}
+.comment_count{ background:url(comment.png) no-repeat  0 center; background-size:15px 15px;}
+.detail_count .done_digg{background:url(done_praise.png) no-repeat  0 center; background-size:15px 15px; color:#084b6d}
+/* 评论 */
+.comment_list{ margin:15px 15px 50px; background:RGBA(255,255,255,.4); padding:10px; border-radius:10px;}
+.comment_list li{ position:relative; min-height:45px; padding:0 0 7px 50px; margin:0 0 10px; border-bottom:1px  dashed #ccc}
+.comment_list li .c_head{ width:40px; height:40px; position:absolute; top:0; left:0;border:2px solid #666; border-radius:22px;}
+.comment_list li .c_head img{ height:40px; width:40px; border-radius:100%;}
+.comment_list li p{ line-height:22px;}
+.comment_list li .name{ font-size:15px; color:#333; display:block;}
+.comment_list li .comment{ font-size:13px; color:#888}
+.comment_list li .time{ position:absolute; top:0; right:0; color:#999; font-size:12px;}
+.comment_list li .comment img{ width:30px; vertical-align:middle;}
+.comment_form{ position:fixed; bottom:0; right:0; left:0; padding:10px; height:30px; z-index:1000; background:#666; border-top:1px solid #333;}
+.comment_form input[type="text"]{ border:none; background:#fdebf0; padding:0 30px 0 10px; border-radius:15px; height:30px; line-height:30px; width:85%; color:#333}
+.comment_form .comment_btn{ width:20%; text-align:center; color:#fff; height:30px; line-height:30px; position:absolute; top:10px; right:0; z-index:10;}

@@ -1,0 +1,101 @@
+<include file="Public/mobile_head"/>
+<style type="text/css">
+#mainer {
+	background:#f3f2f2;
+	width: 100%;
+}
+.top {
+	padding-bottom: 8px;
+	height: 45px;
+}
+.top_left {
+	font-family: "黑体";
+	font-size: 16px;
+	line-height: 45px;
+	text-align: center;
+	float: left;
+	color: #000;
+	width: 50%;
+}
+.top_right {
+	font-family: "黑体";
+	font-size: 16px;
+	line-height: 45px;
+	text-align: center;
+	float: right;
+	color: #000;
+	width: 50%;
+	background: #ccc;
+}
+.list {
+	border-bottom: 1px solid #d9d9d9;
+	vertical-align: middle;
+	list-style: none;
+	height: 60px;
+	padding: 10px;
+}
+.list .yuan {
+	background: #ccc;
+	border-radius: 120px;
+	width: 60px;
+	height: 60px;
+	float: left;
+	border: #fff 1px solid;
+	margin-right: 1.5%;
+	margin-left: 3%;
+}
+.list .wenzi .p1 {
+	padding-top: 10px;
+	font-size: 15px;
+	color: #2c2c2d;
+	line-height: 22px;
+	font-family: "黑体";
+}
+.list .wenzi .p2 {
+	font-size: 13px;
+	color: #4b4b4b;
+	font-family: "黑体";
+}
+.list .wenzi {
+	float: left;
+	height: 60px;
+}
+.list .lahei a {
+	float: right;
+	padding: 0px 4%;
+	font-size: 13px;
+	background: #e7e7e7;
+	border-radius: 2px;
+	border: 1px solid #d9d9d9;
+	font-family: "黑体";
+	margin-right: 3%;
+	margin-top: 20px;
+	text-decoration: none;
+	height: 20px;
+	line-height: 20px;
+	color: #262626;
+}
+</style>
+<body>
+<div id="mainer">
+  <div class="top">
+    <div class="top_left"><a href="{:U('sqlb',array('live_id'=>$live_id))}">上墙列表</a></div>
+    <div class="top_right"><a href="{:U('hmd',array('live_id'=>$live_id))}">黑名单</a></div>
+  </div>
+   <notempty name="data">
+ <volist name="data" id="vo">
+   <ul class="list">
+    <li class="yuan"><notempty name="vo.headimgurl"><img src="{$vo.headimgurl}" /></notempty></li>
+    <li class="wenzi">
+      <p class="p1">{$vo.nickname}</p>
+      <p class="p2">{$vo.content}</p>
+    </li>
+    <li class="lahei"><a href="{:U('set_black',array('id'=>$vo[id],'value'=>1,'live_id'=>$live[id]))}">拉黑</a></li>
+  </ul>
+ </volist>
+ </notempty>
+</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

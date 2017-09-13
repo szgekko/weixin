@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css?v={:SITE_VERSION}"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+</head>
+<body>
+	<a href="javascript:;" id="switchBtn">X</a>
+	<div id="commentPage" style="display:none">
+    	<div class="top_hd">
+        	<empty name="logo"><img class="logo" src="{:ADDON_PUBLIC_PATH}/logo.png"/><else/><img class="logo" src="{$logo|get_cover_url}"/></empty>
+        </div>
+        <div class="side_left">
+        	<div class="fly_wrap">
+                <div class="fly_comment" id="flyCommentBox" data-url="{:addons_url('MiniLive://Show/getComment',array('live_id'=>$live_id))}">
+                </div>
+            </div>
+        </div>
+        <div class="side_right">
+        	<div class="qrcode">
+            	<p>扫描下方二维码<br/>发送up即可参与</p>
+<!--                 <img src="__IMG__/about/qrcode/qrcode_for_tv.jpg"/> -->
+					<img alt="" src="{$qrcode}">
+            </div>
+            <div class="qrcode">
+            	<p>赞助商</p>
+                <div class="ad_wrap">
+                	<notempty name='sponsor'>
+                    <ul class="ad_list">
+                    	<volist name='sponsor' id='vo'>
+                        <li>
+                            <img src="{$vo.img|get_cover_url}"/>
+                            <p>{$vo.name}</p>
+                        </li>
+                        </volist>
+<!--                         <li> -->
+<!--                             <img src="__IMG__/test.jpg"/> -->
+<!--                             <p>深圳市圆梦云科技有限公司</p> -->
+<!--                         </li> -->
+                    </ul>
+                    </notempty>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qrcodePage" id="qrcodePage" >
+    	<div class="left">
+        	<p>语音输入：<br/>
+① 点击+号<br/>
+② 点击 语音输入</p>
+            <img src="{:ADDON_PUBLIC_PATH}/yuying.jpg"/>
+        </div>
+        <div class="middle">
+        	<p>扫描下方二维码<br/>参与互动</p>
+<!--             <img src="__IMG__/about/qrcode/qrcode_for_tv.jpg"/> -->
+				<img alt="" src="{$qrcode}">
+        </div>
+        <div class="right">
+        	<p>上墙方法：<br/>
+① 扫描左边二维码<br/>
+② 发送: UP</p>
+            <img src="{:ADDON_PUBLIC_PATH}/up.jpg"/>
+        </div>
+    </div>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+	<notempty name="music_path">
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$music_path}"></audio>
+	<else/>
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+	</notempty>
+	
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+$(function(){
+	$('body').css('height',wHeight);
+	$('.side_right').height(wHeight-topHeight);
+	$('.fly_wrap').css({'height':wHeight-80});
+	
+})
+$(function(){
+	$('#qrcodePage .middle').height(wHeight-120);
+	$('#qrcodePage .middle').width(wHeight-120);
+	$('#qrcodePage .left,#qrcodePage .right').width((wWidth-wHeight+120)/2);
+	
+	$('#switchBtn').click(function(){
+		if($('#commentPage').is(':visible')){
+			$('#commentPage').hide();
+			$('#qrcodePage').show();
+		}else{
+			$('#commentPage').show();
+			$('#qrcodePage').hide();
+		}
+	})
+})
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>

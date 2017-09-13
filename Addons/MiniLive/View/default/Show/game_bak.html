@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+</head>
+<body>
+	<div id="gameStartPage">
+    	<div class="top_hd">
+        	<!-- 摇一摇游戏配置的logo -->
+        	<empty name="logo"><img class="logo" src="{:ADDON_PUBLIC_PATH}/logo-w.png"/><else/><img class="logo" src="{$logo|get_cover_url}"/></empty>
+        </div>
+        <div class="shake_wrap">
+        	<div class="shake_top"><img src="{:ADDON_PUBLIC_PATH}/rock-t.png"/></div>
+            <div class="shake_content">
+            	<p class="t">疯狂摇一摇，游戏开始后不停摇动手机</p>
+                
+            </div>
+        </div>	
+    </div>
+   <div class="layer_text"></div>
+   <div class="countdown"></div>
+   <div class="rock-fireWorks" id="fireWorks"></div>
+	<div class="rock-no1"><p class="good-pic"></p><p class="good-pic"></p><p class="good-pic"></p><p><strong></strong>你最棒！</p></div>
+      <div class="rock-over"><p><strong>游戏结束</strong></p><p>奖品即将发放，请发表获奖感言自动获取奖品</p></div>
+<audio src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/banjiang.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+	
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+var $rockCountdown = $(".countdown");
+var $rockOver = $(".rock-over");
+var $rockNo1 = $(".rock-no1");
+var loppGet;
+var sloganShowInter;
+var $rockSlogan = $(".layer_text");
+var sloganPosi;
+$(function(){
+	$('body').css('height',wHeight);
+	$('.shake_content').css('height',wHeight-260);
+	
+	//大字好倒计时
+	countdown(11);
+})
+var last_id = 0;
+function addUser(img,name,prize,index){
+	var imgUrl = img!=""?img:'__IMG__/default.png';
+	$html = $('<div class="prize_user"><img src="'+imgUrl+'"/><p><strong>'+name+'</strong><br/>'+prize+'</p></div>');
+	$('.shake_content').prepend($html);
+	$html.addClass('anim').css({left:Math.random()*(wWidth-460),top:60+Math.random()*400,'z-index':index+1});	
+}
+function sloganShow(){
+	
+	$rockSlogan.removeClass(sloganPosi);
+	
+	var sarr = ["使劲摇！","加把劲！","一起摇！","摇啊摇~！","冲啊！","摇起来~！","我要做第一！","我来啦~！","GO！GO！","NO.1归我！"];
+	var colorarr = ["#82FFFF","#82FF97","#E8FF6D","#F8BDF0","#DDE7F7","#EECAA8","#D3BCEF","#F0E85D","#00FF5D","#FFAC9D"];
+	var rand = parseInt(Math.random(10)*10);
+	var crand = parseInt(Math.random(10)*10);
+	
+	var parr = ["fromleft","fromright","fromtop","frombottom"];
+	var prand= parseInt(Math.random(4)*4);
+	sloganPosi = parr[prand];
+	
+	$rockSlogan.css({
+		"line-height":wHeight-rand+"px",
+		"font-size": "100px",
+		"color": colorarr[crand]
+	}).text(sarr[rand]);
+	
+	setTimeout(function(){
+		$rockSlogan.addClass(sloganPosi);
+	},1100);
+}
+//倒计时
+$rockCountdown.css("line-height",wHeight+"px");
+function countdown(seconds){
+	
+	var showTime = setInterval(function(){
+		seconds--;
+		$rockCountdown.text(seconds).toggleClass("bignum");
+		
+		if(seconds==0){
+			$rockCountdown.text("GO!");
+			
+			setTimeout(function(){
+				$rockCountdown.hide();
+				sloganShowInter = setInterval(sloganShow,3000);
+			},1000);
+			
+			clearInterval(showTime);
+			var live_id="{$live_id}";			
+			//开始加载中奖项
+			loopGet = setInterval(function(){
+				$.post("{:U('getPrizeUserByAjax')}",{'last_id':last_id,'live_id':live_id},function(data){
+					if(data !=0){
+						addUser(data.img,data.name,data.prize,last_id);
+						last_id = data.last_id;
+					}
+				})
+			},3000);
+		}
+	},1000);
+}
+//游戏结束
+function gameOver(){
+	clearInterval(loopGet);
+	clearInterval(sloganShowInter);
+	creatFireWorks();//撒花
+	$rockSlogan.hide();
+	
+	setTimeout(function(){
+		$rockNo1.show().find("strong").text($("#no1name").text());
+		
+		setTimeout(function(){
+			$rockNo1.hide();
+			$rockOver.show();
+		},6000);
+		setTimeout(function(){
+			//跳转到获奖感言页面
+			window.location.href="{:U('gameEnd',array('id'=>$live_id))}";
+		},18000);
+	},3000);
+	
+}
+//礼花
+function fireworks(){
+	var fks = "";
+	for(var i=1; i<=10; i++){
+		var r = parseInt(Math.random(10)*10)+1;
+		var w = parseInt(Math.random(wWidth)*wWidth);
+		var s = i*r;
+		var s2 = s*2;
+		
+		var f = "<div class='rock-firework rock-firework-"+i+"' style='width:"+r*4+"px;left:"+w+"px;top:-"+s*5+"px;transform:rotate("+s2+"deg);-webkit-transform:rotate("+s2+"deg)'></div>";
+		fks += f;
+	}
+	$("#fireWorks").append(fks);
+}
+
+
+function creatFireWorks(){
+	for(var i=1; i<=20; i++){
+		fireworks();
+	}
+	
+	setTimeout(function(){
+		$("#fireWorks").find(".rock-firework").each(function(i){
+			$(this).css("top",wHeight*i/100);
+		});
+	},1000);
+	
+}
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>

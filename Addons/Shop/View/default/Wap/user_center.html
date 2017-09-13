@@ -1,0 +1,63 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body class="withFoot" ng-controller="commonCtrl">
+    <div class="container">
+    	<div class="center_header">
+    		<notempty name='follow.headimgurl'>
+    		<img src="{$follow.headimgurl}"/>
+    		<else />
+        	<img src="{:ADDON_PUBLIC_PATH}/mobile/center.png"/>
+        	</notempty>
+           <notempty name='follow.nickname'>
+    		{$follow.nickname}
+    		<else />
+        	本地用户
+        	</notempty>
+        	<notempty name='level'>
+        		<span style="margin-left: 20px;color: dimgray;">( {$level} 级分销用户， 可获得 {$profit_percent} 提成比例 )</span>
+        	</notempty>
+        </div>		
+        <div class="center_nav">
+        	<a href="{$ordersUrl}">全部订单</a>
+            <a href="{$unPayUrl}">待付款</a>
+            <a href="{:U('shippingOrder')}">配送中</a>
+        </div>
+        <div class="block">
+        	<a class="block_a" href="{:addons_url('ShopCoupon://Wap/personal')}&use=1"><i class="icon_coupon"></i>我的代金券<em class="arrow_right">&nbsp;</em></a>
+            <a class="block_a" href="{$cartUrl}"><i class="icon_car"></i>我的购物车<em class="arrow_right">&nbsp;</em></a>
+            <a class="block_a" href="{$collectUrl}"><i class="icon_favorite"></i>我的收藏<em class="arrow_right">&nbsp;</em></a>
+            <!--<a class="block_a" href="#">我的浏览器记录<em class="arrow_right">&nbsp;</em></a>-->
+            <notempty name="myShopUrl" >
+            	<eq name="myShopUrl" value="check_audit" >
+            		<a class="block_a" href="javascript:;" onclick="wait_audit('{$audit_msg}');"><i class="icon_fenxiao"></i>我的分销中心<em class="arrow_right">&nbsp;</em></a>
+            	<else />
+            		<a class="block_a" href="{$myShopUrl}"><i class="icon_fenxiao"></i>我的分销中心<em class="arrow_right">&nbsp;</em></a>
+            	</eq>
+            </notempty>
+            <a class="block_a" href="{$addressUrl}"><i class="icon_area"></i>我的收货地址<em class="arrow_right">&nbsp;</em></a>
+            <a class="block_a block_last" href="{:U('myPJ')}"><i class="icon_comment"></i>我的评价<em class="arrow_right">&nbsp;</em></a>
+        </div>
+        <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>	
+        <include file="DiyTemplate/allDisplay"/>
+		<script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        function wait_audit(msg){
+        	$.Dialog.confirm('提示',msg);
+        }
+        
+        </script>
+    </div>	
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+</body>
+</html>

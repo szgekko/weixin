@@ -1,0 +1,150 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/mobile/shop.js?v={:SITE_VERSION}"></script>
+<body class="withFoot">
+    <div class="container">
+    	<div class="order_detail">
+    	<div class="order">
+        	<h3 class="mb_10">订单号:{$info.order_number}</h3>
+            <volist name="info.goods" id="gg">
+        	<img src="{$gg.cover|get_cover_url}"/>
+            <p class="info">
+            	{$gg.title}
+                <br/>购买数量：{$gg.num}
+                <br/>价格:<font color='#f44805'>
+                <notempty name="gg['seckill_price']">
+                     	￥{$gg.seckill_price|wp_money_format}
+                    <else />
+                    		<php>
+                    			if($gg['spec_option_ids']){
+	                    			$pricedata=$gg['sku_data'][$gg['spec_option_ids']];
+	                    			if(floatval($pricedata['sale_price'])>0){
+	                    				echo '￥'.wp_money_format($pricedata['sale_price']);
+	                    			}else{
+	                    			 	echo '￥'.wp_money_format($pricedata['market_price']);
+	                    			}
+                    			}else{
+                    				if(floatval($gg['sale_price'])>0){
+                    					echo '￥'.wp_money_format($gg['sale_price']);
+                    				}else{
+                    					echo '￥'.wp_money_format($gg['market_price']);
+                    				}
+                    			}
+                    			
+                    		</php>
+                </notempty>
+                </font>元
+                <if condition="$info[pay_type]==11 and $info['is_deposit']==1">
+	               	<br/>定金:<font color='#f44805'><eq name="gg.deposit_price" value="-1"> 不支持</font><else/> ￥{$gg.deposit_price|wp_money_format}</font>元</eq>
+	              	<if condition="count($info['goods']) eq 1">  <br/>余款:<font color='#f44805'> ￥{$info.rest_price|wp_money_format}</font>元</if>
+                </if>
+                <if condition="$info['type'] eq 1 and $info['pay_status'] eq 1">
+                	 <br/> 下载链接：{$info['file_url']}
+                </if>
+                <if condition="$info['type'] eq 2 and $info['pay_status'] eq 1">
+                	 <br/> 点卡序列码：{$accountInfo['card_codes']}
+                </if>
+                <notempty name="info.remark">
+                	 <br/>备注：{$info.remark}
+                </notempty>
+            </p>
+            </volist>
+        </div>
+        <if condition="count($info['goods']) egt 1"> 
+        <div class="order_adress">
+        	<p class="info">
+        		支付金额：<font color='#f44805'> ￥{$info.total_price|wp_money_format}</font><br/>
+        		<eq name="info.is_deposit" value='1'>
+        		定  金：<font color='#f44805'> ￥{$info.reserve_price|wp_money_format}</font><br/>
+        		余  款：<font color='#f44805'> ￥ {$info.rest_price|wp_money_format}</font><br/>
+        		</eq>
+        	</p>
+        </div>
+        </if>
+        <eq name="info['auto_send']" value="0">
+        <div class="order_adress">
+        	<p class="info">
+        	<if condition="$info[pay_type]!=11">
+            	收件人：{$addressInfo.truename}<br/>
+                联系方式：{$addressInfo.mobile}<br/>
+                收货地址：{$addressInfo.address}<br/>
+                <else/>
+                 店      名：{$store_info.name}<br/>
+                联系方式：{$store_info.phone}<br/>
+              <notempty name="store_info.shop_code"> 店铺编码：{$store_info.shop_code}<br/></notempty>
+                店铺地址：{$store_info.address}<br/>
+                </if>
+            </p>
+        </div>
+        </eq>
+         <div class="order_action">
+        		<if condition="$info[pay_type]==11">
+                	<if condition="$info[pay_status]==1">
+<!--                     	<p style="text-align:center"><img src="__IMG__/yes.png" width="50"/><br/>已经通过到店支付方式成功支付!</p> -->
+                    <else/>
+                    	<div class="qr_code_pay">
+<!--                     		<p>请向店铺工作人员出示二维码进行支付</p> -->
+<!--                             <img src="http://qr.liantu.com/api.php?text={:U('manager_confirm_pay',array('id'=>$info['id'],'publicid'=>$public_info[id]))}"/> -->
+                            <script type="text/javascript">
+                            	var payInter = setInterval(function(){
+									$.get("{:U('manager_confirm_pay',array('id'=>$info['id'],'getStatus'=>1))}",function(data){
+										if(data && data.pay_status==1){
+											window.location.reload();
+										}
+										})
+								},2000);
+                            </script>
+                        </div>
+                    </if>
+                <elseif condition="$info[pay_status]==0 && $info[pay_type]!=10"/>
+                	<p class="wait_pay"><center>等待付款中...</center></p>
+                    <div class="m_15">
+                    <a href="{:U('do_pay')}&order_id={$info.id}" class="btn">立即付款</a>
+                    </div>
+                <else/>
+                	<eq name="info[is_send]" value="0">
+                    	<p>等待卖家发货</p>
+                    <else/>
+                        <eq name="info['auto_send']" value="0">
+                       		<p>商品已发货&nbsp;&nbsp;&nbsp;</p>
+                        	<p>发货方式: {$info.send_code_name}</p>
+                        	<p>发货时间: {$info.send_time|time_format}</p>
+                            <p>快递单号: {$info.send_number}</p>
+                            <p>（备注：若15天后未收到货，请联系客服！）</p>
+                            <p class="m_10"><if condition="$info['status_code']==3"><a class="btn" href="javascript:;" onClick="confirmGetGoods('{:U('confirm_get',array('id'=>$info[id]))}');">确认收货</a></if></p>
+                            <div class="shipping_info" style="display:">
+                                <volist name="log" id="vo">
+                                    <P><span>{$vo.cTime|time_format} </span></P>
+                                    <p>{$vo.remark}</p>
+                                    <p>&nbsp;</p>
+                                </volist>
+                            </div>
+                        <else/>
+                        	<!-- <p>商品已发货&nbsp;&nbsp;&nbsp;</p>
+                        	<p>发货方式:自动发货</p>
+                             <p>
+                             	物品虚拟信息是：<br/>
+                                账号：{$accountInfo.account}<br/>
+                                密码：{$accountInfo.password}<br/>
+                             </p>
+                            <p class="m_10"><if condition="$info['status_code']==3"><a class="btn" href="javascript:;" onClick="confirmGetGoods('{:U('confirm_get',array('id'=>$info[id]))}');">确认收货</a></if></p> -->
+                    	</eq>
+                    </eq>
+                </if>
+            
+        </div>
+         
+        </div>
+    </div>	
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+    <block name="script">
+    <script type="text/javascript">
+    $('.order_detail').css('cursor','pointer')
+    $('.order_detail').click(function(){
+        window.location.href = "{:U('myOrder', array('shop_id'=>$shop_id))}"
+    })
+    </script>
+</block>
+</body>
+</html>

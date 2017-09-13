@@ -1,0 +1,78 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<div class="fx_nav_detail">
+			<ul>
+				<li class="nav_com cur">佣金</li>
+				<li class="nav_cash nbr">提现</li>
+			</ul>
+		</div>
+		<div class="fx_list">
+			<!--佣金列表-->
+			<div class="fx_list_com">
+				<notempty name='datas'>
+				<ul>
+					<volist name="datas" id="vo">
+					<li>
+						<h4 class="list_title">{$vo.title} ： {$vo.order_number}</h4>
+						<p class="list_time">{$vo.ctime|time_format}</p>
+						<span class="list_coin">+{$vo.profit|wp_money_format}</span>
+					</li>
+					</volist>
+				<!-- 	<li>
+						<h4 class="list_title">这是一个标题</h4>
+						<p class="list_time">2016-04-05 16:58:00</p>
+						<span class="list_coin add">+10.00</span>
+					</li> -->
+				</ul>
+				<else/>
+				<!--无信息时显示-->
+				<div class="fx_empty">
+					<div class="empty"></div>
+					<p>亲，你暂无收入信息!</p>
+				</div>
+				</notempty>
+			</div>
+			<!--提现列表-->
+			<div class="fx_list_cash">
+				<notempty name='cashout'>
+				<ul>
+					<volist name='cashout' id='cc'>
+					<li>
+						<h4 class="list_title">{$cc.title}</h4>
+						<p class="list_time">{$cc.ctime|time_format}</p>
+						<span class="list_coin add">{$cc.cashout_amount|wp_money_format}</span>
+					</li>
+					</volist>
+				</ul>
+				<else/>
+				<!--无信息时显示-->
+				<div class="fx_empty">
+					<div class="empty"></div>
+					<p>亲，你暂无提现记录!</p>
+				</div>
+				</notempty>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+	imgUrl:'{$shop.logo}'
+});
+	$('.nav_com').click(function(){
+		$(this).addClass('cur').siblings().removeClass('cur'); 
+		$('.fx_list_com').show().siblings().hide();
+	})
+	$('.nav_cash').click(function(){
+		$(this).addClass('cur').siblings().removeClass('cur'); 
+		$('.fx_list_cash').show().siblings().hide();
+	})
+</script>
+</body>
+</html>

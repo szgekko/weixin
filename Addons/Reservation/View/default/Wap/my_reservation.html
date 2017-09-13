@@ -1,0 +1,35 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div id="container" class="container">
+    	<div class="fixed_bg"></div>
+    	<div class="wrap">
+         <div class="top_bar">
+         	<center>我的预约</center>
+         </div>
+         <div class="list_container" style="margin-top:20px">
+         	<ul>
+            	<notempty name="list_data">
+            	<volist name="list_data" id="vo">
+            		<li>
+                    	<p><strong>{$vo.reservation_date|day_format} <eq name="vo[type]" value="0">上午<else/>下午</eq></strong>&nbsp;{$vo.reservation_time|hour_format}</p>
+                    	<p>预约号:<span class="sp">{$vo.reservation_num}</span></p>
+                        <p>姓名:<span class="sp">{$vo.name}</span></p>
+                        <p>手机号:<span class="sp">{$vo.phone}</span></p>
+                        <p>病征描述:<span class="sp">{$vo.desc}</span></p>
+                    </li>
+                </volist>
+                <else/>
+                <p class="success_tips"><br/>你还没有任何预约<br/><a href="{$listUrl}">前往预约</a></p>
+                </notempty>
+            </ul>
+            
+         </div>
+       </div>
+    </div>
+    <include file="Public/mobile_foot"/>
+</body>
+</html>
+<script>
+$('#container').css({'min-height':$(window).height()});
+</script>

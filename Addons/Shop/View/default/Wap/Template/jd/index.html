@@ -1,0 +1,223 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body class="withFoot" ng-controller="commonCtrl">
+    <div class="container">    
+        <form class="search_form" action="{:U('lists',array('shop_id'=>$shop_id))}" method="get">
+            <input type="text" placeholder="输入关键字搜索商品" value="{:I('search_key')}" name="search_key"/>
+            <button type="button" id="search" url="{:U('lists',array('shop_id'=>$shop_id))}"></button>         
+        </form>
+        <!-- banner -->
+        <div class="banner" id="indexBanner" >
+        	<ul >
+            <volist name="slideshow_list" id="vo">
+                <li >
+                    <a href="{$vo.url}">
+                    <img src="{$vo.img|get_cover_url=320,160}" />
+                    </a>
+                     <notempty name="vo.title"><span class="title">{$vo.title}</span></notempty>
+                </li>
+             </volist>
+            </ul>
+            <span class="identify">
+            <if condition="count($slideshow_list) gt 1">
+             <volist name="slideshow_list" id="vo" >
+               <em></em>
+             </volist>
+             </if>
+            </span>
+        </div>
+        <div class="index_nav">
+        	<a href="{:U('lists',array('shop_id'=>$shop_id))}">全部商品</a>
+            <span class="line"></span>
+            <a href="{:U('user_center', array('shop_id'=>$shop_id))}">个人中心</a>
+            <span class="line"></span>
+            <a href="{:U('shop_intro',array('shop_id'=>$shop_id))}">店铺简介</a>
+            <span class="line"></span>
+            <a href="{:U('contact',array('shop_id'=>$shop_id))}">联系卖家</a>
+        </div>
+        <!-- 推荐类目 -->
+        <notempty name="recommend_cate">
+        <h6 class="cate_title">推荐分类</h6>
+        <div class="recommend_cate">
+           <volist name="recommend_cate" id="cate">
+        	<a href="{:U('goodsListsByCategory',array('shop_id'=>$shop_id,'cid0'=>$cate[pid],'cid1'=>$cate[id]))}"><img class="init_square" src="{$cate.icon|get_cover_url=200,200}"/>
+            <span class="title">{$cate.title}</span>
+            </a>
+            </volist>
+        </div>
+        </notempty>
+        
+        <!-- 推荐商品 -->
+        <notempty name="recommend_list">
+        <div class="recommend_list">
+        	<h6 class="cate_title">商城推荐</h6>
+            <div class="product_list">
+                <ul>
+                    <volist name="recommend_list" id="vo">
+                    <li>
+                        <a href="{:U('detail',array('shop_id'=>$shop_id,'id'=>$vo['id']))}">
+                            <img class="init_square" src="{$vo.cover|get_cover_url=300,300}"/>
+                            <div class="desc">
+                            	<p class="name">{$vo.title}</p>
+<!--                             	<p class="price">￥{$vo.market_price|wp_money_format}</p> -->
+ <if condition="(floatval($vo['sale_price']) gt 0) && (floatval($vo['sale_price']) neq floatval($vo['market_price']))">
+ 		<span class="price">￥{$vo.sale_price|wp_money_format}</span>  
+		<del class="price">￥{$vo.market_price|wp_money_format}</del> 
+<else/>
+ 	<span class="price">￥{$vo.market_price|wp_money_format}</span>  
+	<del style="display:none" class="price">￥{$vo.market_price|wp_money_format}</del> 
+
+ </if>
+                            </div>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        </notempty>
+        
+        <!-- 推荐商品 -->
+        <div class="all_list">
+        	<h6 class="cate_title">所有商品</h6>
+            <div class="product_list">
+                <ul>
+                    <volist name="goods_list" id="vo">
+                    <li>
+                        <a href="{:U('detail',array('shop_id'=>$shop_id,'id'=>$vo['id']))}">
+                            <img class="init_square" src="{$vo.cover|get_cover_url=300,300}"/>
+                            <div class="desc">
+                            	<p class="name">{$vo.title}</p>
+<!--                             	<p class="price">￥{$vo.market_price|wp_money_format}</p> -->
+<if condition="(floatval($vo['sale_price']) gt 0) && (floatval($vo['sale_price']) neq floatval($vo['market_price']))">
+ 		<span class="price">￥{$vo.sale_price|wp_money_format}</span>  
+		<del class="price">￥{$vo.market_price|wp_money_format}</del> 
+<else/>
+ 	<span class="price">￥{$vo.market_price|wp_money_format}</span>  
+	<del style="display:none" class="price">￥{$vo.market_price|wp_money_format}</del> 
+
+ </if>
+                            </div>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+            <a class="list_bottom_btn" href="{:U('lists',array('shop_id'=>$shop_id))}">查看所有商品&gt;</a>
+        </div>
+         <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>	
+        <include file="DiyTemplate/allDisplay"/>
+		<script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        </script>
+        
+    </div>
+    <!-- 分销修改店铺信息 -->
+    <div class="shop_info">
+        <div class="shop_head">
+            <a class="back_btn" href="javascript:;"></a>
+            <span>修改店铺信息</span>
+            <a class="sub_btn" href="javascript:;" onclick="setShopName('{$me_is_duser}')">完成</a>
+        </div>
+        <div class="shop_cont">
+            <ul>
+                <li>
+                    <label>店铺名称:</label><input type="text" name="shop_name" value="{$shop.title}">
+                </li>
+                <li>
+                    <label>店铺Logo:</label>
+                    <div class="file_warp">
+<!--                         <img src="{$shop.logo|get_cover_url=100,100}"> -->
+                    <a class="add_btn" href="javascript:;" onClick="$.WeiPHP.wxChooseImg(this,1,'shop_logo')"> 
+                        <input class="file_logo" type="hidden" name="shop_logo" value="{$shop.logo}"><img src="{$shop.logo}">
+                        <span>修改logo</span>
+                   </a>
+                          
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>	
+    <!-- 分类目录 -->
+    <include file="_category"/>
+    
+    <!-- 底部导航 -->
+   <include file="_footer"/>
+   
+<script type="text/javascript">
+$(function(){
+	//通用banner 滑动
+// 	var imgNum=$('#indexBanner img').size();
+// 	for(var i=0;i<imgNum;i++){
+// 		$('#indexBanner img')[i].onload = function(){
+// 			alert(!--imgNum);
+// 			if(!--imgNum){
+				$.WeiPHP.initBanner('#indexBanner',true,5000);
+// 			}
+// 		}
+// 	}
+//弹出修改店铺信息
+$('.title em').click(function(){
+    $('.shop_info').toggle().animate({
+        right:0
+    },500); 
+    m_stop();     
+});
+//弹回修改店铺信息
+$('.back_btn').click(function(){
+    $('.shop_info').animate({
+        right:'-100%'
+    },500,function(){
+        $('.shop_info').toggle();
+    });   
+    m_move();    
+});
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search_form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});	
+	 //回车自动提交
+    $('.search_form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+})
+function setShopName(duid){
+	//图标以图片链接形式保存
+	var shopLogo=$("input[name='shop_logo']").val();
+	var shopName=$("input[name='shop_name']").val();
+	if(!shopName){
+		return false;
+	}
+	$.post("{:U('ajax_set_logo')}",{'shop_logo':shopLogo,'shop_name':shopName,'duid':duid},function(res){
+		if(res==1){
+			$.Dialog.success('设置成功');
+		}else{
+			$.Dialog.fail('设置失败');
+		}
+	})
+}
+</script>    
+</body>
+</html>

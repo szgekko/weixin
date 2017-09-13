@@ -1,0 +1,263 @@
+<include file="Public/mobile_head"/>
+<style type="text/css">
+.con_hd{ display:-webkit-box; margin:5px;}
+.con_hd a{ display:block; margin:5px; background:#09C; color:#fff; -webkit-box-flex:1; padding:14px 0; text-align:center; font-size:16px;}
+.con_hd a.disable{ background:#999; color:#ddd}
+.status{ line-height:60px; font-size:20px; color:#444; text-align:center}
+#status{ color:#F00}
+.dialog_content{ background:#fff; border-radius:5px; padding:10px; overflow:hidden; zoom:1;}
+.dialog_content span{ float:left; width:48%; margin:1%; height:40px; text-align:center; background:#09C; color:#fff; line-height:40px; font-size:20px;}
+.dialog_content span.current{ background:#F60}
+.dialog_content  p{ clear:both; line-height:30px; color:#444; text-align:center}
+</style>
+<body>
+<div id="container" class="container body">
+	 <p class="status">当前状态:<span id="status">{$start_title}</span></p>
+	 <div class="con_hd">
+	 	<if condition="(($monitor[msgwall_state] eq 3) and ($monitor[game_state] neq 0)) or ($shake_count eq 0)">
+	 		<a href="javascript:;" class="disable" id='msgwall_state'>进入上墙</a>
+	 		<a href="javascript:;" class="disable" id='wecome_state' >开场欢迎</a>
+	 	<elseif condition="($monitor[msgwall_state] eq 0) and ($monitor[game_state] eq 0)" />
+     		<a href="javascript:;" onclick="changeState('msgwall_state',1);" id='msgwall_state'>进入上墙</a>
+     		<a href="javascript:;" class="disable" id='wecome_state' >开场欢迎</a>
+     	<elseif condition="$monitor[msgwall_state] eq 1" />
+     		<a href="javascript:;"  class="disable" id='msgwall_state'>继续上墙</a>
+     		<a href="javascript:;" id='wecome_state' onclick="changeState('wecome_state',1);">开场欢迎</a>
+     	<elseif condition="$monitor[wecome_state] eq 1" />
+     		<a href="javascript:;"  id='msgwall_state' onclick="changeState('msgwall_state',1);">继续上墙</a>
+     		<a href="javascript:;" id='wecome_state' class="disable">开场欢迎</a>
+     	
+    	 </if>
+     </div>
+     <notempty name='has_shake'>
+     <div class="con_hd">
+     <if condition="$monitor[game_state] eq 0">
+     		<a href="javascript:;" id='game_state_start' onclick="changeState('game_state',1);">进入游戏</a>
+     		<a href="javascript:;" class="disable" id='game_state_end'>结束游戏</a>
+     <elseif condition="$monitor[game_state] eq 1" />
+     		<a href="javascript:;" id='game_state_start' onclick="changeState('game_state',2);">开始游戏</a>
+     		<a href="javascript:;" class="disable" id='game_state_end'>结束游戏</a>
+     <elseif condition="$monitor[game_state] eq 2" />
+     		<a href="javascript:;" class="disable" id='game_state_start'>开始游戏</a>
+     		<a href="javascript:;" id='game_state_end'  onclick="changeState('game_state',0);">结束游戏</a>
+	<else/>
+		<a href="javascript:;" class="disable" id='game_state_start'>开始游戏</a>
+     	<a href="javascript:;" id='game_state_end'  class='disable'>结束游戏</a>
+	</if>
+      </div>
+      </notempty>
+      
+      <div class="con_hd">
+      	<if condition="($monitor[playback_state] eq 0) and ($monitor[game_state] neq 2)and ($monitor[msgwall_state] neq 1) and ($monitor[game_state] neq 1) and ($monitor[shake_count] gt 0) ">
+     	<a href="javascript:;" id="playback_state" onclick="changeState('playback_state',1);">精彩回放</a>
+     	<else/>
+     	<a href="javascript:;" id="playback_state" class='disable'>精彩回放</a>
+     	
+     	</if>
+        <a href="{:U('sqlb',array('live_id'=>$live[id]))}">黑名单管理</a>
+     </div>
+      <div class="con_hd">
+      	<if condition="($monitor[game_state] eq 3) or (($monitor[game_state] eq 0) && ($monitor[shake_count] gt 0))">
+	     	<a href="javascript:;" id="winner_page_next" onclick="changeState('winner_page_next',{$monitor[winner_page]});">获奖人下一页</a>
+	        <a href="javascript:;" id="winner_page_up" onclick="changeState('winner_page_up',{$monitor[winner_page]});">获奖人上一页</a>
+        <else />
+	        <a href="javascript:;" class="disable">获奖人下一页</a>
+	        <a href="javascript:;" class="disable">获奖人上一页</a>
+        </if>
+     </div>
+     <div class="con_hd">
+     	<eq name="monitor.music_state" value='0'>
+     		<a id="musicState" href="javascript:;" onclick="changeState('music_state',1);">播放音乐</a>
+        <else />
+        	<a id="musicState" href="javascript:;" onclick="changeState('music_state',0);">暂停音乐</a>
+        </eq>
+     	<a id="musicSize"  href="javascript:;" onclick="changeVolume(this);" data-volume="{$monitor.music_size}">音乐大小</a>
+      </div>
+      <div class="box_overlay" style="display:none"></div>
+      <div class="music_volume dialog" style="display:none">
+      	<div class="dialog_content">
+        	<p>音量调节</p>
+      		<span id="volume_0" data-value="0">0</span>
+            <span id="volume_1"  data-value="1">1</span>
+            <span id="volume_2"  data-value="2">2</span>
+            <span id="volume_3"  data-value="3">3</span>
+            <span id="volume_4"  data-value="4">4</span>
+            <span id="volume_5"  data-value="5">5</span>
+            <span id="volume_6"  data-value="6">6</span>
+            <span id="volume_7"  data-value="7">7</span>
+            <span id="volume_8"  data-value="8">8</span>
+            <span id="volume_9"  data-value="9">9</span>
+            <p>数字越大，音量越大</p>
+           </div>
+      </div>
+</div>
+<script type="text/javascript">
+	var live_id="{$live.id}"
+	var monitor="{$monitor.id}";
+	var shake_count="{$shake_count}";
+	var winpage="{$monitor[winner_page]}";
+	setPageNext(winpage);
+	var can_set=1;
+	function changeState(type,val){
+		if(type=='playback_state'){
+			$.ajax({
+				type:'get',
+				url:"{:U('get_pic_count',array('live_id'=>$live[id]))}",
+				async:false,
+				success:function(piccount){
+					can_set=piccount;
+					if(piccount == 0){
+						alert('还没有上传图片！');
+						//$.dialog.fail('还没有上传图片！');
+					}
+				}
+			});
+// 			$.get("{:U('get_pic_count',array('live_id'=>$live[id]))}",function(piccount){
+// 				if(piccount == 0){
+// 					alert('还没有上传图片！');
+// 					return false;
+// 				}
+// 			});
+		}
+		if(can_set !=0){
+			$.post("{:U('ykq_change_state')}",{'type':type,'val':val,'monitor_id':monitor,'shake_count':shake_count},function(d){
+				if(d == 0){
+					return false;
+				}
+				if(type=='msgwall_state'){
+					$('#wecome_state').removeClass('disable');
+					$('#wecome_state').attr('onclick',"changeState('wecome_state',1)").bind('click');
+					
+					$('#msgwall_state').addClass('disable');
+					$('#msgwall_state').attr('onclick','').unbind('click');
+					
+					$('#playback_state').attr('onclick','').unbind('click');
+					$('#playback_state').addClass('disable');
+					
+					$('#status').text('进入上墙');
+				}else if(type== 'wecome_state'){
+					$('#msgwall_state').removeClass('disable');
+					$('#msgwall_state').attr('onclick',"changeState('msgwall_state',1)").bind('click');
+					
+					$('#wecome_state').addClass('disable');
+					$('#msgwall_state').text('继续上墙');
+					$('#wecome_state').attr('onclick','').unbind('click');
+					$('#status').text('开场欢迎');
+				}else if(type=='game_state'){
+					if(val == 1){
+						//进入游戏
+						$('#game_state_start').attr('onclick',"changeState('game_state',2)");
+						$('#msgwall_state').addClass('disable');
+						$('#msgwall_state').attr('onclick','').unbind('click');
+						$('#wecome_state').addClass('disable');
+						$('#wecome_state').attr('onclick','').unbind('click');
+						$('#game_state_start').text('开始游戏');
+						
+						$('#playback_state').attr('onclick','').unbind('click');
+						$('#playback_state').addClass('disable');
+						$('#playback_state').text('精彩回放');
+						$('#status').text('进入游戏');
+					}else if(val == 2){
+						$('#game_state_start').addClass('disable');
+						$('#game_state_start').attr('onclick','').unbind('click');
+						
+						$('#game_state_end').removeClass('disable');
+						$('#game_state_end').attr('onclick',"changeState('game_state',0)").bind('click');
+						$('#status').text('开始游戏');
+					}else if(val ==0){
+						shake_count=parseInt(shake_count);
+						if(shake_count > 1){
+							$('#msgwall_state').removeClass('disable');
+							$('#msgwall_state').attr('onclick',"changeState('msgwall_state',1)").bind('click');
+							$('#game_state_start').removeClass('disable');
+							$('#game_state_start').attr('onclick',"changeState('game_state',1)").bind('click');
+							$('#game_state_start').text('进入游戏');
+							$('#game_state_end').addClass('disable');
+							$('#game_state_end').attr('onclick','').unbind('click');
+						}else{
+							$('#game_state_start').addClass('disable');
+							$('#game_state_start').attr('onclick','').unbind('click');
+							$('#game_state_end').addClass('disable');
+							$('#game_state_end').attr('onclick','').unbind('click');
+						}
+						setPageNext(1);
+						$('#playback_state').attr('onclick',"changeState('playback_state',1)").bind('click');
+						$('#playback_state').removeClass('disable');
+						$('#playback_state').text('精彩回放');
+						$('#status').text('游戏结束');
+					}
+				}else if(type=='music_state'){
+					if(val == 1){
+						$('#musicState').text('暂停音乐');
+						$('#musicState').attr('onclick',"changeState('music_state',0)").bind('click');
+					}else{
+						$('#musicState').text('播放音乐');
+						$('#musicState').attr('onclick',"changeState('music_state',1)").bind('click');
+					}
+				}else if(type=='playback_state'){
+					if(val == 1){
+						$('#playback_state').text('精彩回放');
+						$('#playback_state').addClass('disable');
+						//$('#playback_state').attr('onclick',"changeState('playback_state',1)").bind('click');
+					}else{
+						$('#playback_state').text('精彩回放');
+						$('#playback_state').attr('onclick',"changeState('playback_state',1)").bind('click');
+					}
+				}else if(type == 'winner_page_up'){
+					val = val -1;
+					setPageNext(val);
+					//$('#winner_page_up').attr('onclick',"changeState('winner_page_up',"+val+")");
+				}else if(type == 'winner_page_next'){
+					val = val + 1;
+					setPageNext(val);
+					$('#winner_page_next').attr('onclick',"changeState('winner_page_next',"+val+")");
+				}
+				
+			});
+		}
+		
+	}
+	function setPageNext(val){
+		if(val == 1 ){
+			$('#winner_page_up').addClass('disable');
+			$('#winner_page_up').attr('onclick','').unbind('click');
+		}else{
+			$('#winner_page_up').removeClass('disable');
+			$('#winner_page_up').attr('onclick',"changeState('winner_page_up',"+val+")").bind('click');
+		}
+		$('#winner_page_next').attr('onclick',"changeState('winner_page_next',"+val+")");
+	}
+	function changeVolume(_this){
+		var value = $(_this).data('volume');
+		$('.music_volume').show();
+		$('.box_overlay').show();
+		$('#volume_'+value).addClass('current').siblings().removeClass('current');
+	}
+	$('.dialog_content span').click(function(){
+		var _this = this;
+		var val = $(_this).data('value');
+		$('.music_volume').hide();
+		$('.box_overlay').hide();
+		$('#musicSize').text('音量大小('+val+')').data('volume',val);
+		$.post("{:U('ykq_change_state')}",{'type':'music_size','val':val,'monitor_id':monitor,'shake_count':shake_count},function(d){
+			$(_this).addClass('current').siblings().removeClass('current');
+			
+		})
+	})
+	var gameState="{$monitor.game_state}";
+	var murl="{:addons_url('MiniLive://Show/getStatusByAjax')}&id="+live_id;
+	var rurl="{$reload_url}";
+	var getMonitor=setInterval(function(){
+		$.post(murl,function(d){
+			if(gameState != d.game_state){
+				if(d.game_state ==0 || d.game_state==3){
+					$('#game_state_end').addClass('disable');
+					$('#game_state_end').attr('onclick','').unbind('click');
+				}
+				window.location.href=rurl;
+			}
+		});
+ 	},3000)
+</script>     
+</body>
+</html>

@@ -1,0 +1,79 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+		<div class="fx_top">
+			<span class="logo"><img src="{$duserData.userface}"/></span></notempty>
+            <h3 class="fx_user">{$duserData.nickname}</h3>
+            <p>加入时间: <span>{$duserData.ctime|time_format}</span></p>
+		</div>
+		<div class="fx_main">
+			<div class="fx_total">
+			<a href="{:U('distribution_total',array('shop_id'=>$shop_id))}">
+				<p>累计佣金: <span>{$duserData.profit_money|wp_money_format}</span> 元<em class="icon_right"></em></p>
+				<p>可提佣金 (元)</p>
+			</a>
+			</div>
+			<div class="fx_take">
+				<p>{$duserData.now_profit|wp_money_format}</p>
+				<a class="take_btn" href="{:U('distribution_take')}">提现</a>
+			</div>
+		</div>
+		<div class="fx_nav">
+			<ul>
+				<li><a class="fx_sy" href="{:U('distribution_gains',array('shop_id'=>$shop_id))}"><p>收益统计</p></a><span><em>{$duserData.profit_money|wp_money_format}</em>元</span></li>
+				<li><a class="fx_td" href="{:U('distribution_team',array('shop_id'=>$shop_id))}"><p>我的团队</p></a><span><em>{$duserData.team_count}</em>个伙伴</span></li>
+				<li class="nbr"><a class="fx_dd" href="{:U('distribution_goods',array('shop_id'=>$shop_id))}"><p>分销订单</p></a><span><em>{$duserData.order_count|intval}</em>个订单</span></li>
+				<li class="nbb"><a class="fx_ewm" href="{$share_url}"><p>二维码</p></a><span>推广二维码</span></li>
+<!-- 				<li class="nbb"><a class="fx_tz" href="{:U('distribution_msg',array('shop_id'=>$shop_id))}"><p>我的通知</p></a><span><em>0</em>条通知</span></li> -->
+				<li class="nb"></li>
+			</ul>
+		</div>
+	</div>
+    <!-- 底部导航 -->
+<div class="bottom_menu"> 
+<a class="home" href="{:U('lists',array('uid'=>$duserData[uid],'shop_id'=>$shop_id))}">我的小店</a> 
+<a class="category" href="{:U('lists', array('shop_id'=>$shop_id))}">全部商品</a> 
+<a class="cart" href="{:U('cart', array('shop_id'=>$shop_id))}">购物车<span class="count">{$cart_count}</span></a> 
+<a class="center" href="{:U('user_center', array('shop_id'=>$shop_id))}">个人中心</a> 
+<a class="service" href="javascript:;">联系客服</a> 
+</div>
+<p class="copyright">{$system_copy_right}{$tongji_code}</p>
+<div id="mask_bg"></div>
+<div class="service_tips">
+<!-- 	<h3>这是一个标题</h3> -->
+	<span>X</span>
+	<p>{$kefu}</p>
+</div>
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+	imgUrl:'{$shop.logo}'
+});
+//实现滚动条无法滚动
+var moveStop=function(e){e.preventDefault();};
+/***禁止滑动***/
+function m_stop(){    
+        document.addEventListener("touchmove",moveStop,false);//禁止页面滑动
+}
+/***取消滑动限制***/
+function m_move(){
+        document.removeEventListener("touchmove",moveStop,false);        
+}
+	$('.service').click(function(){
+		$('#mask_bg,.service_tips').show();
+		$('html').addClass('mask_overf')
+		m_stop()
+	})
+	$('.service_tips span,#mask_bg').click(function(){
+		$('#mask_bg,.service_tips').hide();
+		$('html').removeClass('mask_overf')	
+		m_move()
+	})
+</script>
+</body>
+</html>

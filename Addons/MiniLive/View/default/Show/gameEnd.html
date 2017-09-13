@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+</head>
+<body>
+	<div id="gameEndPage">
+    	<div class="top_hd">
+        	<!-- 摇一摇游戏配置的logo -->
+        	<empty name="logo">
+        		<img class="logo" src="{:ADDON_PUBLIC_PATH}/logo-w.png"/>
+        	<else/>
+        		<img class="logo" src="{$logo|get_cover_url}"/>
+        	</empty>
+        </div>
+    	<div class="prize_user_wrap">
+        	<ul class="prize_user_list">
+        		<notempty name="userAward">
+        			<volist name="userAward" id="vo">
+	        		<li>
+	                	<span class="is_check"></span>
+	                	<empty name="vo.headimgurl"><img src="__IMG__/test.jpg"/>
+	                	<else/>
+	                	<img src="{$vo.headimgurl}"/>
+	                	</empty>
+	                    <p class="name">{$vo.name}</p>
+	                    <span class="order">{$vo.ranking}</span>
+	                </li>
+        			</volist>
+        		</notempty>
+            </ul>
+            <div class="btm_txt">
+            	<span class="fl">参与人数:<span id='user_attend'>{$user_attend}</span></span>
+                <span class="fr">中奖人数:<span id='total_count'>{$total_count}</span></span>
+            </div>
+        </div>
+        <div class="prize_comment_wrap">
+        	<div class="comment_inner">
+            	<p class="title">获奖感言:</p>
+                <ul class="prize_comment_list">
+                 <notempty name="speech">
+                 	<volist name="speech" id='vv'>
+                 		<li>
+                    	<span class="user">
+                        	<empty name="vv.headimgurl"><img src="__IMG__/default.png"/><else/><img src="{$vv.headimgurl}"/></empty><br/>
+                            {$vv.nickname}
+                        </span>
+                        <p class="comment">{$vv.content}</p>
+                    </li>
+                 	</volist>
+                 </notempty>
+                    
+                </ul>
+            </div>
+            <div class="btm_txt">
+            	<span class="fr"><span id='ling_count'>{$ling_count}</span>人领奖</span>
+            </div>
+        </div>
+    </div>
+  <audio src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+	<audio  src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+	<notempty name="bj_music_path">
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$bj_music_path}"></audio>
+	<else/>
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/banjiang.mp3"></audio>
+	</notempty>
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+var next_page="{$next_page}";
+$(function(){
+	$('body').css('height',wHeight);
+	$('.prize_user_wrap,.prize_comment_wrap').css('height',wHeight-120);
+// 	getMonitor(next_page,getStatusUrl);
+// 	var interval = setInterval(function(){
+// 		getMonitor(next_page,getStatusUrl);
+// 	},6000)
+	
+})
+var live_id="{$live_id}";			
+//开始加载中奖项
+function getGameEndData(live_id) {
+	$.post("{:U('gameEndAjaxData')}",{'id':live_id},function(dd){
+		
+		$('#ling_count').text(dd.ling_count);
+		$('#total_count').text(dd.total_count);
+		$('#user_attend').text(dd.user_attend);
+		$('.prize_user_list li').remove();
+		var userdata=dd.user_award;
+	    var li_str='';
+		for(var i=0;i<userdata.length;i++){
+			if(!userdata[i]['name']){
+				userdata[i]['name']='匿名';
+			}
+			if(userdata[i]['headimgurl']){
+				li_str +='<li><span class="is_check"></span><img src="'+userdata[i]['headimgurl']+'"/><p class="name">'+userdata[i]['name']+'</p><span class="order">'+userdata[i]['ranking']+'</span></li>';
+			}else{
+				li_str +='<li><span class="is_check"></span><img src="__IMG__/test.jpg"/><p class="name">'+userdata[i]['name']+'</p><span class="order">'+userdata[i]['ranking']+'</span></li>';
+			}
+		}
+		$(li_str).appendTo(".prize_user_list");
+		$('.prize_comment_list li').remove();
+		var speech=dd.speech;
+		var sp_str='';
+		for(var s=0;s<speech.length;s++){
+			if(!speech[s]['nickname']){
+				speech[s]['nickname']='匿名';
+			}
+			if(speech[s]['headimgurl']){
+				sp_str+='<li><span class="user"><img src="'+speech[s]['headimgurl']+'"/></empty><br/>'+speech[s]['nickname']+'</span><p class="comment">'+speech[s]['content']+'</p></li>';
+			}else{
+				sp_str+='<li><span class="user"><img src="__IMG__/default.png"/><img src=""/></empty><br/>'+speech[s]['nickname']+'</span><p class="comment">'+speech[s]['content']+'</p></li>';
+			}
+		}
+		$(sp_str).appendTo(".prize_comment_list");
+		console.log(dd);
+	});
+};
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>

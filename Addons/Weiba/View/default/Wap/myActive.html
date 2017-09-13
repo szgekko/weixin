@@ -1,0 +1,67 @@
+<include file="header" />
+<div id="content">
+  <div id="weiba" data-title="我的活动" class="panel" data-selected="true"  data-menu="msgmenu" style="padding:0;">
+    <header>
+            <div id="header-buttons">
+              <a href="javascript:history.go(-1);">
+                    <div id="back" class="header-menu-link" data-back="false">
+                    </div>
+                </a>
+            </div>
+            <h1 class="hasback">我的活动</h1>
+        </header>
+    </header>
+    <div class="mainWeiba">
+      <div class="weiba_forumlist">
+      <volist name="feed" id="vo">
+       <div class="section">
+                  <div class="friend_list">
+                      <div class="friend_left">
+                      <!--头像-->
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><img class="w-h-img" width="100%"  src="{$feed.headimgurl}"></a>
+                      </div>
+                      <div class="friend_right">
+                          <a href="{:addons_url('Weiba://Wap/profile',array('uid'=>$feed['uid']))}"><h3>{$vo.nickname}</h3></a>
+                          <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}"><p class="content">{$vo.content}</p></a>
+                          <notempty name="feed.img_ids">
+                          <ul class="img_list content_imgs">
+                              <volist name="vo.img_ids" id="img">
+                              <li><img onclick="showBigImgBox(this);" src="{$img}"></li>
+                              </volist>
+                          </ul>
+                          </notempty>
+                          <em class="icon_act"></em>
+                          <div class="friend_list_act">
+                              <p class="act_time">时间：<span>{$vo.event_time|time_format}</span>
+                              <if condition="$vo[has_join] gt 0"><a  href="javascript:;" class="cancle_btn" rel="{$feed.id}">已报名</a>
+                              <else /><a href="javascript:;" class="act_btn" rel="{$feed.id}">立即报名</a></if>
+                              </p>
+                              <notempty name="vo.event_list">
+                              <div class="act_list">
+                                  <p>已报名：{$vo.event_count|intval}人</p>
+                                  <volist name="vo.event_list" id="v">
+                                  <img class="w-h-img" width="100%"  src="{$v.uid|get_userface}">
+                                  </volist>
+                                  <php> if($vo['event_count']>10) echo '...';</php>
+                              </div>
+                              </notempty>
+                          </div>
+                          <p class="info">
+                            <span class="pinfo">
+                              <a href="{:addons_url('Weiba://Wap/feedDetail',array('id'=>$feed['id']))}" class="comment"><i>{$vo.reply_count}</i></a>
+                              <span id="digg{$feed.id}" rel="{$feed.digg_count}">
+                               <eq name="vo.has_digg" value="1"><a href="javascript:;" class="iszan" onclick="delDigg({$vo.id},'{:U('addDigg')}','{:U('delDigg')}')"><i class="zan">{$vo.digg_count}</i></a>
+                                <else /><a href="javascript:;" onclick="addDigg({$vo.id},'{:U('addDigg')}','{:U('delDigg')}')"><i class="zan">{$vo.digg_count}</i></a></eq>
+                              </span>
+                            </span>
+                            <span>{$vo.cTime|time_format}</span>
+                          </p>
+                      </div>
+                  </div>
+            </div>
+            </volist>
+      </div>
+        <div style="height:75px;"></div>
+    </div>
+</div>
+<include file="footer" />

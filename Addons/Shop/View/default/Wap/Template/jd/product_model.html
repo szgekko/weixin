@@ -1,0 +1,26 @@
+<volist name="goods_list" id="vo">
+<if condition="$_GET['order_key'] eq 'sale_price'">
+            	 <li class="contentItem" data-lastid="{$vo.sale_price}" data-goodsids="{$vo.id}">
+            	<elseif condition="$_GET['order_key'] eq 'rank'" />
+            	 <li class="contentItem" data-lastid="{$vo.rank}" data-goodsids="{$vo.id}">
+            	<elseif condition="$_GET['order_key'] eq 'sale_count'" />
+            	 <li class="contentItem" data-lastid="{$vo.sale_count}" data-goodsids="{$vo.id}">
+            	<else/>
+            	 <li class="contentItem" data-lastid="{$vo.id}" data-goodsids="{$vo.id}">
+            </if>
+            
+ <a href="{:U('detail',array('shop_id'=>$shop_id,'id'=>$vo['id']))}"> <img src="{$vo.cover|get_cover_url}"/>
+    <div class="desc">
+      <p class="name">{$vo.title}</p>
+<!--       <p class="price">￥{$vo.market_price|wp_money_format}</p> -->
+   			<notempty name="vo.sale_price">
+                            <span class="price">￥{$vo.sale_price|wp_money_format}</span>  
+                            <del class="price">￥{$vo.market_price|wp_money_format}</del> 
+                        <else />  
+                            <span class="price">￥{$vo.market_price|wp_money_format}</span>  
+                            <del style="display:none" class="price">￥{$vo.market_price|wp_money_format}</del> 
+                        </notempty> 
+    </div>
+    </a> </li>
+</volist>
+<input type='hidden' name='m_last_id' value='{$lastId}' />

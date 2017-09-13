@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+</head>
+<body>
+	<div id="reviewPage">
+    	<div class="top_hd" style="position:absolute; top:0; left:0; right:0; z-index:1000; background:RGBA(0,0,0,.4);">
+        	<empty name="logo"><img class="logo" src="{:ADDON_PUBLIC_PATH}/logo.png"/><else/><img class="logo" src="{$logo|get_cover_url}"/></empty>
+        </div>
+       <div class="gallery galleryReviews">
+                    <div id="galleryPics" class="gallery-inner">
+                      
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948400647.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948461004.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948495801.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948509609.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948541661.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948546596.jpg" class="gallery-item" data-width="720" data-height="1280"> -->
+<!--                         <img src="http://res4.icloudxiao.com/live/20151224/1450948544198.jpg" class="gallery-item" data-width="1280" data-height="720"> -->
+                        <notempty name='picArr'>
+                            <volist name="picArr" id='vo'>
+                                <img src="{$vo.img_url}" class="gallery-item" data-width="{$vo.width}" data-height="{$vo.height}"/>
+                            </volist>
+                        </notempty>
+                        </div>
+                </div>
+
+       		
+       
+    </div>
+    <notempty name="music_path">
+     <audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$music_path}"></audio>
+    <else/>
+     <audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+    </notempty>
+   <audio  src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/banjiang.mp3"></audio>
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+	
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+$(function(){
+	$('body').css('height',wHeight);
+	$('#reviewPage').height(wHeight).width(wWidth);
+	runAnimPic();
+})
+function runAnimPic(){
+	var $galleryPics = $("#galleryPics"),
+		$galleryPicsImg = $galleryPics.find("img"),
+		galleryPicsImgLen = $galleryPicsImg.length;
+	
+	$galleryPicsImg.each(function(i){
+		if(i>11){
+			$(this).addClass("other");
+		}
+	});
+	
+	var pi = 0;
+	
+	function galleryAni(){
+		if(pi>=galleryPicsImgLen){
+			pi = 0;
+		}
+		var $this = $galleryPicsImg.eq(pi);
+		var wid = $this.data("width");
+		var hig = $this.data("height");
+		
+		if(wid>600){
+			hig=(600/wid)*hig;
+			wid=600;
+		}
+		if(hig>600){
+			wid=(600/hig)*wid;
+			hig=600;
+		}
+		
+		$this
+		.addClass("cur")
+		.css({
+			"width":wid,
+			"height":hig,
+			"margin-left":"-"+(wid/2+50)+"px",
+			"margin-top":"-"+(hig/2+50)+"px"
+		})
+		.siblings().removeClass("cur").removeAttr("style");
+		
+		pi++;
+	}
+	
+	var galleryPicsAni = setInterval(galleryAni,3000);
+	
+	var $sendpic = $(".sendpic");
+	
+	function sendPic(){
+		clearInterval(galleryPicsAni);
+		
+		$galleryPicsImg.addClass("flyaway");
+		
+		setTimeout(function(){
+			$sendpic.show();
+		},1200);
+		
+		setTimeout(function(){
+			$sendpic.hide();
+			setInterval(galleryAni,3000);
+			$galleryPicsImg.removeClass("flyaway");
+		},10000);
+	}
+	
+	//返回上墙or进入游戏？
+	var sendPicFlag = true;
+}
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="AppCtrl">
+<head>
+<meta property="qc:admins" content="25322764376510156375" />
+<meta name="baidu-site-verification" content="2MKKT6mbuL" />
+<meta charset="utf-8" />
+<meta name="description" content="{$sys.web_description}" />
+<meta name="keywords" content="{$sys.web_keywords}" />
+<meta name="viewport"content="width=device-width, initial-scale=1.0" />
+<meta property="qc:admins" content="25322764376510156375" />
+<meta property="wb:webmaster" content="354b970d8cd61602" />
+<title>{$sys.web_title}</title>
+
+
+<script>
+
+var web_logo='{$sys.web_logo}';
+var web_copyright='{$sys.web_copyright}';
+var web_qq='{$sys.web_qq}';
+var web_mail='{$sys.web_mail}';
+var web_phone='{$sys.web_phone}';
+var web_address='{$sys.web_address}';
+var web_ipc='{$sys.web_ipc}';
+var qi_ad_xds='{$sys.qi_ad_xds}';
+var xiudian_url='{$sys.xiudian_url}';
+
+
+//var web_muban='{$sys.web_muban}';
+var web_muban_status = '{$sys.web_muban_status}';
+if(web_muban_status==1){
+	var web_muban ='<div id="home" class="min_contain" login-loading>\n    <header>\n        <div class="we_nav content_center">\n            <div class="link_list">\n                <ul class="clearfix">\n                    <li><a target="_blank" href="#/sample">用户案例</a></li>\n                   <!--  <li ng-hide="isAuthenticated()"><a href = "#/home/login">登录</a></li>\n                    <li ng-hide="isAuthenticated()" class=""><a href = "#/home/register">注册</a></li> -->\n                    <li ng-hide="isAuthenticated()"><a ng-click = "openLogin()">登录</a></li>\n                    <li ng-hide="isAuthenticated()" class=""><a ng-click = "openRegister()">注册</a></li>\n                    <li ng-show="isAuthenticated()"><a href="#/main">进入</a></li>\n                </ul>\n            </div>                  \n            <div id="logo"><img ng-src="{{web_logo}}" alt=""></div>\n        </div>    \n    </header>\n   <div id="example_con">\n        <div id="example">\n            <div slides id="slides">\n                <div class="slides_container"></div>\n                <a href="#" class="prev"><img ng-src="{{CLIENT_CDN}}assets/images/arrow-prev.png" width="60px" height="114px" alt="Arrow Prev"></a>\n                <a href="#" class="next"><img ng-src="{{CLIENT_CDN}}assets/images/arrow-next.png" width="60px" height="114px" alt="Arrow Next"></a>\n            </div>\n        </div>\n    </div>\n    <hgroup class="core_five">\n        <div class="home_core content_center">\n            <h1><img ng-src="{{CLIENT_CDN}}assets/images/home/advantage.png" /></h1>\n            <div class="advantage_con">\n                <ul class="clearfix">\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/5.png" alt="" /></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/4.png" alt="" /></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/2.png" alt="" /></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/1.png" alt="" /></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/3.png" alt="" /></li>\n                </ul>\n            </div>\n        </div>\n    </hgroup>\n    <div class="cat_xq">\n        <div class="product_contain">\n            <div class="product_con content_center">\n                <ul class="clearfix">\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_10.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_13.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_15.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_17.png" alt=""/></li>\n                </ul>\n                <ul class="clearfix">\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_24.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_26.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_27.png" alt=""/></li>\n                    <li><img ng-src="{{CLIENT_CDN}}assets/images/home/pro_28.png" alt=""/></li>\n                </ul>\n            </div>\n        </div>\n<!--         <div class="cat_wra">\n            <div class="cat_contain content_center">\n                <div class="cat_head"><ul class="clearfix"><li class="mou"><span  ng-class="{hover:page == \'month\'}" ng-click="page = \'month\'"><em>月排名</em></span></li><li class="wek"><span ng-class="{hover:page == \'week\'}"  ng-click="page = \'week\'"><em>周排名</em></span></li><li class="day"><span ng-class="{hover:page == \'day\'}"  ng-click="page = \'day\'"><em>日排名</em></span></li></ul></div>\n                <div class="cat_content">\n                    <ul class="clearfix" >\n                        <li ng-repeat="weekTop in weekTop" ng-show="page == \'week\'">\n                            <div class="num_con">\n                                <div class="num_head clearfix"><span>num</span><img ng-src="{{CLIENT_CDN}}assets/images/home/PV.png" /><em class="pv_numbers">{{weekTop.showCount | fixnum}}</em></div>\n                                <div class="img_con">\n                                    <a target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + weekTop.code}}">\n                                        <img ng-src="{{PREFIX_FILE_HOST + weekTop.image.imgSrc}}" alt="" />\n                                    </a>\n                                    <p><a target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + weekTop.code}}" title="{{weekTop.name}}">{{weekTop.name}}</a></p>\n                                </div>\n                            </div>\n                        </li>                      \n                    </ul>\n                    <ul class="clearfix" >\n                        <li ng-repeat="dayTop in dayTop" ng-show="page == \'day\'">\n                            <div class="num_con">\n                                <div class="num_head clearfix"><span>num</span><img ng-src="{{CLIENT_CDN}}assets/images/home/PV.png" /><em class="pv_numbers">{{dayTop.showCount | fixnum}}</em></div>\n                                <div class="img_con">\n                                    <a target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + dayTop.code}}">\n                                        <img ng-src="{{PREFIX_FILE_HOST + dayTop.image.imgSrc}}" alt="" />\n                                    </a>\n                                    <p><a target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + dayTop.code}}" title="{{dayTop.name}}">{{dayTop.name}}</a></p>\n                                </div>\n                            </div>\n                        </li>                      \n                    </ul>\n                    <ul class="clearfix" >\n                        <li ng-repeat="monthTop in monthTop" ng-show="page == \'month\'">\n                            <div class="num_con">\n                                <div class="num_head clearfix"><span>num</span><img ng-src="{{CLIENT_CDN}}assets/images/home/PV.png" /><em class="pv_numbers">{{monthTop.showCount | fixnum}}</em></div>\n                                <div class="img_con">\n                                    <a  target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + monthTop.code}}">\n                                        <img ng-src="{{PREFIX_FILE_HOST + monthTop.image.imgSrc}}" alt="" />\n                                    </a>\n                                    <p><a target="_blank" ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + monthTop.code}}" title="{{monthTop.name}}">{{monthTop.name}}</a></p>\n                                </div>\n                            </div>\n                        </li>                      \n                    </ul>                                                \n                </div>\n            </div>\n        </div> -->\n    </div>\n    <div class="customer_case">\n        <div class="customer_case_con content_center clearfix">\n            <div class="case_cat">\n                <h1><img ng-src="{{CLIENT_CDN}}assets/images/home/case.png" alt="" /></h1>\n                <ul>\n                    <li id="one1" ng-class="{hover:typeindex == \'all\'}" ng-click="getHomes(\'all\', null, 1, 9);type=null">全部案例</li>\n                    <li ng-repeat = "sceneType in sceneTypes" ng-class = "{hover: typeindex == $index}" ng-click = "getHomes($index, sceneType.value, 1, 9)">\n                        {{sceneType.name}}\n                    </li>\n                </ul>\n            </div>\n            <div class="case_img">\n                <ul class="clearfix">\n                    <li ng-repeat="home in homes" style="height:235px;"> \n                        <a ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + home.code}}" target="_blank">\n                        <div ng-show="showCode == true" class="cj_img qrcode" qr-code qr-url="{{PREFIX_CLIENT_HOST + \'v-\' + home.code}}"></div>\n                        <div ng-hide="showCode == true" class="cj_img"><img ng-src="{{PREFIX_FILE_HOST + home.image.imgSrc}}" alt="" width="235px" /></div>\n                        <p class="sample_erwei"><a ng-href="{{PREFIX_CLIENT_HOST + \'v-\' + home.code}}" target="_blank" ng-mouseover="showCode = true" ng-mouseleave="showCode = false" >二维码</a></p>\n                    </a>\n                    </li> \n                </ul>\n            </div>\n        </div>\n    </div>\n     <div class="home_reg">\n        <div class="home_reg_con">\n            <div><a ng-click = "register()" alt="立即注册" title="立即注册"><img ng-src="{{CLIENT_CDN}}assets/images/home/ntb_04.png" alt="" /></a></div>\n        </div>\n    </div>   \n    <div class="contact">\n        <div class="contact_con content_center clearfix">\n            <aside>\n                <h4><img ng-src="{{CLIENT_CDN}}assets/images/home/wo.png" alt="" /></h4>\n                <p class="clearfix" style="padding-top:5px"><span class="con_tel">  电话：{{web_phone}} <br> 邮箱：{{web_mail}} <br> 地址：{{web_address}}</span></p>\n                    </aside>\n            <div class="erwei">\n                <p style="text-align:right;"><!-- <img ng-src="{{CLIENT_CDN}}assets/images/home/foot_66.png" />-->  </p>\n                <p><!-- <img ng-src="{{CLIENT_CDN}}assets/images/home/foot_73.png" />--> </p>\n            </div>\n        </div>\n    </div>\n\n</div>\n<div class="scroll" data-ng-init="load2()" ><a class="scroll_top" href="#element-id">TOP</a></div>\n<div ng-include="\'footer.tpl.html\'"></div>';
+
+	}else if(web_muban_status==2){
+	var web_muban ='<div class="topButton" align="center">\n<table class="toptable" cellspacing="0"><tr> \n<td><img style="cursor:pointer;" height="45" src="{{web_logo}}" onclick="openFirstPage()" alt="HTML5在线制作" title="微场景免费在线制作"></td>\n<td id="loginc" align="right">     </td>\n       <td  class="tbutton"><a  href="#/sample"><font color="white">用户案例</font></a></td>  \n <td  class="tbutton" ng-hide="isAuthenticated()"><a  ng-click = "openLogin()"><font color="white">登录</font></a></td>\n       <td  class="tbutton" ng-hide="isAuthenticated()"><a  ng-click = "openRegister()"><font color="white">注册</font></a></td>\n<td ng-show="isAuthenticated()" class="tbutton"><a href="#/main"><font color="white">进入</font></a></td>\n</tr></table>\n </div>\n<div id="body" class="body" align="center">\n<div class="contant">\n<table class="pages" cellspacing="0">\n<tr><td valign="top">\n	<img style="margin-left:70px;margin-top:80px;" src="static/img/index/advantage.png" alt="HTML5在线制作" title="微场景免费在线制作">\n	</td></tr>\n<tr><td valign="top">\n<img style="margin-left:167px;" src="static/img/index/4.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:20px;" src="static/img/index/5.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:20px;" src="static/img/index/2.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:20px;" src="static/img/index/1.png" alt="HTML5在线制作" title="微场景免费在线制作">	  			 \n<img style="margin-left:20px;" src="static/img/index/3.png" alt="HTML5在线制作" title="微场景免费在线制作"> 			 \n</td></tr>\n<tr><td valign="top" align="center">\n<img style="margin-top:30px;" src="static/img/index/btn-bg.png" alt="HTML5在线制作" title="微场景免费在线制作">\n</td></tr>\n<tr><td valign="top" align="right">\n<table cellspacing="0" style="width:100%;"><tr>\n<td valign="top" align="left" width="450">\n<img width="300" src="static/img/index/slide_02.png" alt="HTML5在线制作" title="微场景免费在线制作">\n</td>\n<td valign="bottom">\n<div style="color:white;">\n<h3>让您SHOW得如此精彩</h3>\n<p>海量素材，多样模板，拖拽组件，一键推广</p>\n<p>多种互动效果，满足极致交互体验</p> \n<p>图文动画，音频视频，多媒体视听感受</p> 					 \n<br>\n</div> 				 \n</td> \n<td valign="top" align="right">\n<div style="color:white;" align="left">\n<h3>SHOW,让移动推广变得如此简单</h3>\n<p>精美画面，社交展示，数据收集，持续营销</p>\n<p>移动时代专业级的场景制作平台</p>\n</div>\n</td>\n</tr>\n</table>\n</td></tr>\n<tr><td valign="top">\n<div style="margin-top:190px;">\n<img style="margin-left:110px;" src="static/img/index/pro_10.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:30px;" src="static/img/index/pro_13.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:30px;" src="static/img/index/pro_15.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<br><br><br><br>\n<img style="margin-left:80px;" src="static/img/index/pro_17.png" alt="HTML5在线制作" title="微场景免费在线制作"> \n<img style="margin-left:30px;" src="static/img/index/pro_26.png" alt="HTML5在线制作" title="微场景免费在线制作">\n<img style="margin-left:30px;" src="static/img/index/pro_27.png" alt="HTML5在线制作" title="微场景免费在线制作">\n</div>\n</td></tr>\n<tr><td valign="top">\n<div id="temptest" style="width:800px;" align="right">\n<br/><br/><br/><br/><br/><br/><br/><br/>\n<p style="color:white;">业务QQ：{{web_qq}}</p>\n<p style="color:white;">业务电话：{{web_phone}}</p>\n<p style="color:white;">邮箱：{{web_mail}}</p>\n<p style="color:white;">联系地址：{{web_address}}</p>\n</div> \n</td></tr>\n<tr><td valign="top">\n</td></tr>\n</table>		\n</div>\n</div>\n<div class="foot" align="right">\n<table><tr><td style="color:white;font-family:微软雅黑;font-size:12px;" align="right">{{web_ipc}}  &nbsp;&nbsp; 2015 {{web_copyright}}版权所有&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table>\n</div>\n<div class="gotoBottom" onclick="godown()">联系</div>\n <div class="gotoTop" onclick="goup()">UP</div>';
+
+	}else{
+	var web_muban ='<div class=wrapper>\n<div class="main1 onepage-wrapper" style="position: relative;">\n <section class="page1 section active" data-index="1" style="position: absolute; top: 0%; left: 0px;">\n<div class="page_container">\n<menu>\n<h1 class="logo"><a href="/Public/newweb3/zuiku.html" title="最酷移动H5互动营销平台">最酷移动H5互动营销平台</a></h1>\n<ul class="menu-box">\n<li class="on"><a href="/web/index/list" title="最酷云场景应用首页">最酷移动H5互动营销平台</a></li>\n </ul>\n<div class="menu-login" id="ajax_login"> <ul class="login" id="login"><li><a href="/#" class="btn btn-primary btn-login" title="登录">登录</a></li><li><a href="/#" class="btn btn-org btn-reg" title="注册">注册</a></li></ul>  </div>\n</menu>\n<div class="pg1-box f-center">\n<div class="pg1-txt1"></div>\n<div class="pg1-txt2"></div>\n<div class="pg1-btn">\n<div>\n<a href="/web/personal/list" title="立即使用" class="btn btn-primary btn-free">立即使用</a>  \n               </div>              \n</div>\n</div>\n        </div>\n</section>\n<section class="page3 section" data-index="3" style="position: absolute; top: 200%; left: 0px;">\n<div class="page_container">\n<div class="page_container">\n<div class="f-pos-abs pg3-box-txt">\n<h2>商业展示</h2>\n<h3>企业宣传、产品展示、品牌传播、优惠促销、企业招聘、数据年报</h3>\n<p><b>解决方案：</b></p>\n<p>1.丰富的图片、文字 、音乐、视频控件，立体展示企业产品和公司形象；</p>\n<p>2.电话、分享、关注功能，快速传播，增强客户粘性；</p>\n</div>\n<div class="f-pos-abs pg3-box-pic">\n<div class="f-pos-abs pg3-pic-item pg3-pic-item1"></div>\n<div class="f-pos-abs pg3-pic-item pg3-pic-item2"></div>\n<div class="f-pos-abs pg3-pic-item pg3-pic-item3"></div>\n<div class="f-pos-abs pg3-pic-item pg3-pic-item4"></div>\n<div class="f-pos-abs pg3-pic-item pg3-pic-item5"></div>\n<div class="f-pos-abs f-center pg3-phone"></div>\n</div>\n</div>\n</div></section>\n<section class="page4 section" data-index="4" style="position: absolute; top: 300%; left: 0px;">\n<div class="page_container">\n<div class="f-pos-abs pg4-box-txt">\n<h2>会议活动</h2>\n<h3>会议、展览会、发布会、活动</h3>\n<p><b>解决方案：</b></p>\n<p>1.制作精美动态邀请涵；</p>\n<p>2.便捷的手机在线报名；</p>\n<p>3.即时短信通知；</p>\n<p>4.详细的数据报告及效果评估；</p>\n</div>\n<div class="f-pos-abs pg4-box-pic">\n<div class="f-pos-abs pg4-phone"></div>\n<div class="pg4-pic">\n <ul>\n     <li><img src="/Public/newweb3/op4-pic1.jpg" alt="会议活动"></li>\n                <li><img src="/Public/newweb3/op4-pic2.jpg" alt="展览会发布会"></li>\n              </ul>\n           </div>\n       </div>\n     </div>\n    </section>\n    <section class="page5 section" data-index="5" style="position: absolute; top: 400%; left: 0px;">\n      <div class="page_container">\n        <div class="f-pos-abs pg5-box-txt">\n           <h2>数字出版与教育</h2>\n           <h3>电子杂志、多媒体课件、培训课程</h3>\          <p><b>解决方案：</b></p>\n          <p>1.内链实现章节目录，方便内容的快速导览；</p>\n          <p>2.内链返回功能，实现快速返回章节目录；</p>\          <p>3.弹出层控件，实现更多文章内容显示；</p>\n         <p>4.丰富的动画、特效，实现课件动态展示;</p>\n    </div>\n <div class="f-pos-abs pg5-box-pic">\n           <div class="f-pos-abs pg5-pic"></div>\n          <div class="f-pos-abs f-center pg5-phone"></div>\n       </div>\n      </div>\n   </section>\n   <section class="page6 section" data-index="6" style="position: absolute; top: 500%; left: 0px;">\n     <div class="page_container">\n        <div class="f-pos-abs pg6-box-txt">\n          <h2>电子贺卡</h2>\n         <h3>商业贺卡、节日贺卡、生日贺卡、祝福卡</h3>\n           <p><b>解决方案：</b></p>\n        <p>1.有动画、声音、视频的贺卡；</p>\n          <p>2.丰富的贺卡模板，简单修改文字即可完成制作；</p>\n          <p>3.便捷的通过微信、微博、QQ等发给好友；</p>\n       </div>\n       <div class="f-pos-abs pg6-box-pic">\n          <div class="f-pos-abs pg6-pic1"></div>\n           <div class="f-pos-abs pg6-pic2"></div>\n          <div class="f-pos-abs pg6-pic3"></div>\n          <div class="f-pos-abs pg6-pic4"></div>\n        </div>\n      </div>\n    </section>\n    <section class="page7 section" data-index="7" style="position: absolute; top: 600%; left: 0px;">\n      <div class="page_container">\n        <div class="f-pos-abs pg7-box-txt">\n           <h2>个人应用</h2>\n           <h3>个人秀、婚礼邀请、聚会Party、求职简历</h3>\n           <p><b>解决方案：</b></p>\n           <p>1.个人生活照，艺术照，旅游照等便捷的生成动态相册；</p>\n           <p>2.婚礼、聚会、同学会，在线留言，祝福；</p>\n           <p>3.个人精美求职简历、个人简介；</p>\n        </div>\n        <div class="f-pos-abs pg7-box-pic">\n           <div class="f-pos-abs pg7-pic1"></div>\n           <div class="f-pos-abs pg7-pic2"></div>\n           <div class="f-pos-abs pg7-pic3"></div>\n           <div class="f-pos-abs pg7-icon"></div>\n           <div class="f-pos-abs pg7-phone"></div>\n        </div>\n      </div>\n    </section>\n    <section class="page8 section" data-index="8" style="position: absolute; top: 700%; left: 0px;">\n      <div class="page_container">\n        <div class="pg8-box f-center">\n           <div class="pg8-txt1">手机扫一扫 立即体验</div>\n           <div class="pg8-ewm">\n             <div>\n                 <img src="/Public/newweb3/ewm-3g.jpg" alt="演示场景">\n                 <p>演示场景</p>\n              </div>       \n               </div>\n        </div>\n        <div class="f-pos-abs f-center pg8-footer">\n           <div class="pg8-addr">\n              <div class="f-pos-abs pg8-logo"></div>\n              <ul class="f-pos-abs pg8-addr-info">\n                 <li>客服热线：400 1188 205</li>\n                 <li>交流QQ群3：264460373</li>\n                 <li>地址：深圳市南山区科苑路科兴科学园A4-507</li>  \n                          </ul>\n          </div>\n           <div class="f-pos-abs pg8-info">最酷网 版权所有 © 2015 <a href="/Public/newweb3/zuiku.html" title="最酷网" target="_blank">zuiku.com</a> All Rights Reserved. <a href="http://www.miibeian.gov.cn/" title="工业和信息化部ICP/IP地址/域名信息备案管理系统">粤ICP备14077342号-1</a></div>\n        </div>\n      </div>\n    </section>\n  </div>\n</div>'
+	
+	}
+
+
+
+
+
+var PREFIX_URL = "http://"+window.location.host+"/json/"; //"http://service.eqxiu.com/";
+   var JSON_URL = "http://"+window.location.host+"/index.php";
+  var PREFIX_S1_URL = "http://"+window.location.host+"/";
+  var PREFIX_S2_URL = "http://"+window.location.host+"/";
+  var PREFIX_S3_URL = "http://"+window.location.host+"/";
+  var PREFIX_HOST = "http://"+window.location.host+"/";
+  var PREFIX_FILE_HOST = "http://"+window.location.host+'/Uploads/'; 
+  var SYS_FILE_HOST = "http://"+window.location.host+"/Uploads/";
+  var CLIENT_CDN = "http://"+window.location.host+"/";
+  var INTERVAL_OBJ = {}; // 用于图集使用的定时器对象
+  var IS_OPEN_REG={$sys.is_open_reg};
+   var QI_AD_XDS={$sys.qi_ad_xds};
+   
+  function gt_custom_ajax(result, selector) {
+    selectorA = selector;
+    if (result) {
+      //当验证成功时,延迟2秒自动刷新验证码
+      /*setTimeout(function() {
+        selector(".gt_refresh_button").click();
+      }, 2000);*/
+      challenge = selector(".geetest_challenge").value;
+      validate = selector(".geetest_validate").value;
+      seccode = selector(".geetest_seccode").value;
+      submit = true;
+    }
+  }
+</script>
+
+
+
+
+	    <!-- 前台 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+	<style type="text/css">*{font-family:微软雅黑;}</style>
+	<script type="text/javascript" src="/static/js/jquery1.8.js?1"></script>
+	<script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="/static/js/mycorebar.js"></script>
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	<style type="text/css">.shipinjiaocheng{position:absolute;top:60px;right:15px;width:350px;height:233px;border:5px solid #B44A4A;border-radius:6px;background-color:#B44A4A;}.ukuif{border-radius:4px;}</style>
+	<script type="text/javascript">$(document).ready(function(){$( "#shipinjiaocheng").draggable({containment:"parent",handle:"#shipinjiaochengb"});});</script>
+	<!-- 前台结束 -->
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8D1kIOGsmbbeG9k4U3klKl77"></script> -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="/Public/css/waiwan/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/Public/css/waiwan/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/Public/css/waiwan/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="/Public/css/waiwan/jquery.Jcrop.min.css"/>
+    <link rel="stylesheet" href="/Public/css/waiwan/select.min.css"/>
+    
+    
+
+    <!-- compiled CSS --> 
+  <link rel="stylesheet" href="/Public/css/eqShow-common-3.1.5.css"/>
+    <link rel="stylesheet" href="/Public/css/ui-grid.min.css"/>
+    <link rel="stylesheet" href="/Public/css/hint.min.css"/>
+    <link rel="stylesheet" href="/Public/css/bootstrap.vertical-tabs.min.css"/>
+    <link rel="stylesheet" href="/Public/css/eqShow-3.1.5.css"/>
+
+  
+
+
+    <script src="/Public/css/waiwan/jquery.min.js"></script>
+    <script src="/Public/css/waiwan/jquery-ui.min.js"></script>
+    <script src="/Public/css/waiwan/jquery.Jcrop.min.js"></script>
+    <script src="/Public/css/waiwan/angular.min.js"></script>
+    <script src="/Public/css/waiwan/angular-route.min.js"></script>
+    <script src="/Public/css/waiwan/angular-animate.min.js"></script>
+    <script src="/Public/css/waiwan/angular-sanitize.min.js"></script>
+    <script src="/Public/css/waiwan/ui-bootstrap-tpls.min.js"></script>
+    <script src="/Public/css/waiwan/select.min.js"></script>
+    <script src="/Public/css/waiwan/sortable.min.js"></script>
+    <script src="/Public/css/waiwan/bootstrap.min.js"></script>
+    <script src="/Public/css/waiwan/Chart.min.js"></script>
+    <script src="/Public/css/waiwan/ZeroClipboard.min.js"></script>
+    <!-- compiled JavaScript -->
+ 
+ 
+    
+      <script src="/Public/eq/2.7/ui-grid.min.js"></script>
+    <script src="/Public/eq/2.7/bootstrap-wysiwyg.min.js"></script>
+    <script src="/Public/eq/2.7/jquery.hotkeys.min.js"></script>
+    <script src="/Public/eq/2.7/angular-file-upload.min.js"></script>
+    <script src="/Public/eq/2.7/angular-file-upload-directives.min.js"></script>
+    <script src="/Public/eq/2.7/angular-locale_zh-cn.min.js"></script>
+    <script src="/Public/eq/2.7/hammer.min.js"></script>
+    <script src="Public/eq/3.1/eqShow-3.1.5.js"></script>
+    
+<!--zuiku
+<link rel="stylesheet" type="text/css" href="/Public/newweb3/reset.css">
+<link rel="stylesheet" type="text/css" href="/Public/newweb3/main-v1.0.css">
+<link rel="stylesheet" type="text/css" href="/Public/newweb3/onepage-scroll.css">
+
+<script src="/Public/newweb3/main-v1.0.js"></script>
+<script src="/Public/newweb3/login.js"></script>
+<script src="/Public/newweb3/edit.js" type="text/javascript"></script> 
+<script src="/Public/newweb3/jquery.onepage-scroll.min.js"></script> 
+<script src="/Public/newweb3/uaredirect.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+   $(".main1").onepage_scroll({
+      sectionContainer: "section",
+       responsiveFallback: 400,
+       loop: true
+   });
+});
+</script>
+-->
+
+<!--zuiku end-->
+
+<style>
+.myGrid {
+	width: 998px;
+	height: 550px;
+}
+.myGrid1 {
+  width: 650px;
+  height: 550px;
+}
+.choose_template .main .content .mask ul li .roll :hover .cc{
+  display: block; 
+  
+}
+</style>
+
+</head>
+ 
+<body>
+
+  <div style="z-index:2000;" id="notify" ng-include="'notifications.tpl.html'" ng-if="notifications.getCurrent().length"></div>
+	<div id="eq_main" ng-view></div>
+
+
+<script>
+ 
+
+  var submit = false;
+  var challenge, validate, seccode, selectorA;
+
+</script>
+
+</body>
+</html>

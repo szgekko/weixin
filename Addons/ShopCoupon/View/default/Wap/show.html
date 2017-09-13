@@ -1,0 +1,74 @@
+<include file="Public/mobile_head"/>
+<script type="text/javascript" src="__STATIC__/qrcode/qrcode.js"></script>
+<script type="text/javascript" src="__STATIC__/qrcode/jquery.qrcode.js"></script>
+<link href="{:ADDON_PUBLIC_PATH}/index.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+<div id="container" class="container" data-mh="0.9">
+		<div class="common_header">
+        	<a class="back" href="javascript:;" onClick="history.back()"></a>
+            <span>代金券详情</span>
+        </div>
+	   <div class="conpon">          
+          <p class="title">{$info.title}</p>
+          <p class="use">￥&nbsp;<empty name="sn.prize_title">{$info.money}<notempty name="info.is_money_rand"> ~ {$info.money_max}</notempty><else />{$sn.prize_title}</empty>
+          <em class="l"></em><em class="r"></em>
+          </p>
+          <div class="info">
+            <span class="time">订单满 {$info.order_money}元可使用</span><br/>
+            <span class="time">有效期：<span class="start_time">{$info.start_time|time_format}</span> - <span class="end_time">{$info.end_time|time_format}</span></span> <br/>
+            <div class="desc">
+            	<span>使用说明:</span>
+            	<p class="content">{$info.content}</p>
+            </div>
+            <div class="sn_box">
+          			<div id="usedStatus" <eq name="sn.is_use" value="0">style="display:none"</eq>>
+                        <br/><br/>
+                        <P class="use_status"><img src="__IMG__/yes_white.png" width="50"/><br/>该奖券已使用</P>
+                        <br/>
+                        <br/>
+                     </div>
+                  
+                    <div id="unusedStatus" <eq name="sn.is_use" value="1">style="display:none"</eq>>
+                       <div id="qrCode">SN码：{$sn.sn}</div> 
+                      <p class="qr_time_tips"></p>
+                      <script type="text/javascript">
+                      var textLink = "{:U('do_pay',array('sn_id'=>$sn['id'],'publicid'=>$public_info['id']))}";
+                      $('#qrCode').qrcode({width:150,height:150,text:textLink,refresh:true,time:30000}); 
+                      </script>
+                      <div id="qrCode">SN码：{$sn.sn}</div> 
+                      <p class="qr_tips">如果线下门店使用,将本页面展示给商家即可使用</p>
+                    </div>
+                  </eq>
+             </div>
+          </div>
+      </div>
+      <div class="btnWrap">
+    	<a href="{:addons_url ( 'ShopCoupon://Wap/personal' )}" class="start_btn"> 
+        	查看全部代金券
+        </a> 
+     </div>
+     
+     
+</div>
+<p class="copyright">{$system_copy_right}{$tongji_code}</p>
+<script type="text/javascript">   
+function closepage(){
+	WeixinJSBridge.call('closeWindow');
+}
+var isUsed= '{$sn.is_use}';
+$(function(){
+	if(isUsed==0){
+	var timer = setInterval(function(){
+		$.post("{:addons_url('ShopCoupon://Wap/get_sn_status')}",{ sn_id:"{$sn.id}"},function(data){
+			if(data==1){
+				$('#usedStatus').show();
+				$('#unusedStatus').hide();
+				clearInterval(timer)
+			}
+		})
+	},2000);
+	}
+})
+</script>
+</body>
+</html>

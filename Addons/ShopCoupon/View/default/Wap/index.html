@@ -1,0 +1,69 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/index.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+<div id="container" class="container" data-mh="0.9">
+	  <div class="conpon">          
+          <p class="title">{$info.title}</p>
+          <p class="use">￥&nbsp;{$info.money}<notempty name="info.is_money_rand"> ~ {$info.money_max}</notempty>
+          <em class="l"></em><em class="r"></em>
+          </p>
+          <div class="info">
+            <span class="time">订单满 {$info.order_money}元可使用</span><br/>
+            <notempty name="info.goods">
+            	<span class="time">适用商品： {$info.goods}</span><br/>
+            </notempty>
+             <notempty name="info.member">
+            	<span class="time">适用人群： {$info.member}</span><br/>
+            </notempty>
+            <span class="time">有效期：<span class="start_time">{$info.start_time|time_format}</span> - <span class="end_time">{$info.end_time|time_format}</span></span> <br/>
+            
+            <div class="desc">
+            	<span>使用说明:</span>
+            	<p class="content">{$info.content}</p>
+            </div>
+          </div>
+      </div>
+          
+             <div class="btnWrap">
+             <if condition="$info['end_time'] gt time()">
+             	<eq name="info.has_num" value="1">
+             		<eq name="info.has_power" value="1">
+			            <a href="{$jumpURL}" class="start_btn" style="background:{$info.button_color}"> 
+			                领取代金券
+			            </a> 
+		            <else/>
+			            <a href="###" class="start_btn" style="background:#cfcfcf"> 
+	               			没有权限
+	            		</a> 
+		            </eq>
+            	<else/>
+            	  <a href="###" class="start_btn" style="background:#cfcfcf"> 
+		                已领完
+		            </a> 
+            	</eq>
+            <else/>
+             <a href="###" class="start_btn" style="background:#cfcfcf"> 
+                代金券已过期
+            </a> 
+            </if>
+            <notempty name="info[more_button_arr]" id="vo">
+                <volist name="info[more_button_arr]" id="vo">
+                    <a href="{$key}"  class="start_btn" style="background:{$info.button_color}">{$vo}</a>
+                </volist>
+            </notempty>
+         </div>
+     
+     
+	</div>
+    <p class="copyright">{$system_copy_right}</p>
+    <include file="Public/mobile_foot"/>
+    <script type="text/javascript">
+    	$.WeiPHP.initWxShare({
+			title:"{$info.title}",
+			imgUrl:"{$info.shop_logo|get_cover_url}",
+			desc:"{$info.shop_name}",
+			link:window.location.href
+		})
+    </script>
+</body>
+</html>

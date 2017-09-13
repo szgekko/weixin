@@ -1,0 +1,39 @@
+<include file="header" />
+<div id="content">
+  <div id="weiba" data-title="订单管理" class="panel" data-selected="true"  data-menu="msgmenu" style="padding:0;">
+    <header>
+        <div id="header-buttons">
+            <div class="head_left">
+                    <a class="head_logo" href="/"><img src="{:ADDON_PUBLIC_PATH}/sys/logo.png?v={:SITE_VERSION}"/></a>
+                </div>
+             <div id="otherLink" style="right:0">
+                <a id="friendLink" class="header-menu-link" href="{:U('feedPost')}">分享动态</a>
+                <a id="myLink" class="header-menu-link msg_tips_container" href="{:addons_url('Weiba://Wap/my')}">我<em class="msg"></em></a>
+            </div>
+        </div>
+    </header>
+    <div class="mainWeiba">
+        <div class="orders">
+            <ul class="orders_list">
+              <li>
+                  <p class="orders_name">
+                  收货人：用户名 <span class="orders_phone"><em class="list_icon_phone"></em>13172461616</span><a href="javascrpit:;" class="orders_state" onclick="orders()">未邮寄</a></p>
+                  <p class="orders_addr">收货地址：深圳市龙岗区</p>
+                  <p>配送方式：邮寄<span class="orders_pay">待支付</span></p>
+                  <p>快递单号：77777777777777</p>
+                  <p class="orders_time">2016-07-29 13:00 <span class="orders_num">X1</span></p>
+                  <p class="orders_come"><a href="">来自：阿奎介绍电话卡计算的话</a><span class="orders_sum">￥299</span></p>
+              </li>
+              <li>
+                  <p class="orders_name">
+                  收货人：用户名 <span class="orders_phone"><em class="list_icon_phone"></em>13172461616</span><a href="javascrpit:;" class="orders_state cur" onclick="orders()">已配送</a></p>
+                  <p>配送方式：自提<span class="orders_pay_on">已支付</span></p>
+                  <p class="orders_time">2016-07-29 13:00 <span class="orders_num">X1</span></p>
+                  <p class="orders_come"><a href="">来自：阿奎介绍电话卡计算的话</a><span class="orders_sum">￥299</span></p>
+              </li>
+            </ul>
+        </div>
+        <div style="height:75px;"></div>
+    </div>
+</div>
+<include file="footer" />

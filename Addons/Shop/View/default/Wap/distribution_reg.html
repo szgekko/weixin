@@ -1,0 +1,98 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+        <div class="fx_pic">
+            <img src="Addons/Shop/View/default/Wap/Template/jd/Public/fx_pic.jpg">
+        </div>
+        <div class="fx_reg">
+            <p>欢迎加入<span>{$shop_name}</span>，请填写申请信息！</p>
+            <form id="form">
+                <dl>
+                    <dd>
+                       <input type="text" name="truename" placeholder="请填写真实姓名,用于佣金结算" /> 
+                    </dd>
+                    <dd>
+                       <input type="text" name="mobile" placeholder="请填写手机号码方便联系" /> 
+                    </dd>
+                    <dd>
+                       <input type="text" name="wechat" placeholder="请填写微信号" /> 
+                    </dd>
+                     <dd>
+                        <input type="text" name="inviter" placeholder="请填写邀请人" />
+                    </dd>
+                    <dd>
+                    	<input type="hidden" name="shop_id" value="{$_GET['shop_id']}" />
+                        <a class="btn" href="javascript:;" onclick="do_reg()">申请成为分销商</a>
+                    </dd>
+                </dl>
+            </form>
+        </div>
+        <div class="fx_reg_spec">
+            <p>分销商特权</p>
+            <ul>
+                <li>
+                    <em class="icon_wd"></em>
+                    <h4>独立微店</h4>
+                    <span>拥有自己的微店及推广二维码；</span>
+                </li>
+                <li>
+                    <em class="icon_xs"></em>
+                    <h4>销售拿佣金</h4>
+                    <span>微店卖出商品，您可以获得佣金；</span>
+                </li>
+                <li>
+                    <span>分销商的商品销售统一由厂家直接收款，直接发货，并提供产品的售后服务，分销佣金由厂家统一设置。</span>
+                </li>
+            </ul>
+        </div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+	imgUrl:'{$shop.logo}'
+});
+	function do_reg(){
+		var username=$("input[name='truename']").val();
+		var mobile=$("input[name='mobile']").val();
+		var wechat = $("input[name='wechat']").val();
+		var inviter = $("input[name='inviter']").val();
+		if(!username){
+			$.Dialog.fail('请填写真实姓名');
+			return false;
+		}
+		if(!mobile){
+			$.Dialog.fail('请填写手机号');
+			return false;
+		}
+		var re= /^1[0-9]{10}$/;
+		if(!re.test(mobile)){
+			$.Dialog.fail('请填写正确的手机');
+			return false;
+		}
+		if(!wechat){
+			$.Dialog.fail('请填写微信号');
+			return false;
+		}
+		if(!inviter){
+			$.Dialog.fail('请填写邀请人');
+			return false;
+		}
+		var data=$("#form").serialize();
+		$.post("{:U('distribution_reg')}",data,function(res){
+			if(res.result == 1){
+				$.Dialog.success(res.msg);
+				window.location.href=res.jurl;
+			}else{
+				$.Dialog.fail(res.msg);
+			}
+		})
+		
+	}
+</script>

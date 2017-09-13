@@ -1,0 +1,89 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div id="container" class="container">
+		<div class="">
+        	<img width="100%" style="display:block" src="{$info.cover|get_cover_url}"/>
+        </div>
+        <div class="main_bar">
+        	<if condition="$is_over eq 0">
+            	<p>距离活动结束还有</p>
+            	<div id="runCountDown" class="timer" data-time="{$left_time}">
+                    <div class="left"><span class="day">0</span>天</div>
+                    <div class="left"><span class="hour">0</span>小时</div>
+                    <div class="left"><span class="min">0</span>分</div>
+                    <div class="left"><span class="sec">0</span>秒</div>
+                </div>
+            <elseif condition="$is_over eq 2" />
+            	<p>距离活动开始还有</p>
+            	<div id="runCountDown" class="timer" data-time="{$left_time}">
+                    <div class="left"><span class="day">0</span>天</div>
+                    <div class="left"><span class="hour">0</span>小时</div>
+                    <div class="left"><span class="min">0</span>分</div>
+                    <div class="left"><span class="sec">0</span>秒</div>
+                </div>
+            <else />
+            	<p class="end_tips"><img src="__IMG__/cry.png"/>抱歉，您来慢了~活动已结束</p>
+            </if>
+        </div>
+        <div class="intro_btn">
+        	<a href="javascript:;" onClick="$('.seckill_content').show();">[活动说明]</a>
+        </div>
+        <div class="seckill_content" style="display:none">
+        	<a class="close" href="javascript:;" onClick="$('.seckill_content').hide();"></a>
+        	<div class="content">
+            	{$info.content}
+            </div>
+        </div>
+        <div class="goods_list">
+        	<notempty name="goodsList">
+                <ul>
+                	<volist name="goodsList" id="vo">
+                    	<li>
+                    		<eq name="vo.can_jamp" value="1">
+                        	<a href="{:addons_url('Shop://Wap/detail',array('shop_id'=>$shopInfo['id'],'id'=>$vo['goods_id'],'seckill_id'=>$vo['seckill_id']))}">
+                        	<else/>
+                        	<a href="###">
+                        	</eq>
+                            	<p class="title">{$vo.seckill_title}</p>
+                            	<img  class="init_square"  src="{$vo.goods_info.cover|get_cover_url=300,300}"/>
+                                <p class="info">
+                                	<span class="seckill_price">抢购价：<span>￥{$vo.seckill_price}</span></span>
+                                    <span class="market_price">参考价：<span>￥{$vo.goods_info.market_price}</span></span>
+                                    <if condition="$is_over eq 1">
+                                        <span class="buy buy_gray">活动已结束</span>
+                                    <elseif condition="$is_over eq 2" />
+                                     	<span class="buy buy_gray">活动未开始</span>
+                                    <else />
+                                    	<if condition="$vo['seckill_count'] eq 0">
+                                            <span class="buy buy_gray">已被抢光</span>
+                                        <else />
+                                            <span class="buy">立即抢购</span>
+                                            
+                                        </if>
+                                    	
+                                    </if>
+                                </p>
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+            <else/>
+            	<p>抱歉~~ 店家还没有设置秒杀商品</p>
+            </notempty>
+        </div>
+        <p class="copyright">{$system_copy_right}{$tongji_code}</p>
+    </div>
+    
+    <script>
+	//分享
+	$.WeiPHP.initWxShare({
+		title:'{$info.title}',
+		desc:'{$info.title}',
+		link:"{:U('index',array('id'=>$info['id'],'publicid'=>$public_info['id']))}",
+		imgUrl:'{$info.cover|get_cover_url}'
+	});
+	</script>
+    <include file="Public/mobile_foot"/>
+</body>
+</html>

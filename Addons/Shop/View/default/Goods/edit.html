@@ -1,0 +1,1138 @@
+<extend name="Base/common" />
+<block name="body">
+  
+  <!-- 标签页导航 -->
+  
+  <div class="span9 page_message">
+    <section id="contents">
+    <include file="Addons/_nav" />
+    <div class="tab-content">
+    <!-- 表单 -->
+    <php> $post_url || $post_url = U('edit?model='.$model['id'], $get_param);</php>
+    <form id="form" action="{:$post_url}" method="post" class="form-horizontal form-center" style="width:1000px">
+     
+      <div class="field_group">
+      <h3>基本信息</h3>
+<!--       	<div class="form-item cf toggle-category_id"> -->
+<!--           <label class="item-label"> <span class="need_flag">*</span>商品分类 <span class="check-tips"> -->
+<!--             <notempty name="field['remark']">（{$field['remark']}）</notempty> -->
+<!--             </span></label> -->
+<!--           <div class="controls"> -->
+<!--             <div id="cascade_category_id"></div> -->
+<!--             {:hook('cascade', array('name'=>'category_id','value'=>$data['category_id'],'extra'=>'type=db&table=shop_goods_category'))} </div> -->
+<!--         </div> -->
+        
+          <div style="margin:15px 0;" class="data-table">
+            <table cellspacing="1" cellpadding="0">
+              <thead>
+                <tr>
+                  <th width="80" colspan='3'> <span class="need_flag">*</span>商品分类</th>
+                </tr>
+              </thead>
+              <tbody id="list_data_tbody">
+              <volist name="cate_list" id="cd">
+                <tr class="list_tr" data-sort="{$cd.sort}">
+                  <td align="center"><span class="td_key">分类{$cd.sort}</span></td>
+                  <td>
+                  <notempty name="cate_data.first">
+              			<select name="cate_first[{$cd.sort}]" class='class_first' data-sort='{$cd.sort}' onchange="select_cate(this)">
+              				<volist name="cate_data.first" id="vo">
+              					<option value="{$vo.id}" <if condition="$vo[id] eq $cd[category_first]" >selected</if>>{$vo.title}</option>
+              				</volist>
+              			</select>
+              			
+              			<volist name="cate_data.first" id="vo">
+              				<select class='class_second_{$cd.sort}' name="cate_second[{$cd.sort}]" id="cate_second_{$vo.id}_{$cd.sort}" data-count="{:count($cate_data['second'][$vo['id']])}"  style="display:none;">
+              					<php>
+              						$fid=$vo['id'];
+              						if($cate_data['second'][$fid]){
+              							foreach($cate_data['second'][$fid] as $dd){
+              								if($dd['id'] == $cd['category_second']){
+              									echo '<option value="'.$dd['id'].'" selected="selected">'.$dd['title'].'</option>';
+              								}else{
+              									echo '<option value="'.$dd['id'].'" >'.$dd['title'].'</option>';
+              								}
+
+              							}
+              						}
+              					</php>
+              				</select>
+              			</volist>
+              			<input type='hidden' name="select_cate_second[{$cd.sort}]" id="select_cate_second_{$cd.sort}" value='{$cd。category_second}'/>
+              		</notempty>
+              		
+                      </td>
+                   <td>
+                      <input type="hidden" name="cate_ids[{$cd.sort}]" value="{$cd.id}" />
+                      <a href="javascript:void(0);" onclick="remove_tr(this)">删除</a>
+                   </td> 
+                </tr>
+              </volist>
+                <tr class="more_tr">
+                  <td colspan='3'><a href="javascript:add_tr()">+增加分类</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <php>$field = $fields['type'];</php>
+       <!--  <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+            <volist name=":parse_field_attr($field['extra'])" id="vo">
+              <div class="check-item"> 
+                [if !IE]><! 
+                <input type="radio" class="regular-radio toggle-data" value="{$key}" id="{$field.name}_{$key}" name="{$field.name}" toggle-data="{$vo|get_hide_attr}"
+                
+                <eq name="data[$field['name']]" value="$key">checked="checked"</eq>
+                />
+                <label for="{$field.name}_{$key}"></label>
+                {$vo|clean_hide_attr} 
+                <![endif] 
+                [if IE]>
+							       <input type="radio" value="{$key}" 
+								   id="{$field.name}_{$key}" name="{$field.name}" class="toggle-data" toggle-data="{$vo|get_hide_attr}"
+								  <eq name="data[$field['name']]" value="$key">checked="checked"</eq>/> 
+								  <label for="{$field.name}_{$key}"></label>{$vo|clean_hide_attr}
+							   <![endif] 
+              </div>
+            </volist>
+          </div>
+        </div> -->
+        
+        <php>$field = $fields['type'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            商品类型</label>
+          <div class="controls">
+
+              <div class="check-item"> 
+                <input type="radio" class="regular-radio toggle-data" value="0" id="{$field.name}_0" name="{$field.name}" <eq name='data.type|intval' value='0'>checked=checked</eq> />
+                <label for="{$field.name}_0"></label>
+                实物
+              </div>
+              <div class="check-item"> 
+                <input type="radio" class="regular-radio toggle-data" value="1" id="{$field.name}_1" name="{$field.name}" <eq name='data.type|intval' value='1'>checked=checked</eq> />
+                <label for="{$field.name}_1"></label>
+                软件<span class="check-tips">（可下载）</span>
+              </div>
+              <div class="check-item"> 
+                <input type="radio" class="regular-radio toggle-data" value="2" id="{$field.name}_2" name="{$field.name}" <eq name='data.type|intval' value='2'>checked=checked</eq> />
+                <label for="{$field.name}_2"></label>
+                点卡
+              </div>
+
+          </div>
+        </div>
+
+        <php>$field = $fields['is_recommend'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+            <volist name=":parse_field_attr($field['extra'])" id="vo">
+              <div class="check-item"> 
+                <input type="radio" class="regular-radio toggle-data" value="{$key}" id="{$field.name}_{$key}" name="{$field.name}" toggle-data="{$vo|get_hide_attr}"
+								  
+                
+                <eq name="data[$field['name']]" value="$key">checked="checked"</eq>
+                />
+                <label for="{$field.name}_{$key}"></label>
+                {$vo|clean_hide_attr} 
+              </div>
+            </volist>
+          </div>
+        </div>
+        
+      </div>
+      
+       <div class="field_group" id='shop_store'>
+      <h3>所属门店<span style="margin-left: 8px; color: #aaa; font-weight: normal;">（此库存仅用于用户购买商品时判断，与下面商品库存无关）</span></h3>
+        <php>$field = $fields['title'];</php>
+        <div class="form-item cf toggle-parm">
+          <div class="data-table">
+          	<div id='all_store_list' style="display:none">
+          	<notempty name="store_data">
+                  		<select >
+                  			<volist name="store_data" id="ss">
+                  				<option value="{$key}" >{$ss}</option>
+                  			</volist>
+                  		</select>
+                  	<else/>
+                  	<a href="{:addons_url('Coupon://Shop/lists')}&mdm=3743|3764" style="font-size: 12px;color:#aaa;margin-left:10px;">没还有创建门店，点击创建</a>
+                  	</notempty>
+          	</div>       
+            <table cellspacing="1" style="width:auto;">
+              <thead>
+                <tr>
+                <th></th>
+                  <th>门店名<span style="font-size: 12px;color:#aaa;margin-left:10px;">(<a href="{:addons_url('Coupon://Shop/lists')}&mdm=3743|3764" target='_blank'>进入门店列表</a>)</span></th>
+                  <th>库存数</th>
+                </tr>
+              </thead>
+              
+              <notempty name="store_data">
+              	<volist name="store_data" id="ss">
+              	<tr >
+              		<td><input type="checkbox" name="goods_store_title[{$key}]" value="{$key}" <if condition="$store_lists[$key]">checked=checked</if> /></td>
+              		<td>{$ss}</td>
+              		<td><input type="text" class="text" name="goods_store_num[{$key}]" value="{$store_lists[$key]['store_num']|intval}" style="width:120px;margin-bottom:0;"></td>
+              	</tr>
+              	</volist>
+              </notempty>
+              
+              
+              
+              <!-- <tbody id="item-store" style="display:none">
+                <notempty name="store_lists" >
+                
+                 <volist name="store_lists" id="pp">
+                 <tr  class="item-tr">
+                  <td>
+                  	<notempty name="store_data">
+                  		<select name="goods_store_title[{$pp.id}]">
+                  			<volist name="store_data" id="ss">
+                  				<option value="{$key}" <if condition="$key eq $pp['store_id']">selected=selected</if>>{$ss}</option>
+                  			</volist>
+                  		</select>
+                  	<else/>
+                  	<a href="{:addons_url('Coupon://Shop/lists')}" style="font-size: 12px;color:#aaa;margin-left:10px;">没还有创建门店，点击创建</a>
+                  	</notempty>
+                  </td>
+                  <td><input type="text" class="text" name="goods_store_num[{$pp.id}]" value="{$pp.store_num}" style="width:120px;margin-bottom:0;"></td>
+                  <td><a class="border-btn" href="javascript:;" onClick="delStore(this);">删除</a></td>
+                    </tr>
+                  </volist>
+                  <else />
+                   <tr  class="item-tr">
+                   <td>
+                  	<notempty name="store_data">
+                  		<select name="goods_store_title[-1]">
+                  			<volist name="store_data" id="ss">
+                  				<option value="{$key}">{$ss}</option>
+                  			</volist>
+                  		</select>
+                  	<else/>
+                  	<a href="{:addons_url('Coupon://Shop/lists')}" style="font-size: 12px;color:#aaa;margin-left:10px;">没还有创建门店，点击创建</a>
+                  	</notempty>
+                  </td>
+                  <td><input type="text" class="text" name="goods_store_num[-1]" value="" style="width:120px;margin-bottom:0;"></td>
+                  <td><a class="border-btn" href="javascript:;" onClick="delStore(this);">删除</a></td>                  
+                   </tr>
+                  </notempty>
+             
+              </tbody> -->
+            </table>
+          </div>
+        </div>
+<!--         <a id="addStoreBtn" class="btn" href="javascript:;" style="margin:15px 0 0 30px;">添加所属门店</a>       -->
+      </div> 
+      
+      
+      <div class="field_group">
+      <h3>规格 / 库存</h3>
+      	<!-- 规格 -->
+        <div class="check-item"> 
+          <input type="radio" class="regular-radio toggle-data" value="0" id="is_spec_0" name="is_spec" <eq name='data.is_spec|intval' value='0'>checked="checked"</eq> />
+          <label for="is_spec_0"></label>
+          无规格商品
+        </div>
+        <div class="check-item" id='has_spec'> 
+          <input type="radio" class="regular-radio toggle-data" value="1" id="is_spec_1" name="is_spec"  <eq name='data.is_spec|intval' value='1'>checked="checked"</eq> />
+          <label for="is_spec_1"></label>
+          有规格商品
+        </div>
+
+         <div class="form-item cf toggle-spec" style="display:none;margin-top:10px;">
+          <label class="item-label">
+            商品规格<span class="check-tips">
+            <empty name="field['remark']">（请先选择好商品规格类型，再填写规格各类型对应的数据！！！规格类型最多只能添加三种，无规格可不添加！！！）</empty>
+            </span></label>
+          <div class="spec_container">
+          		<!-- 编辑和添加均有此spec_item_default -->
+          		<div class="spec_item_default" style="display:none">
+                	<div class="select_spec_div">
+                        <select name="spec_id[]" onChange="loadSpecInfo(this);">
+                        	<option value="0">选择规格</option>
+                            <volist name="spec_list" id="vo">
+                            <option value="{$vo.id}">{$vo.title}</option>
+                            </volist>
+                        </select>
+                        <a class="border-btn" style="vertical-align:5px;" href="javascript:;" onClick="delSpec(this);">删除</a>
+                    </div>
+                    <div class="spec_info">
+                    </div>
+                </div>
+                <!-- 编辑时默认填充 -->
+                <volist name="spec_config" id="cf">
+                <div class="spec_item">
+                	<div class="select_spec_div">
+                        <select name="spec_id[]" onChange="loadSpecInfo(this);" class="defualt_spec_div">
+                        	<option value="0">选择规格</option>
+                            <volist name="spec_list" id="vo">
+                            <option value="{$vo.id}" <if condition="$vo[id]==$cf[spec_id]">selected="selected"</if> >{$vo.title}</option>
+                            </volist>
+                        </select>
+                        <a class="border-btn" style="vertical-align:5px;" href="javascript:;" onClick="delSpec(this);">删除</a>
+                    </div>
+                    
+                    <div class="spec_info">
+                    </div>
+                </div>
+               </volist>
+               
+          		<a id="addSpecBtn" class="btn" href="javascript:;" onClick="addSpec()">添加规格项目</a>
+          </div>
+          <div class="data-table" style="margin:15px 0;" id="specTable">
+          </div>
+        </div>
+        <!-- 规格 end -->
+        <div class="form-item-spec">
+        <php>$field = $fields['stock_num'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default=0}">
+          </div>
+        </div>
+        <php>$field = $fields['sn_code'];</php>
+        <!-- <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+          </div>
+        </div> -->
+        <php>$field = $fields['cost_price'];</php>
+<!--         <div class="form-item cf toggle-{$field.name}"> -->
+<!--           <label class="item-label"> -->
+<!--             <notempty name="field.is_must"><span class="need_flag">*</span></notempty> -->
+<!--             {$field['title']} <span class="check-tips"> -->
+<!--             <notempty name="field['remark']">（{$field['remark']}）</notempty> -->
+<!--             </span></label> -->
+<!--           <div class="controls"> -->
+<!--            <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default='0.00'}"> -->
+<!--           </div> -->
+<!--         </div> -->
+         <php>$field = $fields['market_price'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default='0.00'}">
+          </div>
+        </div>
+         <php>$field = $fields['sale_price'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default='0.00'}">
+          </div>
+        </div>    
+        </div>
+         <php>$field = $fields['reduce_score'];</php>
+        <!-- <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default='0.00'}">
+          </div>
+        </div>    -->
+        
+        <php>$field = $fields['distribution_price'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]|default='0.00'}">
+          </div>
+        </div> 
+            
+      </div>
+      
+      <div class="field_group">
+      <h3>商品信息</h3>
+      	<php>$field = $fields['title'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+          </div>
+        </div>
+
+        <php>$field = $fields['weight'];</php>
+        <!-- <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+          </div>
+        </div> -->
+        <php>$field = $fields['imgs'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+        	 <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+              <div class="mult_imgs">
+                                <div class="upload-img-view" id='mutl_picture_{$field.name}'>
+                                  <notempty name="data[$field['name']]">
+                                  	<volist name="data[$field['name']]" id="vo">
+                                    <div class="upload-pre-item22">
+                                    <img width="100" height="100" src="{$vo|get_cover_url}"/>
+                                    <input type="hidden" name="{$field.name}[]" value="{$vo}"/>
+                                    <em>&nbsp;</em>
+                                    </div>
+                                    </volist>
+                                  </notempty>
+                                </div>
+                                <div class="controls uploadrow2 mult" data-max="9"  title="点击上传图片" rel="{$field.name}">
+                                  <input type="file"  id="upload_picture_{$field.name}">
+                                </div>
+                            </div>
+        </div>
+          <php>$field = $fields['file_url'];</php>
+         <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <span class="need_flag">*</span>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+           <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+          </div>
+        </div>
+<!--             $field = $fields['card_code'];dump($field); -->
+            <br/>
+         <div class="form-item cf toggle-card_code">
+          <label class="item-label">
+            <span class="need_flag">*</span>
+            点卡序列码<span class="check-tips">
+          (  每个序列号之间用回车换行隔开  <empty name="data.id">，保存商品后编辑商品时可进行多条数据导入&nbsp; </empty>)
+            </span></label>
+            <notempty name="data.id">
+            <div style="padding: 5px 5px 10px 5px;">
+<!--              <a class="btn" href="{:U('import',array('goods_id'=>$data['id'],'mdm'=>$_GET['mdm']))}" target="_blank">导入序列号</a> -->
+            <a class="btn" onclick="$.WeiPHP.openSubmitDialog('导入序列号','{:U('import',array('goods_id'=>$data['id']))}',600,400)" href="javascript:;">导入序列号</a>
+<!--              <a class="btn" href="javascript:;" onclick="do_refresh_code({$data.id});">刷新序列号</a> -->
+            </div>
+            </notempty>
+           <label class="textarea input-large">
+             <textarea name="card_code" id="code_card">{$data['card_code']}</textarea>
+           </label>
+        </div>
+           
+         
+        <php>$field = $fields['is_new'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+          <volist name=":parse_field_attr($field['extra'])" id="vo">
+                          	<div class="check-item">
+                              <input type="checkbox" class="regular-checkbox toggle-data" value="{$key}" id="{$field.name}_{$key}" name="{$field.name}[]" toggle-data="{$vo|get_hide_attr}"
+                              <in name="key" value="$data[$field['name']]" >checked="checked"</in> >
+                              <label for="{$field.name}_{$key}"></label>{$vo|clean_hide_attr} 
+                             </div>
+                          </volist>
+<!--            <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}"> -->
+          </div>
+        </div>
+       
+            
+         <php>$field = $fields['can_deposit'];</php>
+        <div class="form-item cf toggle-{$field.name}">
+          <label class="item-label">
+            <notempty name="field.is_must"><span class="need_flag">*</span></notempty>
+            {$field['title']} <span class="check-tips">
+            <notempty name="field['remark']">（{$field['remark']}）</notempty>
+            </span></label>
+          <div class="controls">
+          <volist name=":parse_field_attr($field['extra'])" id="vo">
+                          	<div class="check-item">
+							<!--[if !IE]><!-->  
+								  <input type="radio" class="regular-radio toggle-data" value="{$key}" id="{$field.name}_{$key}" name="{$field.name}" toggle-data="{$vo|get_hide_attr}"
+								  <eq name="data[$field['name']]" value="$key">checked="checked"</eq> />
+								  <label for="{$field.name}_{$key}"></label>{$vo|clean_hide_attr} 
+							  <!--<![endif]-->
+							   <!--[if IE]>
+							       <input type="radio" value="{$key}" 
+								   id="{$field.name}_{$key}" name="{$field.name}" class="toggle-data" toggle-data="{$vo|get_hide_attr}"
+								  <eq name="data[$field['name']]" value="$key">checked="checked"</eq>/> 
+								  <label for="{$field.name}_{$key}"></label>{$vo|clean_hide_attr}
+							   <![endif]-->
+                             </div>
+                          </volist>
+<!--            <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}"> -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="field_group">
+      <h3>详细参数</h3>
+        <div class="form-item cf toggle-parm">
+          <div class="data-table">            
+            <table cellspacing="1" style="width:auto;">
+              <thead>
+                <tr>
+                  <th>参数名<span style="font-size: 12px;color:#aaa;margin-left:10px;">(冒号系统自动生成)</span></th>
+                  <th>参数值</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="item-parm">
+                <notempty name="param_lists" >
+                
+                 <volist name="param_lists" id="pp">
+                 <tr  id="item-tr">
+                  <td><input type="text" class="text" name="goods_param_title[{$pp.id}]" value="{$pp.title}" style="width:120px;margin-bottom:0;"></td>
+                  <td><input type="text" class="text" name="goods_param_value[{$pp.id}]" value="{$pp.param_value}" style="width:120px;margin-bottom:0;"></td>
+                  <td><a class="border-btn" href="javascript:;" onClick="delParm(this);">删除</a></td>
+                    </tr>
+                  </volist>
+                  <else />
+                   <tr  id="item-tr">
+                  <td><input type="text" class="text" name="goods_param_title[-1]" value="" style="width:120px;margin-bottom:0;"></td>
+                  <td><input type="text" class="text" name="goods_param_value[-1]" value="" style="width:120px;margin-bottom:0;"></td>
+                  <td><a class="border-btn" href="javascript:;" onClick="delParm(this);">删除</a></td>                  
+                   </tr>
+                  </notempty>
+             
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <a id="addParmBtn" class="btn" href="javascript:;" style="margin:15px 0 0 30px;">添加参数</a>      
+      </div> 
+       
+           
+      <div id="extra_fields"></div>
+      <!-- flied item end -->
+      </div>
+      <div class="form-item form_bh" style="text-align:center">
+        <notempty name="data.id">
+          <input type="hidden" name="id" value="{$data.id}">
+        </notempty>
+
+        <input type="hidden" name="is_show" value="{$data.is_show}" />
+        <button class="btn submit-btn ajax-post"  type="button" target-form="form-horizontal" onclick="do_submit(1)">{$submit_name|default='直接上架'}</button>
+        <button class="btn submit-btn ajax-post"  type="button" target-form="form-horizontal" onclick="do_submit(2)">{$submit_name|default='仅保存至待上架'}</button>
+
+      </div>
+    </form>
+    <table style="display:none">
+<tr id="default_tr" >
+                  <td align="center"><span class="td_key">分类sort_id_cn</span></td>
+                  <td>
+                   <notempty name="cate_data.first">
+              			<select name="cate_first[sort_id]" class='class_first' data-sort='sort_id' onchange="select_cate(this,sort_id)">
+              				<volist name="cate_data.first" id="vo">
+              					<option value="{$vo.id}">{$vo.title}</option>
+              				</volist>
+              			</select>
+              			
+              			<volist name="cate_data.first" id="vo">
+              				<select class='class_second_sort_id' name="cate_second[sort_id]" id="cate_second_{$vo.id}_sort_id" data-count="{:count($cate_data['second'][$vo['id']])}" style="display:none;">
+              					<php>
+              						$fid=$vo['id'];
+              						if($cate_data['second'][$fid]){
+              							foreach($cate_data['second'][$fid] as $dd){
+              									echo '<option value="'.$dd['id'].'" >'.$dd['title'].'</option>';
+              							}
+              						}
+              					</php>
+              				</select>
+              			</volist>
+              			<input type='hidden' name="select_cate_second[sort_id]" id="select_cate_second_sort_id" value=''/>
+              		<else/>
+              		<input type='hidden' name='no_cate' value='1' />
+              		</notempty>
+                      </td>
+                      <td>
+                      <input type="hidden" name="cate_ids[sort_id]" value="" />
+                      <a href="javascript:void(0);" onclick="remove_tr(this)">删除</a>
+                      </td>
+</tr> </table>   
+            
+  </div>
+  </section>
+  
+  </div>
+</block>
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<php>
+
+if(C('COLOR_STYLE')=='blue_color') echo '
+<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+';
+</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v={:SITE_VERSION}" charset="UTF-8"></script> 
+<script type="text/javascript">
+
+function do_submit(is_show){
+	$("input[name='is_show']").val(is_show);
+// 	$("#form").submit();
+	var url=$("#form").attr("action");
+	var data=$("#form").serialize();
+	$.post(url,data,function(res){
+		if(res.status == 1){
+			updateAlert(res.info + ' 页面即将自动跳转~','alert-success');
+			setTimeout(function(){
+				if (res.url) {
+					location.href=res.url;
+				}else{
+					location.reload();
+				}
+			},1500);
+		}else{
+			updateAlert(res.info ,'alert-error');
+		}
+		
+	})
+}
+$('.class_first').each(function(){
+	$(this).change(function(){
+		var sort_id=$(this).data('sort');
+		var catefid=$(this).val();
+		changeCate(catefid,sort_id);
+	});
+	var sort_id=$(this).data('sort');
+	var catefid=$(this).val();
+	changeCate(catefid,sort_id);
+});
+function select_cate(_this,sort_id){
+	var val = $(_this).val();
+	changeCate(val,sort_id);
+}
+function changeCate(fid,sort_id){
+	$('.class_second_'+sort_id).hide();
+	$('#cate_second_'+fid+'_'+sort_id).show();
+	var sfcid=$('#cate_second_'+fid+'_'+sort_id+' option:selected').val();
+	var dataCount=$('#cate_second_'+fid+'_'+sort_id).attr('data-count');
+	if(parseInt(dataCount) <=0){
+		$('#cate_second_'+fid+'_'+sort_id).hide();
+	}
+	$("#select_cate_second_"+sort_id).val(sfcid);
+	$('#cate_second_'+fid+'_'+sort_id).change(function(){
+		var sval=$(this).val();
+		$("#select_cate_second_"+sort_id).val(sval);
+	});
+}
+function add_tr(){
+	var no_cate=$("input[name='no_cate']").val();
+	if(no_cate == 1){
+		if(confirm('还没有商品分类，前往添加')){
+			window.location.href="{:addons_url('Shop://Category/lists')}&mdm=266|366";
+			return false;
+		}else{
+			return false;
+		}		
+	}
+	var count = 1;
+// 	$('.list_tr').each(function() {
+//         count += 1;
+//     });	
+var  aTr =$('#list_data_tbody tr').size();
+	if(aTr>1){
+		var last_count=$('#list_data_tbody').find('tr').eq(-2).attr('data-sort')
+		count= parseInt(last_count)+1;
+		//console.log(count);		
+	}
+	 re = new RegExp("sort_id", "g");
+	 str  = $('#default_tr').html().replace(/sort_id_cn/g, Chinese(count)).replace(re, count);
+	//console.log(str);
+	var html = '<tr class="list_tr" data-sort="'+count+'">'+ str +'</tr>';
+	if(count==1)
+	  $('#list_data_tbody tr').before(html);	
+	else
+	  $('.list_tr:last').after(html);
+}
+function remove_tr(_this){	
+	$(_this).parent().parent().remove();
+	
+	var count = 0;
+	$('.td_key').each(function() {
+      if(count>1){         
+		    count = count + 1;
+        $(this).html('分类'+count);       
+        } 
+    });	
+}
+//添加规格
+function addSpec(){
+	
+	var $item = $('<div class="spec_item">'+$('.spec_item_default').html()+'</div>');
+	$item.insertBefore($('#addSpecBtn'));
+	var specSize = $('.spec_item').size();
+	if(specSize==3){
+		$('#addSpecBtn').hide();	
+	}
+}
+function delSpec(_this){
+	$(_this).parents('.spec_item').remove();
+	var specSize = $('.spec_item').size();
+	if(specSize<3){
+		$('#addSpecBtn').show();	
+	}
+	initSpecTable();
+}
+function loadSpecInfo(_this){
+	var id = $(_this).val();
+	var getUrl = "{:U('getSpecInfo')}&id="+id+"&goods_id={$data.id}";
+	var container = $(_this).parents('.spec_item').find('.spec_info');
+	if(id==0){
+		container.html('');
+		return;	
+	}
+	var hasSelected = false;
+	$(_this).parents('.spec_item').siblings('.spec_item').find('select').each(function(index, element) {
+        if($(this).val()==id){
+			hasSelected = true;
+		}
+    });
+	if(hasSelected){
+		alert('该规格已经选择');
+		$(_this).val(0);
+		return;
+	}
+	container.html('加载属性中...');
+	$.get(getUrl,function(data){
+		
+		if(data.length>0){
+			container.html('');
+			for(var i=0;i<data.length;i++){
+				var info = data[i];
+				var specItem = $('<span class="spec_info_item">'+
+										 '<input onChange="initSpecTable();" '+info.checked+' type="checkbox" rel="'+info.name+'"  value="'+info.id+'" name="spec['+id+']['+info.id+']" id="spec['+id+']['+info.id+']" data-info-id="'+info.id+'"/>'+
+										 '<label for="spec['+id+']['+info.id+']">'+info.name+'</label>'+
+// 										 '<img onClick="addSpecInfoImg(this)" title="规格图片" src="'+info.img+'" data-max=1 rel="specImg_'+id+'_'+info.id+'" id="cover_id_specImg_'+id+'_'+info.id+'" data-callback="callbackimg"/>'+
+										'<input type="hidden" value="" name="specImg['+id+']['+info.id+']" id="input_specImg_'+id+'_'+info.id+'" />'+
+									'</span>');
+				container.append(specItem);
+			}
+			initSpecTable();			
+		}else{
+			container.html('该规格下还没有添加属性!请添加规格');
+		}
+	})
+}
+var specTableHeader =
+// 		'<th class="text-center">成本价（元）</th> ' +
+		'<th class="text-center"><span class="need_flag">*</span>市场价（元）</th> ' +
+		'<th class="text-center">促销价（元）</th> ' +
+		'<th class="text-center">库存</th> ' /*+
+		'<th class="text-center">商家编码</th> ';*/
+var specTableBody =
+// 		'<td><input type="text" maxlength="11" name="cost_price_arr" class="form-control" onblur="set_price(this);" value="0.00" /></td> ' +
+		'<td><input type="text" maxlength="11" name="market_price_arr" class="form-control" onblur="set_price(this);" value="0.00" /></td> ' +
+		'<td><input type="text" maxlength="11" name="sale_price_arr" class="form-control" onblur="set_price(this);" value="0.00" /></td> ' +
+		'<td><input type="text" maxlength="11" name="stock_num_arr" class="form-control  numclass" value="0" onblur="set_num(this)" /></td> ' /*+
+		'<td><input type="text" maxlength="11" name="sn_code_arr" class="form-control" value="" /></td> ';*/
+	
+function initSpecTable(){
+	var specValueArr = new Array();
+	var specArr = new Array();
+	$('.spec_item').each(function(index, specElem) {
+		var specObj = new Object();
+		specObj.id = $(specElem).find('select').val();
+		specObj.name = $(specElem).find('option:selected').text();
+		var specInfoArr = new Array();
+		$(specElem).find('.spec_info_item').each(function(index, infoElem) {
+			if($(infoElem).find('input').prop("checked")==true){
+			   var obj = new Object();
+			    obj.name = $(infoElem).find('input').attr('rel');
+				obj.id = $(infoElem).find('input').data('info-id');
+				specInfoArr.push(obj);
+			}
+        });
+		if(specInfoArr.length>0){
+			specArr.push(specObj);
+			specValueArr.push(specInfoArr);
+		}
+    });
+	//console.log(specValueArr);
+	if(specValueArr.length>0){
+		var specCount = specValueArr.length;
+		//初始化table head
+		var addHeader = "";
+		for(var key in specValueArr){
+			if(specArr[key].name!='') addHeader =  addHeader + '<th class="text-center">'+specArr[key].name+'</th>';
+		}
+		 //初始化table body
+		var tableTr = "";
+		if(specCount == 1){
+			tableTr = addSpecItemOne(specValueArr);
+		}else if(specCount == 2){
+			tableTr = addSpecItemTwo(specValueArr);
+		}else if(specCount == 3){
+			tableTr = addSpecItemThree(specValueArr);
+		}
+		//显示表格
+		$('#specTable').html('<table cellpadding="0" cellspacing="1">'+
+			'<thead>'+addHeader+specTableHeader+'</thead>'+
+			'<tbody>'+tableTr+'</tbody>'+
+          	'</table>');
+		initInputAttr();		
+		
+//		$('.toggle-stock_num').hide();
+//		$('.toggle-sn_code').hide();
+//		$('.toggle-cost_price').hide();
+//		$('.toggle-market_price').hide();
+//		$('.toggle-sale_price').hide();
+		
+// 		$('input[name="stock_num"]').prop('readonly',true);
+// 		$('input[name="sn_code"]').prop('readonly',true);
+// 		$('input[name="cost_price"]').prop('readonly',true);
+// 		$('input[name="market_price"]').prop('readonly',true);
+// 		$('input[name="sale_price"]').prop('readonly',true);
+	}else{
+		$('#specTable').html('');
+		
+//		$('.toggle-stock_num').show();
+//		$('.toggle-sn_code').show();
+//		$('.toggle-cost_price').show();
+//		$('.toggle-market_price').show();
+//		$('.toggle-sale_price').show();
+				
+// 		$('input[name="stock_num"]').prop('readonly',false);
+// 		$('input[name="sn_code"]').prop('readonly',false);
+// 		$('input[name="cost_price"]').prop('readonly',false);
+// 		$('input[name="market_price"]').prop('readonly',false);
+// 		$('input[name="sale_price"]').prop('readonly',false);
+	}
+
+}
+
+// 添加一级规格项目
+function addSpecItemOne(tableItems) {
+	var itemAppend = '';
+	for (var i = 0; i < tableItems[0].length; ++i) {
+		itemAppend += '<tr data-spec-value-id="'+tableItems[0][i].id+'"><td>' + tableItems[0][i].name + '</td>' + specTableBody + '</tr>';
+	}
+	return itemAppend;
+}
+
+// 添加二级规格项目
+function addSpecItemTwo(tableItems) {
+	var itemAppend = '';
+	var rowSpan = tableItems[1].length;
+	for (var i = 0; i < tableItems[0].length; ++i) {
+		if(tableItems[0][i].id > tableItems[1][0].id){
+			itemAppend += '<tr data-spec-value-id="'+tableItems[1][0].id+'_'+tableItems[0][i].id+'"><td rowspan="' + rowSpan + '">' + tableItems[0][i].name + '</td><td>' + tableItems[1][0].name + '</td>'+specTableBody + '</tr>';
+			for (var j = 1; j < tableItems[1].length; ++j) {
+				itemAppend += '<tr data-spec-value-id="'+tableItems[1][j].id+'_'+tableItems[0][i].id+'"><td>' + tableItems[1][j].name + '</td>' + specTableBody + '</tr>';
+			}
+		}else{
+			itemAppend += '<tr data-spec-value-id="'+tableItems[0][i].id+'_'+tableItems[1][0].id+'"><td rowspan="' + rowSpan + '">' + tableItems[0][i].name + '</td><td>' + tableItems[1][0].name + '</td>'+specTableBody + '</tr>';
+			for (var j = 1; j < tableItems[1].length; ++j) {
+				itemAppend += '<tr data-spec-value-id="'+tableItems[0][i].id+'_'+tableItems[1][j].id+'"><td>' + tableItems[1][j].name + '</td>' + specTableBody + '</tr>';
+			}
+		}
+	}
+	return itemAppend;
+}
+
+// 添加三级规格项目
+function addSpecItemThree(tableItems) {
+	var itemAppend = '';
+	var rowSpan = 0;
+	for (var i = 0; i < tableItems[0].length; ++i) {
+		rowSpan = tableItems[1].length * tableItems[2].length;
+		itemAppend += '<tr data-spec-value-id="'+tableItems[2][0].id+'_'+tableItems[1][0].id+'_'+tableItems[0][i].id+'"><td rowspan="' + rowSpan + '">' + tableItems[0][i].name + '</td>';
+		rowSpan = tableItems[2].length;
+		itemAppend += '<td rowspan="' + rowSpan + '">' + tableItems[1][0].name + '</td><td>' + tableItems[2][0].name + '</td>' + specTableBody + '</tr>';
+		for (var k = 1; k < tableItems[2].length; ++k) {
+			itemAppend += '<tr data-spec-value-id="'+tableItems[2][k].id+'_'+tableItems[1][0].id+'_'+tableItems[0][i].id+'"><td>' + tableItems[2][k].name + '</td>' + specTableBody + '</tr>';
+		}
+		for (var j = 1; j < tableItems[1].length; ++j) {
+			itemAppend += '<tr data-spec-value-id="'+tableItems[2][0].id+'_'+tableItems[1][j].id+'_'+tableItems[0][i].id+'"><td rowspan="' + rowSpan + '">' + tableItems[1][j].name + '</td><td>' + tableItems[2][0].name + '</td>' + specTableBody + '</tr>';
+			for (var k = 1; k < tableItems[2].length; ++k) {
+				itemAppend += '<tr data-spec-value-id="'+tableItems[2][k].id+'_'+tableItems[1][j].id+'_'+tableItems[0][i].id+'"><td>' + tableItems[2][k].name + '</td>' + specTableBody + '</tr>';
+			}
+		}
+	}
+	return itemAppend;
+}
+
+var goods_sku_data = <empty name="goods_sku_data">new Array()<else />{$goods_sku_data}</empty>;
+//console.log(goods_sku_data);
+//初始化sku input属性
+function initInputAttr(){
+	$('#specTable tr').each(function(index, element) {
+		var valueId = $(this).data('spec-value-id');
+    if(valueId== "undefined" || goods_sku_data==null || typeof(goods_sku_data[valueId])=="undefined"){
+      $(this).find('input[name="cost_price_arr"]').attr('name','cost_price_arr['+valueId+']');
+      $(this).find('input[name="sale_price_arr"]').attr('name','sale_price_arr['+valueId+']');
+      $(this).find('input[name="market_price_arr"]').attr('name','market_price_arr['+valueId+']');
+      $(this).find('input[name="stock_num_arr"]').attr('name','stock_num_arr['+valueId+']');
+      $(this).find('input[name="sn_code_arr"]').attr('name','sn_code_arr['+valueId+']');      
+    }else{
+			$(this).find('input[name="cost_price_arr"]').attr('name','cost_price_arr['+valueId+']').attr('value', goods_sku_data[valueId]['cost_price']);
+			$(this).find('input[name="sale_price_arr"]').attr('name','sale_price_arr['+valueId+']').attr('value', goods_sku_data[valueId]['sale_price']);
+			$(this).find('input[name="market_price_arr"]').attr('name','market_price_arr['+valueId+']').attr('value', goods_sku_data[valueId]['market_price']);
+			$(this).find('input[name="stock_num_arr"]').attr('name','stock_num_arr['+valueId+']').attr('value', goods_sku_data[valueId]['stock_num']);
+			$(this).find('input[name="sn_code_arr"]').attr('name','sn_code_arr['+valueId+']').attr('value', goods_sku_data[valueId]['sn_code']);
+		}
+    });
+}
+//添加属性图片
+function addSpecInfoImg(_this){
+	$.WeiPHP.uploadImgDialog(_this,{});
+	/*
+	1,function(data){
+	$(_this).parent().find('input[name*="specImg"]').val(data[0].id);
+	$(_this).attr('src',data[0].src);
+}
+	*/
+}
+function callbackimg(fieldName,picId,src){
+	$('#input_'+fieldName).val(picId);
+	$('#cover_id_'+fieldName).attr('src',src);
+}
+//加载筛选属性和普通属性
+function addExtraField(){
+	$('#extra_fields').html(' ');
+	var cids = $('#data_category_id').val();
+	var goods_id = "{$data.id}";
+	$.post("{:U('getExtraField')}",{cids:cids,goods_id:goods_id},function(html){
+		$('#extra_fields').html(html);
+	});
+}
+//TODO
+function set_price(_this){
+}
+function set_num(_this){
+	var num=0;
+	$('.numclass').each(function(){
+		var nn=parseInt($(this).val());
+		num = num+nn;
+	})
+	$("input[name='stock_num']").val(num);
+}
+function initSpecData(){
+	<volist name="goods_sku_data" id="vo">
+$('input[rel="cost_price_arr_{$vo.spec_option_ids}"]').val('{$vo.cost_price}');
+$('input[rel="market_price_arr_{$vo.spec_option_ids}"]').val('{$vo.market_price}');
+$('input[rel="sale_price_arr_{$vo.spec_option_ids}"]').val('{$vo.sale_price}');
+$('input[rel="stock_num_arr_{$vo.spec_option_ids}"]').val('{$vo.stock_num}');
+$('input[rel="sn_code_arr_{$vo.spec_option_ids}"]').val('{$vo.sn_code}');
+</volist>
+}
+
+$(function(){    
+	var UploadFileExts = "{$UploadFileExts}";
+	initUploadImg();
+	if(UploadFileExts!=""){
+		initUploadFile(function(){},UploadFileExts);
+	}else{
+		initUploadFile();
+	}
+
+	initSpecTable();
+	$('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:0,
+        autoclose:true
+    });
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });	
+    showTab();
+	
+	$('.toggle-data').each(function(){
+		var data = $(this).attr('toggle-data');
+		if(data=='') return true;		
+		
+	     if($(this).is(":selected") || $(this).is(":checked")){
+			 change_event(this)
+		 }
+	});
+	$('.defualt_spec_div').each(function(){
+		loadSpecInfo(this);
+	});
+	
+	$('.toggle-data').bind("click",function(){ change_event(this) });
+	$('#cascade_category_id').bind("change",function(){ addExtraField() });
+	addExtraField();
+
+	
+	
+});
+//添加参数
+$(function addParm(){
+/*	var i = 1;
+	$('#item-parm tr').each(function(){i++;});*/
+	   var id = -1;
+  $('#addParmBtn').click(function(){
+     id--
+	console.log(id);
+	var strhtml='<td><input type="text" class="text" name="goods_param_title['+id+']" value="" style="width:120px;margin-bottom:0;"></td><td><input type="text" class="text" name="goods_param_value['+id+']" value="" style="width:120px;margin-bottom:0;"></td>';
+  var $item = $('<tr>'+strhtml+'</tr>')
+  var $aDel = $('<td><a class="border-btn" href="javascript:;" onClick="delParm(this);">删除</a></td>') 
+  $item.appendTo($('#item-parm'));
+  $aDel.appendTo($item)
+  })
+})
+function delParm(_this){
+    $(_this).parents('tr').remove();
+}
+
+//添加所属门店
+$(function addStore(){
+	 var htmlstore='';
+	
+/*	var i = 1;
+	$('#item-parm tr').each(function(){i++;});*/
+	   var id = -1;
+  $('#addStoreBtn').click(function(){
+     id--;
+     htmlstore=$('#all_store_list select').html();
+     if(htmlstore == undefined){
+ 		htmlstore=$('#all_store_list').html();
+ 	}else{
+ 		htmlstore='<select name="goods_store_title['+id+']">'+htmlstore+'</select>';
+ 	}
+     
+	var strhtml='<td>'+htmlstore+'</td><td><input type="text" class="text" name="goods_store_num['+id+']" value="" style="width:120px;margin-bottom:0;"></td>';
+  var $item = $('<tr>'+strhtml+'</tr>')
+  var $aDel = $('<td><a class="border-btn" href="javascript:;" onClick="delStore(this);">删除</a></td>') 
+  $item.appendTo($('#item-store'));
+  $aDel.appendTo($item)
+  })
+})
+function delStore(_this){
+    $(_this).parents('tr').remove();
+}
+
+function Chinese(num){
+var N = [
+    "零", "一", "二", "三", "四", "五", "六", "七", "八", "九"
+];
+    var str = num.toString();
+    var len = num.toString().length;
+    var C_Num = [];
+    for(var i = 0; i < len; i++){
+        C_Num.push(N[str.charAt(i)]);
+    }
+    return C_Num.join('');
+} 
+//类型选择
+var type=parseInt($("input[name='type']:checked").val());
+show_param(type);
+$("input[name='type']").click(function(){
+	var type=parseInt($("input[name='type']:checked").val());
+	show_param(type)
+});
+function show_param(type){
+	if(type==1){
+		//软件
+		$("#shop_store").hide();
+		$(".toggle-can_deposit").hide();
+		$("#has_spec").hide();
+		$("input[name='is_spec']").eq(0).attr('checked','checked');
+		has_guige(0);
+		$(".toggle-file_url").show();
+		$(".toggle-card_code").hide();
+		$('input[name="stock_num"]').prop('readonly',false);
+	}else if(type==2){
+		//点卡
+		$("#shop_store").hide();
+		$(".toggle-can_deposit").hide();
+		$("#has_spec").hide();
+		$("input[name='is_spec']").eq(0).attr('checked','checked');
+		has_guige(0);
+		$(".toggle-file_url").hide();
+		$(".toggle-card_code").show();
+		$('input[name="stock_num"]').prop('readonly',true);
+	}else{
+		//实物
+		$("#shop_store").show();
+		$(".toggle-can_deposit").show();
+		$("#has_spec").show();
+		$(".toggle-file_url").hide();
+		$(".toggle-card_code").hide();
+		$('input[name="stock_num"]').prop('readonly',false);
+	}
+}
+//规格选择
+var is_spec = parseInt($("input[name='is_spec']:checked").val());
+has_guige(is_spec);
+$("input[name='is_spec']").click(function(){
+	var type=parseInt($("input[name='is_spec']:checked").val());
+	has_guige(type);
+});
+function has_guige(val){
+	if(val==1){
+		$('.toggle-spec').show();
+		$('.form-item-spec').hide();
+		$('input[name="stock_num"]').prop('readonly',true);
+		$('input[name="sn_code"]').prop('readonly',true);
+		$('input[name="cost_price"]').prop('readonly',true);
+		$('input[name="market_price"]').prop('readonly',true);
+		$('input[name="sale_price"]').prop('readonly',true);
+	}else{
+		$('.toggle-spec').hide();
+		$('.form-item-spec').show();
+		if(type != 2){
+			$('input[name="stock_num"]').prop('readonly',false);
+		}
+		$('input[name="sn_code"]').prop('readonly',false);
+		$('input[name="cost_price"]').prop('readonly',false);
+		$('input[name="market_price"]').prop('readonly',false);
+		$('input[name="sale_price"]').prop('readonly',false);
+	}
+	
+}
+function do_refresh_code(goodsid){
+	var url="{:U('ajax_get_code')}";
+	$.get(url,{'goods_id':goodsid},function(dd){
+		$("textarea[name='card_code']").val(dd['str_code']);
+		$("input[name='stock_num']").val(dd['num']);
+	});
+}
+</script>
+</block>

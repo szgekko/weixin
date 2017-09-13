@@ -1,0 +1,409 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body class="withFoot">
+    <div class="container">
+    <empty name="has_subscribe">
+        <div class="fixTop">
+                    <img src="{$shop.logo}" style="width: 42px;height: 46px;">
+                    <div class="fix_cont">
+                        <notempty name="is_duser">
+                            <p>来自好友<span style="color:#6c6;">{$is_duser|get_username}</span>的推荐</p>
+                            <p>关注公众号,享专属服务</p>
+                        <else/>
+                            <p>欢迎进入<span style="color:#6c6;">{$shop.title}</span></p>
+                            <p>关注公众号,享专属服务</p>
+                        </notempty>
+                    </div>
+                    <a class="btn small_btn" href="{:U('distribution_follow',array('shop_id'=>$shop_id))}">立即关注</a>
+        </div>
+        </empty>
+                <!-- 店标和名称 -->
+        <div class="shop_row" <empty name="has_subscribe"> style="margin-top:46px;" </empty> >
+            <notempty name="shop.logo"><span class="logo"><img src="{$shop.logo}"/></span></notempty>
+            <span class="title">{$shop.title}
+            <notempty name="me_is_duser"><em style="display: none;"></em></notempty>
+            </span>
+            <notempty name="show_my_shop"><a class="btn small_btn" href="{:U('index',array('shop_id'=>$shop_id,'uid'=>$show_my_shop))}">我的小店</a></notempty>
+        </div>
+    	<form class="search_form" action="{:U('lists',array('shop_id'=>$shop_id))}" method="get">
+        	<!-- <a href="{$indexurl}" class="back_icon">&nbsp;</a> -->
+            <input type="text" placeholder="输入关键字搜索商品" value="{:I('search_key')}" name="search_key" />
+            <button type="button" id="search" url="{:U('lists',array('shop_id'=>$shop_id))}"></button>
+            <div class="filterbtn">
+                <a href="javascript:;"></a>
+            </div>            
+        </form>
+        <!-- 侧边栏 -->
+        <div id="right_aside">
+            <div class="right_filter">
+                <div class="aside_main">
+                    <div class="aside_head">
+                        <button class="btn_clear">清 空</button>
+                        <span>共<span id='goods_count'></span>款</span>
+                        <button class="btn_sure" id='search_sure'>确 定</button>
+                    </div>
+                    <ul class="aside_type" id="is_new_type">
+                        <li <if condition="in_array(1,$new_arr)" >class="active"</if>><a href="javascript:;" data-typeid='1'>新品</a></li>
+                        <li <if condition="in_array(2,$new_arr)" >class="active"</if>><a href="javascript:;" data-typeid='2'>热销</a></li>
+                        <li <if condition="in_array(3,$new_arr)" >class="active"</if>><a href="javascript:;" data-typeid='3'>优惠</a></li>
+                    </ul>
+                    <div class="aside_cont">
+                        <ul>
+                        <!-- 一级分类 -->
+                        	<notempty name="top_lists">
+                        		<volist name="top_lists" id='tl'>
+                        		 <li id="right_quality_{$tl.id}"><a href="javascript:;" onClick="do_right_quality({$tl.id},'{$tl.title}')">{$tl.title}
+                                 <span class="quality_more" id="sub_cate_tit_{$tl.id}"><if condition="$cate_title_arr[$tl[id]]" >{$cate_title_arr[$tl[id]]}<else/>全部</if></span><i></i>
+                                 </a>
+                        		   <input type="hidden" name="category_ids[{$tl.id}]" id="sub_cate_ids_{$tl.id}" class='category_ids' value="{$cate_arr[$tl[id]]}"> 
+                        		   </li>
+                        		</volist>
+                        	</notempty>
+                           
+<!--                             <li id="right_type"><a href="javascript:;">款式</a></li> -->
+<!--                             <li id="right_price"><a href="javascript:;">价格</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 二级分类 -->
+            
+            <div class="right_quality">
+                 <div class="aside_head">
+                    <button class="btn_back">返 回</button>
+                    <span id="top_aside_title"></span>
+                    <button class="type_sure">确 定</button>
+                </div> 
+                <ul class="aside_type" id="sub_aside_type">
+<!--                     <li><a href="javascript:;">钻石</a></li> -->
+                </ul>                              
+            </div>
+            <!-- 款式 -->
+                    
+        </div>        
+        <div class="list_type">
+        <php>$okey=I('order_key','id'); $otype =I('order_type','desc'); $fotype = $otype=='desc'?'asc':'desc'; $cArr = array('desc'=>'sort_down','asc'=>'sort_up'); </php>
+            <a href='javascript:;' data-url="{:U('lists',array('shop_id'=>$shop_id,'order_key'=>'id','order_type'=>$fotype,'search_key'=>I('search_key'),'category_id'=>$category_id))}" onClick="dosort(this)">最新
+            <em class="icon_sort <php> if($okey=='id'){ echo $cArr[$otype]; } </php>">&nbsp;</em></a>
+            <a href='javascript:;' data-url="{:U('lists',array('shop_id'=>$shop_id,'order_key'=>'sale_price','order_type'=>$fotype,'search_key'=>I('search_key'),'category_id'=>$category_id))}" onClick="dosort(this)">价格
+            <em class="icon_sort <php> if($okey=='sale_price'){ echo $cArr[$otype]; } </php>">&nbsp;</em></a>
+            <a href='javascript:;' data-url="{:U('lists',array('shop_id'=>$shop_id,'order_key'=>'rank','order_type'=>$fotype,'search_key'=>I('search_key'),'category_id'=>$category_id))}" onClick="dosort(this)">热销
+            <em class="icon_sort <php> if($okey=='rank'){ echo $cArr[$otype]; } </php>">&nbsp;</em></a>
+            <a href='javascript:;' data-url="{:U('lists',array('shop_id'=>$shop_id,'order_key'=>'sale_count','order_type'=>$fotype,'search_key'=>I('search_key'),'category_id'=>$category_id))}" onClick="dosort(this)">销量
+            <em class="icon_sort <php> if($okey=='sale_count'){ echo $cArr[$otype]; } </php>">&nbsp;</em></a>
+            <notempty name="spec_list"><a href="javascript:;" onClick="$('.list_filter').show()">筛选</a></notempty>
+        </div>
+        <!-- 产品列表 -->
+        <div class="product_list">
+            <ul id="productContainer">
+            <volist name="goods_list" id="vo">
+            <if condition="$_GET['order_key'] eq 'sale_price'">
+            	 <li class="contentItem" data-lastid="{$vo.sale_price}" data-goodsids="{$vo.id}">
+            	<elseif condition="$_GET['order_key'] eq 'rank'" />
+            	 <li class="contentItem" data-lastid="{$vo.rank}" data-goodsids="{$vo.id}">
+            	<elseif condition="$_GET['order_key'] eq 'sale_count'" />
+            	 <li class="contentItem" data-lastid="{$vo.sale_count}" data-goodsids="{$vo.id}">
+            	<else/>
+            	 <li class="contentItem" data-lastid="{$vo.id}" data-goodsids="{$vo.id}">
+            </if>
+                        <a href="{:U('detail',array('shop_id'=>$shop_id,'id'=>$vo['id']))}">
+                            <img src="{$vo.cover|get_cover_url}"/>
+                            <div class="desc">
+                            	<p class="name">{$vo.title}</p>
+<!--                             	<p class="price">￥{$vo.market_price|wp_money_format}</p> -->
+                            	
+<if condition="(floatval($vo['sale_price']) gt 0) && (floatval($vo['sale_price']) neq floatval($vo['market_price']))">
+ 		<span class="price">￥{$vo.sale_price|wp_money_format}</span>  
+		<del class="price">￥{$vo.market_price|wp_money_format}</del> 
+<else/>
+ 	<span class="price">￥{$vo.market_price|wp_money_format}</span>  
+	<del style="display:none" class="price">￥{$vo.market_price|wp_money_format}</del> 
+
+ </if>
+                        
+                            	
+                            </div>
+                        </a>                    
+                </li>
+                </volist>
+            </ul>
+            <input type='hidden' name='last_id' value='{$lastId}' />
+        </div>
+        <div class="noMore">没有更多内容</div> 
+     	<div class="moreLoading"><em>&nbsp;</em>正在加载更多···</div>
+        
+        
+    </div>	
+    <!-- 筛选 -->
+    <div class="list_filter">
+    	<p class="main_title">筛选<a href="javascript:;" onClick="$(this).parents('.list_filter').hide();" class="close">&nbsp;</a></p>
+
+            <volist name="spec_list" id="spec">
+        	<div class="filter_block">
+            	<p class="title">{$spec.title}</p>
+                <div class="filter_items">
+                     <volist name="spec.options" id="op">
+                	  <span class="item">
+                	  	<input class="custom_check" id="item_{$op.id}" {$op.checked} name="option_ids[]" type="checkbox" value="{$op.id}" /><label for="item_{$op.id}"><em>&nbsp;</em>{$op.name}</label>
+                      </span>
+                      </volist>
+                </div>
+            </div>
+            </volist>
+            
+            <button type="button" class="btn" onClick="doChoose()">确定</button>
+    </div>
+    
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+    
+<script type="text/javascript">
+function doChoose(){
+	var ids = new Array();
+	$('.custom_check').each(function() {
+        var is_checked = $(this).is(":checked");
+		if(is_checked){
+			ids.push($(this).val());
+		}
+    });
+	
+	var url = window.location.href;
+	if( url.indexOf('?')>0 ){
+            url += '&option_ids=' + ids.join(',');
+     }else{
+            url += '?option_ids=' + ids.join(',');
+     }
+	 window.location.href = url;
+	//console.log(ids);
+}
+$(function(){
+	
+	var strNew=getNewStr();
+     var cateidstr=getCateIdStr();
+      
+// 	var __lastId = $('.contentItem').last().data('lastid');
+	var __lastId= $("input[name='last_id']").val();
+	var lastMaxId = $('.contentItem').data('lastid');
+	var __minId = $.WeiPHP.getListMinId('contentItem');
+	var __maxId = $.WeiPHP.getListMaxId('contentItem');
+	
+	var pageids='';
+	$('.contentItem').each(function(){
+		pageids+= $(this).data('goodsids')+',';
+	});
+	$.WeiPHP.initLoadMore({
+		"pageCount":10, //每次拉取的数量
+		"lastId": __lastId,//第一次加载的Id
+		"minId": __minId,//第一次加载的Id
+		"maxId": __maxId,//第一次加载的Id
+		"loadType" : 1,//0:页码加载  1:lastId加载
+		"pageids" : pageids,//所有加载商品编号
+		"loadUrl" : "{:U('product_model',array('lastId'=>$lastId,'shop_id'=>$shop_id,'order_key'=>I('order_key','id'),'order_type'=>I('order_type','desc'),'search_key'=>I('search_key'),'category_id'=>$category_id))}&is_new="+strNew+"&category_ids="+cateidstr,
+
+		//loadUrl 加载的model连接 可带参数 返回为空时自动停止下拉
+		"domClass" : "contentItem", //每个item的Class
+		"domContainer" : "productContainer" //所有item的容器Id
+	});
+	
+		//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search_form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});	
+    //回车自动提交
+    $('.search_form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+})
+//侧边栏
+$(function(){
+//实现滚动条无法滚动
+    var moveStop=function(e){e.preventDefault();};
+    /***禁止滑动***/
+    function m_stop(){
+    /*        document.body.style.overflow='hidden'; */       
+            document.addEventListener("touchmove",moveStop,false);//禁止页面滑动
+    }
+    /***取消滑动限制***/
+    function m_move(){
+           /* document.body.style.overflow='';//出现滚动条*/
+            document.removeEventListener("touchmove",moveStop,false);        
+    }
+    //页面加载时执行
+/*    var http_ =window.location.href
+    if(http_=="{:U('lists',array('shop_id'=>$shop_id))}"){
+        $('html,body').scrollTop(0);
+        $('html').addClass('html_move');
+        $('.bottom_menu').addClass('foot_move');
+        $('#mask_bg,#right_aside').show();
+        m_stop();
+    }*/
+    //筛选按钮
+    $('.filterbtn a').click(function(){
+        $('html').addClass('html_move');
+        $('.bottom_menu').addClass('foot_move');
+        $('#right_aside,#mask_bg').show();
+        m_stop();
+    });
+    $('.aside_type li').click(function(){
+        $(this).toggleClass('active');
+        get_seach_count();
+    })
+    //透明背景
+    $('#mask_bg').click(function(){
+        $('html').removeClass('html_move')
+        $('.bottom_menu').removeClass('foot_move')
+        $('#right_aside,#mask_bg').hide();
+        m_move();      
+    });
+    //侧边栏返回按钮
+        $('.right_quality .btn_back').click(function(){
+        $('.right_filter').show();   
+        $('.right_quality').hide();
+    });
+    //清空
+        $('.btn_clear').click(function(){
+            ajax_seach_count();
+            $('.category_ids').each(function(){
+                $(this).val('');
+            })
+            $('.quality_more').each(function(){
+                $(this).text('全部');
+            })
+            $('.active').each(function(){
+                $(this).removeClass();
+            })            
+        })        
+        
+       $('#search_sure').click(function(){
+    	   var strNew='';
+    	    $('#is_new_type .active a').each(function(){
+    	    	strNew += $(this).attr('data-typeid')+',';
+    	     })
+    	     var cateidstr='';
+    	     $('.category_ids').each(function(){
+                if ($(this).val()!='') {
+    	    	 cateidstr+= $(this).val();                  
+                };
+    	     });
+    	     window.location.href="{:U('search_goods_lists')}&is_new="+strNew+"&category_ids="+cateidstr;
+             m_move();
+       });
+       
+});
+//二级菜单确定
+function sub_true(categoryid){
+    var subid = '';
+    var subtitle='';
+        $('#sub_aside_type .active a').each(function(){
+           subid += $(this).attr('data-subid')+',';
+           subtitle += $(this).attr('data-subtitle')+','
+        })
+        if(subtitle != ''){
+        	var slen=subtitle.length - 1;
+        	subtitle=subtitle.substring(0,slen);
+        }else{
+        	subtitle = '全部';
+        }
+        $('#sub_cate_tit_'+categoryid).text(subtitle)       
+        $("#sub_cate_ids_"+categoryid).val(subid);
+        $('.right_filter').show();  
+        $('.right_quality').hide();
+        get_seach_count();
+        
+}       
+function do_right_quality(cid,title){
+	var subListStr='{$sub_lists}';
+	var subData=JSON.parse(subListStr)
+	var theSub=subData[cid];
+    var sublistr='';
+    $('#top_aside_title').text(title);
+    $('.type_sure').attr('onclick','sub_true('+cid+')').bind();
+    var fv=$("#sub_cate_ids_"+cid).val();
+ 	var fvArr= fv.split(',');
+ 	if(fv){
+ 		var subArr = new Array();
+ 		for(var i=0;i<fvArr.length;i++){
+ 			if(fvArr[i] != ""){
+ 				subArr[fvArr[i]]=fvArr[i];
+ 			}
+ 		}
+ 	}
+	for(var key in theSub){
+		if(subArr != undefined ){
+			var k=theSub[key]['id'];
+			if(subArr[k]){
+				sublistr+='<li class="active"><a href="javascript:;" data-subtitle="'+theSub[key]['title']+'" data-subid="'+theSub[key]['id']+'">'+theSub[key]['title']+'</a></li>';
+			}else{
+				sublistr+='<li><a href="javascript:;" data-subtitle="'+theSub[key]['title']+'" data-subid="'+theSub[key]['id']+'">'+theSub[key]['title']+'</a></li>';
+			}
+			
+		}else{
+			sublistr+='<li><a href="javascript:;" data-subtitle="'+theSub[key]['title']+'" data-subid="'+theSub[key]['id']+'">'+theSub[key]['title']+'</a></li>';
+		}
+	}
+	$('#sub_aside_type').html(sublistr);
+	$('.right_filter').hide();
+	$('.right_quality').show();
+    $('#sub_aside_type li').click(function(){
+        $(this).toggleClass('active')
+    })
+}
+
+get_seach_count();
+function ajax_seach_count(str_new,str_catergory){
+	$.post("{:U('ajax_goods_count')}",{'is_new':str_new,'category_ids':str_catergory},function(count){
+		$('#goods_count').text(count);
+	});
+}
+function get_seach_count(){
+	 //查询搜索商品总数
+    var strNew=getNewStr();
+    var cateidstr=getCateIdStr();
+     ajax_seach_count(strNew,cateidstr);
+}
+
+function dosort(_this){
+		 var strNew=getNewStr();
+	     var cateidstr=getCateIdStr();
+	    var listsUrl=$(_this).data('url');
+	    if(strNew !=''){
+	    	listsUrl += '&is_new='+strNew;
+	    }
+	    if(cateidstr != ''){
+	    	listsUrl += '&category_ids='+cateidstr;
+	    }
+	    window.location.href=listsUrl;
+}
+function getNewStr(){
+	var strNew='';
+	$('#is_new_type .active a').each(function(){
+    	if($(this).attr('data-typeid') != ''){
+    		strNew += $(this).attr('data-typeid')+',';
+    	}
+     })
+     return strNew;
+}
+function getCateIdStr(){
+	 var cateidstr='';
+     $('.category_ids').each(function(){
+  
+    		 cateidstr+= $(this).val() +',';
+    	 
+     });
+     return cateidstr;
+}
+</script>
+</body>
+</html>

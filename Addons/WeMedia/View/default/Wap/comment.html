@@ -1,0 +1,36 @@
+<include file="Public/mobile_head" />
+<link href="{:ADDON_PUBLIC_PATH}/css.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script type="text/javascript"	src="{:ADDON_PUBLIC_PATH}/common.js?v={:SITE_VERSION}"></script>
+<body>
+<div class="common_bg" style=" position:fixed; top:0; left:0; right:0; bottom:0;background-size:100% 100%; z-index:10;"></div>
+<div id="container" class="container" style="position:relative; z-index:11;">
+  <div class="comment_list">
+    <ul id="CommentBox" data-url="{:addons_URL('Comment://Wap/get',array('aim_id'=>$info[id],'aim_table'=>'we_media'))}">
+      <center>
+        <img src="__IMG__/loading.gif" />
+      </center>
+    </ul>
+  </div>
+  <div class="comment_form">
+    <form id="commentForm" action="{:addons_url('Comment://Wap/add')}" method="post">
+      <input type="text" name="content" value="" placeholder="写上您的评论吧" />
+      <input type="hidden" name="aim_id" value="{$info.id}" />
+      <input type="hidden" name="comment_status" value="0" />
+      <input type="hidden" name="aim_table" value="we_media" />
+      <span class="comment_btn">发送</span>
+    </form>
+  </div>
+</div>
+<include file="Public/mobile_foot" />
+</body>
+</html><script>
+$('#container').css({'min-height':$(window).height()});
+
+//初始化评论
+var commentConfig = {:json_encode(getAddonConfig ( 'Comment' ))};
+//GLOBALS ['user']
+var currentUserFollowID="{$mid}";
+var currentUserHeadPic="{$mid|get_userface}";
+var currentUserName="{$mid|get_nickname}";
+$.comment.initComment($('#CommentBox'));
+</script>

@@ -1,0 +1,125 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body  ng-controller="commonCtrl">
+<body class="withFoot">
+    <div class="container">
+        <div class="top_tab">
+            <a href="{:U('myOrder')}" class="{$allClass}">全部订单</a>
+            <a href="{:U('unPayOrder')}" class="{$unPayClass}">待付款</a>
+            <a href="{:U('shippingOrder')}" class="{$shippingClass}">配送中</a>
+            <a href="{:U('waitCommentOrder')}" class="{$waitClass}">待评价</a>
+        </div>
+          <form id="form" action="{:U('detail_comment')}" method="post" >
+        <notempty name="goodsInfo">
+        	<volist name="goodsInfo" id="vo">
+        	  <div class="goods_pj">
+                    <div class="goods_item">
+                    	<input type="hidden" name="goodsids[]" value="{$vo.id}" />
+                        <img src="{$vo['imgs_url']['0']}"/><span>{$vo.title}</span>
+                    </div>            
+            <div class="item_star">
+                <span>评分:</span>
+                <input type="hidden" name="score[{$vo.id}]" />
+                <div class="pj_section" id="{$vo.id}_pj_star">
+                    <ul>
+                        <li><a href="javascript:;" val="1"></a></li>
+                        <li><a href="javascript:;" val="2"></a></li>
+                        <li><a href="javascript:;" val="3"></a></li>
+                        <li><a href="javascript:;" val="4"></a></li>
+                        <li><a href="javascript:;" val="5"></a></li>    
+                    </ul>                    
+                </div>
+            </div>
+            <div class="item_txt">
+                <span>心得:</span>
+                <div>
+                    <textarea cols="30" rows="10" name="content[{$vo.id}]"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        	</volist>
+        </notempty>
+      	<input name="order_id" type="hidden" value="{$orderInfo.id}" />
+      	<input name="shop_id" type="hidden" value="{$orderInfo.shop_id}" />
+        <button class="btn" type='button' id='submit1' style="width:90%;margin:0 auto;">提交评价</button>
+        
+        </form>
+        <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>  
+        <include file="DiyTemplate/allDisplay"/>
+        <script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        //评论
+        $('.pj_section').each(function(index,ele){
+                var conId = $(ele).attr('id');
+                var goodsId=parseInt(conId);
+                star('#'+conId,goodsId);
+        })  
+        function star(id,goodsId){
+            var aLi = $(id).find('li');
+            var i = iScore = iStar = 0;   
+            for (i = 1; i <= aLi.length; i++){
+                aLi[i - 1].index = i;               
+                //鼠标移过显示分数
+                aLi[i - 1].onmouseover = function (){
+                    fnPoint(this.index);
+                };                
+                //鼠标离开后恢复上次评分
+                aLi[i - 1].onmouseout = function (){
+                    fnPoint();
+                };
+                
+                //点击后进行评分处理
+                aLi[i - 1].onclick = function (){
+                    iStar = this.index;
+                    $("input[name='score["+goodsId+"]']").val(iStar);
+                }
+            }          
+            //评分处理
+            function fnPoint(iArg){
+                //分数赋值
+                iScore = iArg || iStar;
+                for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : ""; 
+            }
+        };
+        $(function(){
+        	$('#submit1').click(function(){
+        		var url=$('#form').attr('action');
+        		$.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: url,
+                    data: $('#form').serialize(),
+                    success: function (msg) {
+                    	if(msg){
+//             				$.Dialog.fail(msg);
+            				$.Dialog.confirm('提示',msg);
+            			}else{
+//             				$.Dialog.success("评论成功");
+//             				window.location.href="{:U('myOrder')}";
+            				$.Dialog.confirm('提示','评论成功！','',"{:U('myOrder')}");
+            			}
+                    },
+                    error: function(data) {
+                        alert("error:"+data.responseText);
+                     }
+                });
+        	});
+        })
+        </script>
+        
+    </div>  
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+</body>
+</html>

@@ -1,0 +1,62 @@
+CREATE TABLE IF NOT EXISTS `wp_wuguai` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`headface`  varchar(255) NULL  COMMENT '近期正面清晰照片',
+`truename`  varchar(50) NULL  COMMENT '宝宝姓名',
+`age`  int(10) NULL  COMMENT '年龄',
+`sex`  tinyint(2) NULL  DEFAULT 1 COMMENT '性别',
+`lose_time`  int(10) NULL  COMMENT '丢失时间',
+`lose_address`  varchar(255) NULL  COMMENT '丢失地址',
+`mobile`  varchar(30) NULL  COMMENT '联系电话',
+`content`  text NULL  COMMENT '宝宝特征',
+`money`  int(10) NULL  DEFAULT 100 COMMENT '悬赏金额',
+`cTime`  int(10) NULL  COMMENT 'cTime',
+`uid`  int(10) NULL  COMMENT 'uid',
+`token`  varchar(50) NULL  COMMENT 'token',
+`latitude`  varchar(50) NULL  COMMENT '经度',
+`longitude`  varchar(50) NULL  COMMENT '纬度',
+`person_id`  varchar(100) NULL  COMMENT 'faceapp相应person的id',
+`person_name`  varchar(100) NULL  COMMENT 'faceapp相应person的name',
+`tag`  varchar(255) NULL  COMMENT 'person相关的tag',
+`face_id`  varchar(255) NULL  COMMENT 'person相关的face_id',
+`session_id`  varchar(100) NULL  COMMENT 'facepp的session_id',
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0;
+INSERT INTO `wp_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('wuguai','天下无拐','0','','1','["headface","truename","age","sex","lose_time","lose_address","mobile","content","money"]','1:基础','','','','','headface|get_img_html:照片\r\ntruename:姓名\r\nmobile:手机号\r\nmoney:金额\r\nids:操作:[EDIT]|编辑,[DELETE]|删除','10','truename:请输入宝宝姓名搜索','','1441619831','1445142720','1','MyISAM','Wuguai');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('headface','近期正面清晰照片','varchar(255) NULL','mult_picture','','很重要，用于系统通过人脸识别自动匹配','1','','0','wuguai','1','1','1445217955','1441619944','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('truename','宝宝姓名','varchar(50) NULL','string','','','1','','0','wuguai','1','1','1441620009','1441620009','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('age','年龄','int(10) NULL','num','','','1','','0','wuguai','1','1','1441620060','1441620060','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('sex','性别','tinyint(2) NULL','bool','1','','1','1:男\r\n2:女','0','wuguai','0','1','1441620114','1441620114','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('lose_time','丢失时间','int(10) NULL','datetime','','','1','','0','wuguai','1','1','1441620164','1441620164','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('lose_address','丢失地址','varchar(255) NULL','string','','','1','','0','wuguai','1','1','1441620242','1441620242','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('mobile','联系电话','varchar(30) NULL','string','','很重要，有最新消息时能及时联系到您','1','','0','wuguai','1','1','1441620348','1441620348','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('content','宝宝特征','text NULL','textarea','','请尽量描述宝宝丢失时的穿着，打扮等明显的特征','1','','0','wuguai','0','1','1441620514','1441620514','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('money','悬赏金额','int(10) NULL','num','100','单位：元，悬赏越高越能激发更多周边志愿者上传可疑照片。孩子寻回前都可以全额退回','1','','0','wuguai','0','1','1441620971','1441620971','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('cTime','cTime','int(10) NULL','datetime','','','0','','0','wuguai','0','1','1441621004','1441621004','','3','','regex','time','1','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('uid','uid','int(10) NULL','num','','','0','','0','wuguai','0','1','1441621032','1441621032','','3','','regex','get_mid','1','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','token','varchar(50) NULL','string','','','0','','0','wuguai','0','1','1441621060','1441621060','','3','','regex','get_token','1','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('latitude','经度','varchar(50) NULL','string','','','0','','0','wuguai','0','1','1441624347','1441624347','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('longitude','纬度','varchar(50) NULL','string','','','0','','0','wuguai','0','1','1441624390','1441624390','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('person_id','faceapp相应person的id','varchar(100) NULL','string','','','0','','0','wuguai','0','1','1445137032','1445137032','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('person_name','faceapp相应person的name','varchar(100) NULL','string','','','0','','0','wuguai','0','1','1445137123','1445137123','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('tag','person相关的tag','varchar(255) NULL','string','','','0','','0','wuguai','0','1','1445137149','1445137149','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('face_id','person相关的face_id','varchar(255) NULL','string','','','0','','0','wuguai','0','1','1445137214','1445137214','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('session_id','facepp的session_id','varchar(100) NULL','string','','','0','','0','wuguai','0','1','1445143522','1445143522','','3','','regex','','3','function');
+UPDATE `wp_attribute` SET model_id= (SELECT MAX(id) FROM `wp_model`) WHERE model_id=0;
+
+
+CREATE TABLE IF NOT EXISTS `wp_wuguai_group` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`group_name`  varchar(30) NULL  COMMENT 'group_name',
+`tag`  varchar(255) NULL  COMMENT 'tag',
+`group_id`  varchar(100) NULL  COMMENT 'group_id',
+`added_person`  int(10) NULL  DEFAULT 0 COMMENT 'added_person',
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0;
+INSERT INTO `wp_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('wuguai_group','脸部识别分组','0','','1','','1:基础','','','','','','10','','','1445137309','1445137309','1','MyISAM','Wuguai');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_name','group_name','varchar(30) NULL','string','','','0','','0','wuguai_group','0','1','1445137398','1445137398','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('tag','tag','varchar(255) NULL','string','','','0','','0','wuguai_group','0','1','1445137423','1445137423','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('group_id','group_id','varchar(100) NULL','string','','','0','','0','wuguai_group','0','1','1445137498','1445137498','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('added_person','added_person','int(10) NULL','num','0','','0','','0','wuguai_group','0','1','1445137522','1445137522','','3','','regex','','3','function');
+UPDATE `wp_attribute` SET model_id= (SELECT MAX(id) FROM `wp_model`) WHERE model_id=0;
+
+

@@ -1,0 +1,43 @@
+<div class="bottom_menu"> 
+<a class="home" href="{$indexurl}">首页</a> 
+<a class="category" href="{:U('lists', array('shop_id'=>$shop_id))}">全部商品</a> 
+<a class="cart" href="{:U('cart', array('shop_id'=>$shop_id))}">购物车<span class="count">{$cart_count}</span></a> 
+<a class="center" href="{:U('user_center', array('shop_id'=>$shop_id))}">个人中心</a> 
+<a class="service" href="javascript:;">联系客服</a> 
+</div>
+<p class="copyright">{$system_copy_right}{$tongji_code}</p>
+<div id="mask_bg"></div>
+<div class="service_tips">
+<!-- 	<h3>这是一个标题</h3> -->
+	<span>X</span>
+	<p>{$kefu}</p>
+</div>
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{$indexurl}",
+	imgUrl:'{$shop.logo}'
+});
+//实现滚动条无法滚动
+var moveStop=function(e){e.preventDefault();};
+/***禁止滑动***/
+function m_stop(){    
+        document.addEventListener("touchmove",moveStop,false);//禁止页面滑动
+}
+/***取消滑动限制***/
+function m_move(){
+        document.removeEventListener("touchmove",moveStop,false);        
+}
+	$('.service').click(function(){
+		$('#mask_bg,.service_tips').show();
+		$('html').addClass('mask_overf')
+		m_stop()
+	})
+	$('.service_tips span,#mask_bg').click(function(){
+		$('#mask_bg,.service_tips').hide();
+		$('html').removeClass('mask_overf')	
+		m_move()
+	})
+</script>

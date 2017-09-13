@@ -1,0 +1,327 @@
+<include file="header" />
+<link href="{:ADDON_PUBLIC_PATH}/webuploader.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css" />
+<script src="{:ADDON_PUBLIC_PATH}/webuploader.html5only.min.js?v={:SITE_VERSION}"></script>
+<style type="text/css">
+  body{background-color: #f1f1f1;}
+</style>
+<div id="content">
+    <div id="weiba" data-title="发动态" class="panel" data-selected="true"  data-menu="msgmenu">
+        <header>
+            <div id="header-buttons">
+            	<a href="javascript:history.go(-1);">
+                    <div id="back" class="header-menu-link" data-back="false">
+                    </div>
+                </a>
+				<div class="header-menu-link" id="hmp-send">
+                    <a class="sendBtn disable" onClick="doWeibaPost()" id="postbut" href="javascript:;">发布</a>
+                </div>
+            </div>
+            <h1 class="hasback">
+                发动态
+            </h1>
+        </header>
+      
+      <div class="weibaPost">
+        <form method="post" action="{:addons_url('Weiba://Wap/feedPost')}" id="doWeibaPost" onsubmit="doWeibaPost();return false;"> 
+         <div class="navlist">
+          <ul style="margin:0 0 10px">
+             <li>
+                <select style="color:#555" name="weiba_id" id="weiba_id" class="ts-select" >
+                <option value="0">选择版块</option>
+                <option value="1">111111</option>
+                <option value="2">222222</option>
+                </select>
+             </li>
+         </ul>
+      </div>
+        <div class="friend_tab weui_cells_radio">
+          <span class="weui_span">内容</span>
+                  <label class="weui_cell weui_check_label" for="friend_tab_long">
+                      <div class="weui_cell_hd">
+                          <input type="radio" name="radio1" class="weui_check" id="friend_tab_long" >
+                          <span class="weui_icon_radio"></span>
+                      </div>
+                      <div class="weui_cell_bd weui_cell_primary">
+                          <p>长文</p>
+                      </div>
+                  </label>
+                  <label class="weui_cell weui_check_label" for="friend_tab_act">
+                      <div class="weui_cell_hd">
+                          <input type="radio" name="radio1" class="weui_check" id="friend_tab_act" >
+                          <span class="weui_icon_radio"></span>
+                      </div>
+                      <div class="weui_cell_bd weui_cell_primary">
+                          <p>活动</p>
+                      </div>
+                  </label>
+                  <label class="weui_cell weui_check_label" for="friend_tab_goods">
+                      <div class="weui_cell_hd">
+                          <input type="radio" name="radio1" class="weui_check" id="friend_tab_goods">
+                          <span class="weui_icon_radio"></span>
+                      </div>
+                      <div class="weui_cell_bd weui_cell_primary">
+                          <p>商品</p>
+                      </div>
+                  </label>
+                  <label class="weui_cell weui_check_label" for="friend_tab_default">
+                      <div class="weui_cell_hd">
+                          <input type="radio" class="weui_check" name="radio1" id="friend_tab_default" checked="checked">
+                          <span class="weui_icon_radio"></span>
+                      </div>
+                      <div class="weui_cell_bd weui_cell_primary">
+                          <p>动态</p>
+                      </div>
+                  </label>
+        </div>
+          <div class="long_content">
+            <span>标题</span>
+            <input id="title"  type="text" name="long" placeholder="请输入标题">
+          </div>       
+          <div class="pure-form send_box">
+              <textarea class="ts-textarea" name="content" id="post-content" rows="5" placeholder="请输入内容，不能少于4个字符"></textarea>
+              <!-- 表情 -->
+              <a class="icon facelistbutton ts-listen" data-listen="weibo-facelist-show"><i class="fa-btn fa-btn-smile"></i></a>
+          </div>
+          <div class="ts-footer">
+              <!-- 图片 -->
+             
+              <div id="uploader">
+                  <!--用来存放item-->
+                  <div id="filePicker"></div>
+                  <div id="fileList" class="uploader-list"></div>
+              </div>
+          </div>
+          <div class="goods_content">
+            <span>价格</span><input type="number" name="price" id="price" placeholder="请输入商品售价">
+              <div class="weui_cells weui_cells_checkbox">
+              <span class="weui_span">寄送方式</span>
+                <label class="weui_cell weui_check_label" for="is_store">
+                    <div class="weui_cell_hd">
+                        <input type="checkbox" class="weui_check goods_store" name="checkbox1" id="is_store">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>到店自提</p>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label" for="is_home">
+                    <div class="weui_cell_hd">
+                        <input type="checkbox" name="checkbox1" checked="checked" class="weui_check" id="is_home">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>送货上门</p>
+                    </div>
+                </label>
+              </div>
+              <input class="goods_addr" type="text" name="goods_addr" id="goods_addr" placeholder="请输入门店地址">
+          </div>
+          <div class="act_content">
+            <span>活动时间</span>
+            <input id="date" type="datetime-local" name="date" placeholder="请选择活动开始时间">
+          </div>
+        </form>
+      </div>
+    </div>
+<include file="footer" />
+<script type="text/javascript">
+// 初始化Web Uploader
+var uploader = WebUploader.create({
+
+    // 选完文件后，是否自动上传。
+    auto: true,
+
+    // 文件接收服务端。
+    server: "{:U('Home/File/uploadPicture')}",
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#filePicker',
+
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+    },
+    fileNumLimit : 9
+});
+
+// 当有文件添加进来的时候
+uploader.on( 'fileQueued', function( file ) {
+    var imgId = parseInt(file.id.split('_').pop()) 
+    var $li = $(
+            '<div id="' + file.id + '" class="file-item thumbnail" val="'+imgId+'">' +
+			       '<input type="hidden" name="img_ids[]" class="img_one" value="" />' +
+                '<em class="cancel">X</em>'+
+                '<img>' +
+            '</div>'
+            ),
+        $img = $li.find('img');
+    var $list =$('#fileList');
+
+    // $list为容器jQuery实例
+    $list.append( $li );
+    // 创建缩略图
+    // 如果为非图片文件，可以不用调用此方法。
+    // thumbnailWidth x thumbnailHeight 为 100 x 100
+    uploader.makeThumb( file, function( error, src ) {
+        if ( error ) {
+            $img.replaceWith('<span>不能预览</span>');
+            return;
+        }
+
+        $img.attr( 'src', src );
+    }, 60, 60);
+
+    $('.cancel').on('click', function() {
+      uploader.removeFile( file,true );
+      $('#postbut').css('display','block');
+      $(this).parents('.file-item').remove();
+    })
+});
+
+// 文件上传过程中创建进度条实时显示。
+uploader.on( 'uploadProgress', function( file, percentage ) {
+    var $li = $( '#'+file.id ),
+        $percent = $li.find('.progress span');
+
+    // 避免重复创建
+    if ( !$percent.length ) {
+        $percent = $('<p class="progress"><span></span></p>')
+                .appendTo( $li )
+                .find('span');
+    }
+    $('#postbut').css('display','none');
+    $percent.css( 'width', percentage * 100 + '%' );
+});
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+uploader.on( 'uploadSuccess', function( file,response ) {
+
+	$( '#'+file.id ).find('input').val(response.id);
+    $( '#'+file.id ).addClass('upload-state-done');
+});
+
+// 文件上传失败，显示上传出错。
+uploader.on( 'uploadError', function( file ) {
+    var $li = $( '#'+file.id ),
+        $error = $li.find('div.error');
+
+    // 避免重复创建
+    if ( !$error.length ) {
+        $error = $('<div class="error"></div>').appendTo( $li );
+    }
+
+    $error.text('上传失败');
+});
+
+// 完成上传完了，成功或者失败，先删除进度条。
+uploader.on( 'uploadComplete', function( file ) {
+    $( '#'+file.id ).find('.progress').remove();
+    $('#postbut').css('display','block');
+});
+
+$("#date").on("input",function(){
+   if($(this).val().length>0){
+   $(this).addClass("full");
+}
+else{
+  $(this).removeClass("full");
+  }
+ });
+
+var feed_type = 0;
+$('#friend_tab_default').click(function(){
+  $('.act_content').hide();
+  $('.goods_content').hide();
+  $('.long_content').hide();
+  $('.ts-textarea').attr('rows',5)
+  feed_type = 0;
+})
+$('#friend_tab_goods').click(function(){
+  $('.goods_content').show();
+  $('.act_content').hide();
+  $('.long_content').hide();
+  $('.ts-textarea').attr('rows',5)
+  feed_type = 1;
+});
+$('#friend_tab_act').click(function(){
+  $('.act_content').show();
+  $('.goods_content').hide();
+  $('.long_content').hide();
+  $('.ts-textarea').attr('rows',5)
+  feed_type = 2;
+})
+$('#friend_tab_long').click(function(){
+  $('.long_content').show();
+  $('.act_content').hide();
+  $('.goods_content').hide();
+  $('.ts-textarea').attr('rows',13)
+  feed_type = 3;
+})
+$('.goods_store').click(function(){
+  $('.goods_addr').toggle();
+})
+
+function doWeibaPost(){
+	var title = $.trim($('#title').val());
+	var content = $.trim($('#post-content').val());
+	var imageIds = '';
+	$('.img_one').each(function(i, el){
+		imageIds = $(el).val()+','+imageIds;
+	});
+
+	var price = Number($('#price').val());
+	var is_store = $('#is_store').prop('checked') ==  true ? 1:0;;
+	var is_home = $('#is_home').prop('checked') ==  true ? 1:0;;
+	var event_time = $("#date").val();
+	var store_address = $('#goods_addr').val();
+
+    if(!content){
+		$.ui.showMask("内容不能为空!",true);
+		$('#post-content').focus();
+	}else if(content.length<4){
+		$.ui.showMask("内容不能少于4个字符",true);
+		$('#post-content').focus();
+	}else if(feed_type==1 && price<=0){
+		$.ui.showMask("请先正确填写商品价格再发布",true);
+		$('#price').focus();
+	}else if(feed_type==1 && is_store==0 && is_home==0){
+		$.ui.showMask("你的商品是到店自提还是送货上门？",true);
+		$('#is_store').focus();
+	}else if(feed_type==1 && is_store==1 && store_address==''){
+		$.ui.showMask("请填写你的门店地址",true);
+		$('#goods_addr').focus();
+	}else if(feed_type==2 && event_time==''){
+		$.ui.showMask("请选择活动开始时间",true);
+		$('#goods_addr').focus();								
+	}else{
+		$.post($('#doWeibaPost').attr('action'), {
+			weiba_id: '{$weiba_id|intval}',
+			title   : title,
+			content : content,
+			img_ids: imageIds,
+			feed_type:feed_type,
+			price   : price,
+			is_store : is_store,
+			is_home: is_home,
+			event_time:event_time,	
+			store_address:store_address			
+		}, function(data){
+			if(data.status){
+				$('#title').val('');
+				$('#post-content').val('');
+				$('#ts-upload-img-box').empty();
+				$.ui.showMask('发布成功', true);
+				setTimeout(function(){
+					window.location.href = data.url;
+				},2000)
+			}else{
+				$.ui.showMask(typeof data=='string'?data:data.info,true);
+			}
+			
+		},'JSON');
+	}
+}
+</script>

@@ -1,0 +1,398 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:ADDON_PUBLIC_PATH}/mobile/diy_page.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<script src="__STATIC__/angular.min.js"></script>
+<script src="{:ADDON_PUBLIC_PATH}/mobile/shop.js"></script>
+<body ng-controller="commonCtrl">
+    <div class="container">
+    	<form class="search_form">
+        	<!-- <a href="{:U('lists',array('shop_id'=>$shop_id))}" class="back_icon">&nbsp;</a> -->
+            <input type="text" placeholder="输入关键字搜索商品" value="{:I('search_key')}" name="search_key" />
+            <button type="button" id="search" url="{:U('lists',array('shop_id'=>$shop_id))}"></button>
+        </form>
+        <empty name='goods'>
+        	<br/><br/>
+        	<p style="text-align: center;color: red;">抱歉，该商品不存在，已被删除</p>
+        	<else />
+        	<eq name='goods.is_show' value='0'>
+        		<br/><br/>
+        		<p style="text-align: center;color: red;">抱歉，该商品已下架</p>
+        	<else />
+        	
+        <!-- 相册 -->
+        <section class="photoList">
+        	<ul>
+            <volist name="goods.imgs_url" id="url">
+                <li>
+                    <img src="{$url}"/>
+                </li>
+             </volist>            
+            </ul>
+            <span class="identify">
+            <volist name="goods.imgs_url" id="vo">
+                <em></em>
+             </volist>  
+            </span>
+        </section>
+        <!-- 详情信息 -->
+        <form id="detailForm" action="{:addons_url('Shop://Wap/confirm_order')}" method="post">
+        <input type="hidden" name="goods_id" value="{$goods.id}"/>
+        <input type="hidden" name="shop_id" value="{$goods.shop_id}"> 
+        <input type="hidden" name="spec_option_ids" id="spec_option_ids" value="{$goods.sku_data_defalut}"/>
+        <div class="detail_info">
+        	<div class="info_item">
+        		<h6 class="name"><a href="{:U('detail_more',array('shop_id'=>$shop_id,'id'=>$goods[id]))}">{$goods.title}</a></h6>
+                <notempty name="seckill_info">
+                	<div class="price seckill_div">
+                        <span class="seckill_price">秒杀价:<span>￥{$seckill_info.seckill_price|wp_money_format}</span></span><br/>  
+                        <span class="market_price">市场价:<del>￥{$goods.market_price|wp_money_format}</del></span>  
+                        <div id="runCountDown" class="timer" data-time="{$seckill_info.left_time}">
+                            <div class="left"><span class="day">0</span>天</div>
+                            <div class="left"><span class="hour">0</span>小时</div>
+                            <div class="left"><span class="min">0</span>分</div>
+                            <div class="left"><span class="sec">0</span>秒</div>
+                        </div>
+                        <input type="hidden" name="seckill_price" value="{$seckill_info.seckill_price}"/>
+                        <input type="hidden" name="seckill_id" value="{$seckill_info.seckill_id}"/>
+                    </div>
+                <else />
+                	<p class="price">
+                        <if condition="(floatval($goods['sale_price']) gt 0) && (floatval($goods['sale_price']) neq floatval($goods['market_price']))">
+                        <span class="price_jb">促销价</span>
+                            ￥<span id="price">{$goods.sale_price|wp_money_format}</span>  
+                            <del id="mPrice">￥{$goods.market_price|wp_money_format}</del> 
+                        <else />  
+                            ￥<span id="price">{$goods.market_price|wp_money_format}</span>  
+                            <del style="display:none" id="mPrice">￥{$goods.market_price|wp_money_format}</del> 
+                        </if>  
+                    </p>
+                </notempty>
+            </div>
+            <div class="info_item">
+                <section class="goods_parameter">
+                    <div class="tit" onclick="$('.list').toggle();$('.goods_parameter i').toggleClass('btnD')">
+                        <p>详细参数</p>
+                        <i></i>
+                    </div>
+                    <notempty name="goods.goods_param">
+                    <ul class="list">
+                    	<volist name="goods.goods_param" id ='pv'>
+                    	<li><span>{$pv.title}：</span>{$pv.param_value}</li>
+                    	</volist>
+                        
+                        <!-- <li><span>类　　型：</span>2</li>
+                        <li><span>款　　式：</span></li>
+                        <li><span>材　　质：</span></li>
+                        <li><span>系　　列：</span></li>
+                        <li><span>重　　量：</span>约<em></em>克</li>
+                        <li><span>镶　　法：</span></li>
+                        <li><span>打磨方法：</span></li>
+                        <li><span>成　　色：</span></li>
+                        <li><span>配　　链：</span></li>
+                        <li><span>可 刻 字：</span></li>
+                        <li><span>适用人群：</span></li>
+                        <li><span>计价方式：</span></li>
+                        <li><span>工　　费：</span><em>¥</em></li> -->
+                    </ul>
+                    </notempty>
+                    
+                </section>
+            </div>
+            <div class="info_item">
+                <div class="tit" onclick="$('.goods_spec').toggle();$('.tit_i').toggleClass('btnD')">
+                    <p>我的选择</p>
+                    <i class="tit_i"></i>
+                </div>            
+                <section class="goods_spec">
+               <notempty name="reward_tips"><p class="sale_tips"><span class="sale_text_icon">促</span><span class="red">{$reward_tips}</span></p></notempty>
+                <!--商品规格-->
+                <volist name="goods.spec_list" id="spec">
+                	<div class="detail_spec_div">
+            			<p>{$spec.title}</p>
+                      <volist name="spec.options" id="op">
+                      <a class="sku_item" href="javascript:;" data-price="{$op.id}">{$op.name}<input type="checkbox" class="sku_check" name="sku[0]" value="1"/></a>
+                      </volist>
+                      </div>
+                </volist>
+                
+                
+                
+                <p>数量</p>
+                <div class="buy_count">
+                	<a class="reduce" href="javascript:;">-</a>
+                    <input type="text" name="buyCount" value="1" onblur="set_num(this)"/>
+                    <a class="add" href="javascript:;" rel="{$goods.id}">+</a>
+                </div><div style="display: inline-block;margin-left: 15px;color: darkgrey;vertical-align: -5px;">(库存量：<span id='stockNum_{$goods.id}'>{$goods.stock_num}</span>)</div>
+                </section>
+            </div>
+        </div>
+        <!-- 商品介绍
+        <div class="detail_content">
+            <h6 class="t">商品介绍</h6>
+            <div class="content">{$goods.content}
+            </div>
+        </div>
+         -->
+        </form>
+        <div class="diy_container" ng-style="{'background-color':headItem.params.bgColor}">
+             <div ng-if="module['id'] && !module['disable']" id="module-{{module.index}}" name="{{module.id}}" index="{{module.index}}" ng-class="{'modules-actions': activeItem.index == module.index, 'js-sorttable' : !module.issystem,'edit_panel':true}" ng-repeat="module in activeModules" on-finish-render-filters>
+                <div ng-init="displayPanel = ('widget-'+(module['id'].toLowerCase())+'-display.html')" ng-include="displayPanel"></div>
+            </div>
+        </div>  
+        <include file="DiyTemplate/allDisplay"/>
+        <!--评论start-->
+        <div class="detail_comment">
+        	<span class="t">购买评价</span><span class="t comment_count">(<span style="color: #c00">{$comment_count}</span>)</span>
+<!--             <span class="star_rader">
+            	<span class="star_select" style="width:20%"></span>
+            </span>     -->       
+        </div>
+        <div class="detail_comment_warp">
+        <!--评论列表-->
+        <notempty name='comments'>
+        <volist name="comments"  id='co'>
+        <div class="detail_comment_list">
+                <div class="comment_list_item">
+                <!--评论星级用户名-->
+                    <div class="comment_list_name">
+                        <span>{$co.username}</span>
+                        <div class="comment_star">
+                            <span class="comment_star_{$co.score}"></span>
+                        </div>
+                    </div>
+                    <!--评论内容-->
+                    <div class="comment_list_content">{$co.content}</div>
+                    <!--评论时间-->
+                    <div class="comment_list_time">{$co.cTime|time_format}</div>
+                </div>               
+            </div>
+        </volist>
+        <else/>
+        
+        </notempty>
+            
+<!--                 <div class="comment_list_item"> -->
+<!--                 评论星级用户名 -->
+<!--                     <div class="comment_list_name"> -->
+<!--                         <span>bobo</span> -->
+<!--                         <div class="comment_star"> -->
+<!--                             <span class="comment_star_5"></span> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                     评论内容 -->
+<!--                     <div class="comment_list_content">这是一个测试评论</div> -->
+<!--                     评论时间 -->
+<!--                     <div class="comment_list_time">2016年3月3日</div> -->
+<!--                 </div>                -->
+            </div>           
+        </div>
+        <!--评论end-->
+		<script type="text/javascript">
+        var dataConfig = '{$diyData[config]}';
+        if(dataConfig!=""){
+            initDiy(dataConfig);
+        }
+        </script>
+    </div>
+        <!-- 分类目录 -->
+    <include file="_category"/>
+    
+    <!-- 底部加入购物车等 -->
+    <div class="detail_bottom">
+    	<a class="add_favorite" href="javascript:;" onClick="addToFavorite()">收藏</a>
+        <empty name="seckill_info.seckill_id">
+          <if condition="$goods['type'] eq 0">
+        <a class="add_cart" href="javascript:;" onClick="addToCart()">加入购物车</a>
+        </if>
+    </empty>
+        <a class="buy_now" href="javascript:;" onClick="buyNow()">立即购买</a>
+        
+        <a class="my_cart" href="{:U('cart', array('shop_id'=>$shop_id))}">购物车<span class="count" id="cartCount">{$cart_count}</span></a>
+    </div>
+    </eq>
+  </empty>
+	<p class="copyright">{$system_copy_right}{$tongji_code}</p>
+<script type="text/javascript">
+var is_collect = "{$goods['is_collect']|intval}";
+if(is_collect==1){
+	 $('.add_favorite').addClass('favorite_act');
+}
+function set_num(_this){
+	var num=parseInt($(_this).val());
+	var snum=parseInt($("#stockNum_{$goods.id}").text());
+	if(isNaN(num)){
+		num=0;
+	}
+	if(num > snum){
+		num = snum;
+	}
+	$(_this).val(num);
+// 	alert(isNaN(num));
+// 	alert(num+','+snum);
+}
+
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$goods.title}',
+	link:"{:U('detail',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'id'=>$goods['id'],'seckill_id'=>$seckill_info['seckill_id'],'publicid'=>$public_info['id']))}",
+	imgUrl:'{$goods.cover|get_cover_url}'
+});
+//加入收藏
+function addToFavorite(){
+	$.Dialog.loading();
+	var data = $('#detailForm').serializeArray();
+    $('.add_favorite').toggleClass('favorite_act')
+	$.ajax({
+		url:"{:U('addToCollect',array('shop_id'=>$shop_id,'is_collect'=>$goods['is_collect']))}",
+		data:data,
+		dataType:'JSON',
+		type:"POST",
+		success:function(data){
+			if(data>0){
+				$.Dialog.success("恭喜，收藏成功！");
+			}else if(data == -1){
+				$.Dialog.success("取消收藏成功");
+			}
+		}
+	})
+}
+function addToCart(){
+	
+	if(parseInt($('#stockNum').text()) <1 ){
+		$.Dialog.fail("抱歉~该商品库存不足");
+		return;	
+	}
+	if(parseInt($('input[name="buyCount"]').val())<1){
+		$.Dialog.fail("购物数量不能小于1件");
+		return;	
+	}
+//	if(!$('.sku_check:checked').val()){
+//		$.Dialog.fail("请选择型号");
+//		return;	
+//	}
+	var seckill_id=$("input[name='seckill_id']").val();
+	$.Dialog.loading();
+	var data = $('#detailForm').serializeArray();
+	var spec_option_ids= $("#spec_option_ids").val();
+	$.ajax({
+		url:"{:U('addToCart',array('shop_id'=>$shop_id))}&seckill_id="+seckill_id+"&spec_option_ids="+spec_option_ids,
+		data:data,
+		dataType:'html',
+		type:"POST",
+		success:function(res){
+			if(res){
+				$.Dialog.success("加入购物车成功");
+				$('#cartCount').text(res);
+				window.location.reload();	
+			}
+		}
+	})
+}
+function buyNow(){
+	if(parseInt($('input[name="buyCount"]').text())>0){
+		$.Dialog.fail("购物数量不能小于1件");
+		return;	
+	}
+	if(parseInt($('#stockNum_{$goods.id}').text()) <=0 || parseInt($('input[name="buyCount"]').text())>parseInt($('#stockNum_{$goods.id}').text())>0){
+		$.Dialog.fail("抱歉~该商品库存不足");
+		return;	
+	}
+//	if(!$('.sku_check:checked').val()){
+//		$.Dialog.fail("请选择型号");
+//		return;	
+//	}
+	$('#detailForm').submit();
+}
+
+function sum_money(){
+	try{
+		var ids = [];
+		$('.select').each(function(){
+			ids.push($(this).attr('data-price'));		
+		})
+		
+		ids = ids.sort(function(a,b){ return a-b; });
+		
+		var key = ids.join('_');
+		if(key==''){ //初始化第一个数据
+			<php> if(!empty($_GET['spec_option_ids'])) { </php>
+			   key = "{:I('get.spec_option_ids')}";
+			<php> } else { </php>
+			   key = "{$goods.sku_data_defalut}";
+			<php> } </php>
+			var defalut_arr = key.split('_');
+			
+			$('.sku_item').each(function(){
+				 var id = $(this).attr('data-price');	
+				 if($.inArray(id, defalut_arr)!=-1) select_sku(this);
+			})
+			
+		}
+		
+		var sku_data = {:json_encode($goods[sku_data])};
+		if(parseFloat(sku_data[key]['sale_price'])>0){
+			$('#price').text(sku_data[key]['sale_price']);
+			$('#mPrice').text(sku_data[key]['market_price']).show();
+		}else{
+			$('#price').text(sku_data[key]['market_price']);
+			$('#mPrice').text(sku_data[key]['market_price']).hide();
+		}
+		$('#stockNum').text(sku_data[key]['stock_num']);
+		$("input[name='buyCount']").val('1');
+		$('#spec_option_ids').val(key);
+	}catch(e){
+		
+	}
+}
+function select_sku(_this){
+	$(_this).addClass('select').siblings().removeClass('select');
+	$(_this).find('input').prop("checked",true);
+	$(_this).siblings().find('input').prop("checked",false);
+}
+$(function(){
+	$.WeiPHP.gallery('.photoList','.photoList ul');
+	
+	
+	$('.sku_item').click(function(){
+		select_sku(this);		
+		sum_money();
+	})
+	sum_money();
+	//图片预览
+	var picList = [];
+	$('.photoList li img').each(function(index, element) {
+		var picUrl = $(this).attr("src");
+		picList[index] = picUrl;
+        $(this).click(function(){
+			wx.previewImage({
+				current: picUrl, // 当前显示的图片链接
+				urls: picList // 需要预览的图片链接列表
+			});
+		})
+    });
+	
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search_form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});	
+        //回车自动提交
+    $('.search_form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+})
+</script>	
+</body>
+</html>

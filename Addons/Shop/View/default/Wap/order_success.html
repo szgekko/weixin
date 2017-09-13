@@ -1,0 +1,71 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<!-- 下单成功-->
+    <div class="container">
+    	<div class="order_success_tips">
+            <if condition="$paytype eq 10">
+                <center><br/><br/><img width="60" src="__IMG__/yes.png"/><br/><span>下单成功！</span><br/><br/></center>
+           <else/>
+                <center><br/><br/><img width="60" src="__IMG__/yes.png"/><br/><span>下单成功！</span><br/>
+                <empty name="is_all">
+	               	<eq name="pay_deposit" value='1'>
+	                <span class='price' style='#e5520a'>需支付定金：<font color='#f44805'>￥{$orderinfo['reserve_price']}</font>元</span><br/>
+	                <span class='price'>余款:<font color='#f44805'>￥{$orderinfo['rest_price']}</font>元</span><br/>
+	                	（支付完订金后，请前往店铺看货，并支付余款）<br/><br/>
+	                <else/>
+	                 <span class='price' style='#e5520a'>已支付定金：<font color='#f44805'>￥{$orderinfo['reserve_price']}</font>元</span><br/>
+	                <span class='price'>需支付余款:<font color='#f44805'>￥{$orderinfo['rest_price']}</font>元</span><br/>
+	                	<br/><br/>
+	                </eq>
+                <else/>
+                 <span class='price' style='#e5520a'>需支付金额：<font color='#f44805'>￥{$orderinfo['rest_price']}</font>元</span><br/>
+	                	（支付完金额后，请前往店铺看货，并让店员确认）<br/><br/>
+                </empty>
+                </center>
+            	<div class="container">
+    	
+        <div style="margin:20px 30px">
+        	<a class="btn" style="background: #fff;color: #000;" href="{:U('orderDetail',array('id'=>$orderinfo[id]))}">查看订单详情</a>
+        </div>
+    </div>	
+            </if>
+        </div>
+        <volist name="data" id="vo">
+            <a href="{:U('orderDetail',array('id'=>$orderinfo[id]))}" class="goods_data">
+                <img src="{$vo.cover|get_cover_url=100,100}"/>
+                <p class="title">{$vo.title}</p>
+            </a>
+        </volist>
+        <if condition= "$payment_config['isopenwx'] ==1">
+        <div class="choose_pay_type">
+            <a href="{$url0}" paytype='0'><em class="wxpay">&nbsp;</em>
+            	<empty name="is_all">
+	            	<eq name="pay_deposit" value='1'>
+	            	微信支付定金
+	            	<span style="float:right;color:#f44805"> ￥ {$orderinfo['reserve_price']|wp_money_format}</span>
+	            	<else/>
+	            	微信支付余款
+	            	<span style="float:right;color:#f44805"> ￥ {$orderinfo['rest_price']|wp_money_format}</span>
+	            	</eq>
+	            <else/>
+	           		 微信支付金额
+	            	<span style="float:right;color:#f44805"> ￥ {$orderinfo['rest_price']|wp_money_format}</span>
+	            </empty>
+            </a>
+<!--         	<a href="{$url1}" paytype='1'><em class="alipay">&nbsp;</em>支付宝支付定金</a> -->
+        </div>
+        </if>
+    </div>	
+    
+</body>
+</html>
+<script type="text/javascript">
+//分享
+$.WeiPHP.initWxShare({
+	title:'{$shop.title}',
+	desc:'{$shop_share}',
+	link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+	imgUrl:'{$shop.logo}'
+});
+</script>

@@ -1,0 +1,24 @@
+<extend name="Base/common" />
+<block name="body">
+  <div class="span9 page_message">
+    <section id="contents"> 
+      <include file="Addons/_nav" /> 
+		<div class="sport_summary">
+			<div class="teams">
+				<span><img src="{$info.home_team_arr.logo_url}" /><br />{$info.home_team_arr.title}</span>
+				<span><img src="{$info.visit_team_arr.logo_url}" /><br />{$info.visit_team_arr.title}</span>
+			</div>
+			<div class="summary">
+				<p class="p1">{$info.start_time|time_format}</p>
+				<p class="p2">
+					<img src="__IMG__/y_yao.jpg" />共抽奖<span class="g">{$info.draw_count}</span>次，总人次<span
+						class="g">{$info.draw_follow_count}</span>次，每人平均摇
+						<span class="g">{:ceil($info['draw_count']/$info['draw_follow_count'])}</span>次，中奖<span
+						class="y">{$info.has_count}</span>份，已兑换<span
+						class="y">{$info.use_count}</span>份
+				</p>
+			</div>
+		</div>
+    </section>
+  </div>
+</block>

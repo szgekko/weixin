@@ -1,0 +1,74 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/mobile/shop.js?v={:SITE_VERSION}"></script>
+<body class="withFoot" id="categoryPage">
+    <div class="container">
+    	<form class="search_form" action="{:U('lists',array('shop_id'=>$shop_id))}" method="get">
+        	<a href="{:U('index',array('shop_id'=>$shop_id))}" class="back_icon">&nbsp;</a>
+            <input type="text" placeholder="输入关键字搜索商品" value="{:I('search_key')}" name="search_key" />
+            <button type="button" id="search" url="{:U('lists',array('shop_id'=>$shop_id))}">搜索</button>
+        </form>
+        <div>
+        	<div class="left_cate">
+            	<ul>
+                <volist name="top_list" id="top">
+                	<php>if(!$sub_list[$top['id']]){</php>
+                			<li><a href="{:U('goodsListsByCategory',array('shop_id'=>$shop_id,'cid1'=>$top[id]))}">{$top.title}</a></li>
+                	<php>}else{</php>
+                	<li><a href="javascript:;" onClick="showSubCate(this,{$top.id});">{$top.title}</a></li>
+                		
+                	<php>}</php>
+                </volist>
+                 
+                    <!--<li><a href="javascript:;" onClick="showSubCate(this,2);" class="cur">美容美发</a></li>-->
+                </ul>
+            </div>
+            <div class="right_sub_cate">
+                 <volist name="top_list" id="top">
+            	 <ul id="cate_{$top.id}">
+                 
+                 <php> foreach($sub_list[$top['id']] as $k=> $vo) { 
+                 			if(empty($sub_list[$k])){
+                 </php>
+                   <li><a href="{:U('goodsListsByCategory',array('shop_id'=>$shop_id,'cid0'=>$top[id],'cid1'=>$vo[id]))}"><empty name="vo.icon"><img src="__IMG__/no_pic.png"/><else /><img src="{$vo.icon|get_cover_url=100,100}" /></empty><span>{$vo.title}</span></a></li>
+                   <php> }else{
+                   		echo "<h2 style='text-align: center;color: dimgray;'>".$vo['title']."</h2>";
+                   		foreach($sub_list[$k] as $v){
+                   		</php>
+                   		 <li><a href="{:U('goodsListsByCategory',array('shop_id'=>$shop_id,'cid0'=>$vo[id],'cid1'=>$v[id]))}"><empty name="v.icon"><img src="__IMG__/no_pic.png"/><else /><img src="{$v.icon|get_cover_url}" /></empty><span>{$v.title}</span></a></li>
+                   		<php>
+		                   }
+		                   	echo '<br/>';
+		                   }} </php>
+                </ul>
+                </volist>
+            </div>
+        </div> 
+    </div>	
+    <!-- 底部导航 -->
+    <include file="_footer"/>
+    
+<script type="text/javascript">
+$(function(){
+		//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search_form').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	$('#categoryPage .left_cate').height($(window).height()-100);	
+	$('#categoryPage .right_sub_cate').height($(window).height()-100);
+	$('#categoryPage .left_cate a').eq(0).addClass('cur');
+	$('#categoryPage .right_sub_cate ul').hide();
+	$('#categoryPage .right_sub_cate ul').eq(0).show();
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<extend name="Base/common" />
+<block name="body">
+<div class="span9 page_message">
+	<section id="contents">
+      <include file="Addons/_nav" />
+      
+      <div class="tab-content" id="hasSubNav"> 
+        	<div class="sub_tab_content">
+            	<div class="main_summay">
+                	<p style="line-height:200px; text-align:center">在需要使用的插件里下载素材包进行上传使用</p>
+                </div>
+            </div>
+      </div>
+    </section>
+ </div>
+</block>
+
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+//导航高亮
+$('.side-sub-menu').find('a[href="{:U('Addons/index')}"]').closest('li').addClass('current');
+if($('ul.tab-nav').length){
+	$('.btn-return').hide();
+}
+$(function(){
+	showTab();
+	
+})
+</script>
+</block>

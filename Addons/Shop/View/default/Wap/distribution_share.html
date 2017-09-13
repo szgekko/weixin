@@ -1,0 +1,54 @@
+<include file="Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/mobile/common.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<link href="{:CUSTOM_TEMPLATE_PATH}Public/shop.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body>
+	<div class="fx_warp">
+        <div class="fx_share_top">
+            <img src="{$datas.userface}">
+            <div class="share_bubble">
+	            <p>我是<span style="color: #ff8400;">{$datas.truename}</span>，</p>
+	            <p>我为<span style="color: #ff8400;">自己</span>代言。</p>
+	            <em class="arrow_left"><em></em></em>
+	        </div>
+        </div>	
+        <div class="fx_share_cont">
+        	<img src="{$datas.qrcode}">
+        	<p>长按 识别图中二维码 购买</p>
+        	<span>关注我们 加入有礼品 购买有惊喜</span>
+        </div>	
+        <div class="fx_share_spec">
+        	<h4>分销如何赚钱</h4>
+        	<dl>
+        		<dt>第一步</dt>
+        		<dd>转发店铺链接给微信好友；</dd>
+        		<dt>第二步</dt>
+        		<dd>从您转发的链接进入商城的好友，系统将自动锁定成为您的客户，他们在微信商城中购买任何商品，您都可以获得分销佣金。</dd>
+        		<dt>第三步</dt>
+        		<dd>您可以在分销中查看【我的客户】和【分销订单】。好友确认收货后，佣金可提现。</dd>
+        	</dl>
+        	<p>说明：分享后会带有独有的推荐码，您的好友访问之后，系统会自动检测并记录客户关系。 如果您的好友已被其他人抢先发展成了客户，他就不能成为您的客户。以最早发展成为客户为准。</p>
+        </div>
+		<div class="fx_fix_share">
+			<a class="btn" href="javascript:;">链接分销</a>
+		</div>
+		<div class="shareTips">
+			<div class="tips_concern"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	//分享
+	$.WeiPHP.initWxShare({
+		title:'{$shop.title}',
+		desc:'{$shop_share}',
+		link:"{:U('index',array('shop_id'=>$shop['id'],'uid'=>$share_uid,'publicid'=>$public_info['id']))}",
+		imgUrl:'{$shop.logo}'
+	});
+		$('.fx_fix_share').click(function(){
+			$('.shareTips').show();
+		})
+		$('.shareTips').click(function(){
+			$(this).hide();
+		})
+	</script>
+</body>
+</html>

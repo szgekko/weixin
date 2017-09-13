@@ -1,0 +1,64 @@
+<include file="Public/mobile_head"/>
+<style type="text/css">
+#container {
+	width: 100%;
+	height: 100%;
+	background: #e6fefb;
+	position:relative;
+}
+.con_hd{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);}
+
+#container .con_hd .p1 {
+	font-size: 15px;
+	color: #436aaf;
+	font-family: "微软雅黑";
+	line-height: 40px;
+}
+#container .con_hd img {padding-left:28%;text-align:center;}
+#container .btn {
+	padding:0px;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	color: #3c3c3c;
+	width: 100%;
+	height: 40px;
+	text-align:center;
+	padding:0px;
+	background: #cafef8;
+	border-radius: 3px;
+	border: #84a5cd 1px solid;
+	display: block;
+}
+#container .mima {
+	padding:0px;
+	margin-bottom:15px;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background: #e6fefb;
+	border-radius: 3px;
+	border: #84a5cd 1px solid;
+	display: block;
+}
+</style>
+<body>
+<div id="container" class="container body">
+  <div class="con_hd">
+  <img src="{:ADDON_PUBLIC_PATH}/suo_03.png" width="75px; height:75px;" />
+    <form action="{:U('ykq_pwd')}"  method="post">
+      <input type='hidden' name='live_id' value="{$live_id}">
+      <p class="p1">请输入摇控器密码：
+        <input type='password' name='pwd' class="mima" />
+      </p>
+      <p>
+        <input type='submit' value='确定' class="btn" />
+      </p>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

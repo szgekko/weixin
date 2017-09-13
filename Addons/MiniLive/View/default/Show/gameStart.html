@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<include file="Public/head"/>
+<link type="text/css" rel="stylesheet" href="{:ADDON_PUBLIC_PATH}/ppt.css"/>
+<script type="text/javascript" src="__STATIC__/jquery.danmu.js?v={:SITE_VERSION}"></script>
+<style>
+ body{ background:#444 url("{$bg_path}") no-repeat;background-size:100% 100%; }
+</style>
+</head>
+<body>
+	<div id="gameStartPage">
+    	<div class="top_hd">
+        	<!-- 摇一摇游戏配置的logo -->
+        	<empty name='shake.shake_logo'><img class="logo" src="{:ADDON_PUBLIC_PATH}/logo-w.png"/><else/><img class="logo" src="{$shake.company_logo|get_cover_url}"/></empty>
+        </div>
+        <div class="start_qrcode_wrap">
+        	<div class="left">
+<!--             	<img class="ad" src="__IMG__/test.jpg"/> -->
+<!--                 <img src="__IMG__/about/qrcode/qrcode_for_tv.jpg"/> -->
+				<img class="ad" src="{$shake.company_logo|get_cover_url}"/>
+				<img alt="" src="{$qrcode}">
+            </div>
+            <div class="right">
+            	<p class="t_p">{$shake.title}</p>
+                <p class="t_p">豪礼大奖一起抢</p>
+                <p class="j_p">参与方式：<br/>
+                	① 扫描左边二维码<img src="{:ADDON_PUBLIC_PATH}/arrow-right.png"/>点击关注<img src="{:ADDON_PUBLIC_PATH}/arrow-right.png"/>参与活动<br/>
+					② 或发送up参与活动</p>
+                </p>
+                <p>奖品详情:</p>
+                <div class="prize_wrap">
+                	<notempty name="awards">
+                	<ul class="prize_list">
+                		<volist name='awards' id='vo'>
+                    	<li>
+                            <img src="{$vo.img_url}"/>
+                            <p>{$vo.prize_level}</p>
+                            <p>奖品：{$vo.name}</p>
+                            <p>数量：{$vo.number}</p>
+                        </li>
+                        </volist>
+                    </ul>
+                    </notempty>
+                </div>
+                <div class="start_count_down" style="display:none">
+                	<P>距离抽奖开始</p>
+                    <p>还有<span id="leftSec"><empty name='shake.warm_sec'>30<else/>{$shake.warm_sec}</empty></span>秒</p>
+                </div>
+                <p>当前共{$user_attend}人参与</p>
+            </div>
+        </div>
+    </div>
+   
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/theMass.mp3"></audio>
+	
+	<notempty name="bj_music_path">
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{$bj_music_path}"></audio>
+	<else/>
+	<audio loop="loop" autoplay="autoplay" id="musicAudio" src="{:ADDON_PUBLIC_PATH}/mp3/yaojiang.mp3"></audio>
+	</notempty>
+	
+	<audio src="{:ADDON_PUBLIC_PATH}/mp3/xiangce.mp3"></audio>
+<script type="text/javascript">
+var gameStartUrl =  "{:U('gameStart',array('id'=>$live_id))}";
+var gameUrl = "{:U('game',array('id'=>$live_id))}";
+var gameEndUrl = "{:U('gameEnd',array('id'=>$live_id))}";
+var gameIndexUrl = "{:U('index',array('id'=>$live_id))}";
+var gamePlaybackUrl = "{:U('playback',array('id'=>$live_id))}";
+var showUrl =  "{:U('show',array('id'=>$live_id))}";
+var showQrcodeUrl =  "{:U('showQrCode',array('id'=>$live_id))}";
+var getStatusUrl = "{:U('getStatusByAjax',array('id'=>$live_id))}";
+var setdaojiUrl="{:addons_url('MiniLive://Wap/daoJiShu',array('live_id'=>$live_id))}";
+var wHeight = $(window).height();
+var wWidth = $(window).width();
+var topHeight = 80;
+$(function(){
+	$('body').css('height',wHeight);
+})
+</script>
+<script type="text/javascript" src="{:ADDON_PUBLIC_PATH}/ppt.js?v={:SITE_VERSION}"></script>
+</body>
+</html>
